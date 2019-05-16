@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="js hashchange csscolumns csstransforms csstransitions mq checked"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Become a Binary Search Tree  Ninja  in OCaml - Genin Level</title>
+    <meta name="description" content="This post presents the recursive modelling skills for binary search tree problems in OCaml, at entry level. Essential operations are described.">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://typeocaml.com/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/normalize.css">
+    <link rel="stylesheet" type="text/css" href="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/style.css">
+    <link rel="stylesheet" type="text/css" href="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/nprogress.css">    
+    <link rel="stylesheet" type="text/css" href="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/style_002.css">
+    <link rel="stylesheet" type="text/css" href="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/monokai_sublime.css">
+        
+    <script async="" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/analytics.js" style=""></script><script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/modernizr.js"></script>
+    <script src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/jquery_006.js"></script>  
+    <noscript><style>.wookmarkWrap #wookmark .item{visibility: visible;}</style></noscript>
+    <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/assets/css/IE7.css?v=ab50f2fa2f" /><![endif]-->
+
+    <link rel="canonical" href="http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/">
+    
+    <meta property="og:site_name" content="Many things about OCaml">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Become a Binary Search Tree  Ninja  in OCaml - Genin Level">
+    <meta property="og:description" content="This post presents the recursive modelling skills for binary search tree problems in OCaml, at entry level. Essential operations are described....">
+    <meta property="og:url" content="http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/">
+    <meta property="article:published_time" content="2014-12-19T12:28:00.000Z">
+    <meta property="article:modified_time" content="2014-12-30T20:54:58.042Z">
+    <meta property="article:tag" content="binary search tree">
+    <meta property="article:tag" content="data structure">
+    <meta property="article:tag" content="ninja">
+    <meta property="article:tag" content="recursion">
+    
+    <meta name="twitter:card" content="content">
+    <meta name="twitter:title" content="Become a Binary Search Tree  Ninja  in OCaml - Genin Level">
+    <meta name="twitter:description" content="This post presents the recursive modelling skills for binary search tree problems in OCaml, at entry level. Essential operations are described....">
+    <meta name="twitter:url" content="http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Many things about OCaml",
+    "author": {
+        "@type": "Person",
+        "name": "Jackson Tale",
+        "image": "http://typeocaml.com/content/images/2014/11/me.jpg",
+        "url": "http://typeocaml.com/author/jtale",
+        "sameAs": "http://massd.github.io/mongo/"
+    },
+    "headline": "Become a Binary Search Tree  Ninja  in OCaml - Genin Level",
+    "url": "http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/",
+    "datePublished": "2014-12-19T12:28:00.000Z",
+    "dateModified": "2014-12-30T20:54:58.042Z",
+    "keywords": "binary search tree, data structure, ninja, recursion",
+    "description": "This post presents the recursive modelling skills for binary search tree problems in OCaml, at entry level. Essential operations are described."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="Many things about OCaml" href="http://typeocaml.com/rss/">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-56468115-1', 'auto');
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+
+    </script>
+<script type="text/javascript" async="" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/embed.js"></script><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/alfie.js" async="" charset="UTF-8"></script><script type="text/javascript" charset="UTF-8" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/common.js"></script><script type="text/javascript" charset="UTF-8" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/util.js"></script><script type="text/javascript" charset="UTF-8" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/stats.js"></script></head>
+
+<body class="post-template tag-binary-search-tree tag-data-structure tag-ninja tag-recursion showNewsFeed"><div id="MathJax_Message" style="display: none;"></div>
+    
+    <div id="wrapper">
+        <input id="mainNavCheck" class="" type="checkbox">
+
+        <div id="sideBar" class="closeNav">
+            <nav>
+                <div class="logoContain">
+                    <div class="logo"><span>Type</span> OCaml</div>
+                    <div class="copy"><i>Well-typed programs cannot go wrong. - Robin Milner</i></div>
+                </div>
+                <ul id="mainNav">
+                    <li class="menu">
+                        <label for="mainNavCheck" class="togglemenu">
+                            <span class="icon icon-menu"><!-- --></span>
+                            <span class="title">Menu</span>
+                        </label>    
+                    </li>
+                    <li class="openMenu search">
+                        <span class="icon icon-search"><!-- --></span>
+                        <span class="title search">
+                            <input required="" placeholder="Search" id="searchSite" name="search" type="text">
+                            <label class="search" for="searchSite"><!-- --></label>
+                        </span>
+                    </li>                        
+                    <li>
+                        <a class="ajaxLink" href="http://typeocaml.com/">
+                            <span class="icon icon-house"><!-- --></span>
+                            <span class="title">Home</span>
+                        </a>
+                    </li>
+                    <li class="listTags openMenu autoExpand">
+                        <input class="subMenuCheck" id="subMenuCheck1" value="" type="checkbox">
+                        <label for="subMenuCheck1">
+                            <span class="icon icon-pen"><!-- --></span>
+                            <span class="title">Blog</span>
+                            <span class="expandButton icon-down"><!-- --></span>
+                        </label>                                
+                        <ul><!-- --><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/algorithm">algorithm</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/binary-search">binary search</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/binary-search-tree">binary search tree</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/binomial-heap">binomial heap</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/data-structure">data structure</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/divide-and-conquer">divide and conquer</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/execution-model-">execution model </a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/functional-programming-style">functional programming style</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/heap">heap</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/imperative-programming">imperative programming</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/leftist-tree">leftist tree</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/max">max</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/memoize">memoize</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/memoize-recursive">memoize recursive</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/merge">merge</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/mergesort">mergesort</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/min">min</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/min-missing-natural-number">min missing natural number</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/mutable">mutable</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/ninja">ninja</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/pearls">pearls</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/quickselect">quickselect</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/quicksort-">quicksort </a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/random">random</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/recursion">recursion</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/selection">selection</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/shuffle">shuffle</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/surpassers">surpassers</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/untying-the-recursive-knot">untying the recursive knot</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/visualisation">visualisation</a></li></ul>
+                    </li>
+                    <li class="openMenu">
+                        <input class="subMenuCheck" id="subMenuCheck2" value="" type="checkbox">
+                        <label for="subMenuCheck2" class="">
+                            <span class="icon icon-twitter"><!-- --></span>
+                            <span class="title">@typeocaml</span>
+                            <!--span class="expandButton icon-down"></span>-->
+                        </label>                                
+                        <!--<ul>
+                            <li><a class="ajaxLink" href="/about">Sub menu 1</a></li>
+                            <li><a class="ajaxLink" href="/about">Sub menu 2</a></li>
+                        </ul>-->
+                    </li>
+                    <!--<li>
+                        <a class="ajaxLink" href="/contact">    
+                            <span class="icon icon-contact"></span>
+                            <span class="title">Contact</span>
+                        </a>-->
+                    
+                </ul>
+            </nav>
+            <div id="newsFeed">
+               <div id="filters" style="height: 65px;">
+                    <input id="radio1" name="radios" value="all" checked="checked" type="radio">
+                    <label for="radio1">All</label>
+                    <input id="radio2" name="radios" value="tags" type="radio">
+                    <label for="radio2">Tags</label>
+                    <input id="radio3" name="radios" value="search" type="radio">
+                    <label for="radio3">Search</label>
+                    <div id="navUnderline"><div id="highlight"></div></div>
+                    <div id="options">
+                        <div id="tags" class="listTags">
+                             <ul><!-- --><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/algorithm">algorithm</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/binary-search">binary search</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/binary-search-tree">binary search tree</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/binomial-heap">binomial heap</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/data-structure">data structure</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/divide-and-conquer">divide and conquer</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/execution-model-">execution model </a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/functional-programming-style">functional programming style</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/heap">heap</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/imperative-programming">imperative programming</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/leftist-tree">leftist tree</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/max">max</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/memoize">memoize</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/memoize-recursive">memoize recursive</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/merge">merge</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/mergesort">mergesort</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/min">min</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/min-missing-natural-number">min missing natural number</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/mutable">mutable</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/ninja">ninja</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/pearls">pearls</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/quickselect">quickselect</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/quicksort-">quicksort </a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/random">random</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/recursion">recursion</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/selection">selection</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/shuffle">shuffle</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/surpassers">surpassers</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/untying-the-recursive-knot">untying the recursive knot</a></li><li><a class="ajaxTagLink" href="http://typeocaml.com/tag/visualisation">visualisation</a></li></ul>
+                        </div>
+                        <div id="search">
+                            <form>
+                                <input required="" placeholder="Search" id="searchSite2" name="search" type="text">
+                                <label for="searchSite2">Search</label>
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+                <div id="feed" style="height: 939px;">   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/11/22/visualise_random/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">22 Nov 2015</div>                                             <h1 class="postTitle">Visualise Randomness</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/05/05/permutation/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">05 May 2015</div>                                             <h1 class="postTitle">Permutations</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/03/31/pearl-no-3-saddleback-search/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">31 Mar 2015</div>                                             <h1 class="postTitle">Pearl No.3 - Saddleback Search</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/03/17/binomial-heap/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">18 Mar 2015</div>                                             <h1 class="postTitle">Binomial Heap</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/03/12/heap-leftist-tree/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">13 Mar 2015</div>                                             <h1 class="postTitle">Heap - Leftist Tree</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/02/20/pearl-no-2-the-max-number-of-surpassers/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">21 Feb 2015</div>                                             <h1 class="postTitle">Pearl No.2 - The Max Number of Surpassers</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/02/02/functional-pearl-no-1-the-min-free-nature/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">02 Feb 2015</div>                                             <h1 class="postTitle">Pearl No.1 - The Min Missing Natural Number</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/01/25/memoize-rec-untying-the-recursive-knot/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">25 Jan 2015</div>                                             <h1 class="postTitle">Recursive Memoize &amp; Untying the Recursive Knot</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/01/20/mutable/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">21 Jan 2015</div>                                             <h1 class="postTitle">Mutable</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2015/01/02/immutable/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">02 Jan 2015</div>                                             <h1 class="postTitle">Immutable</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage active">                                <a class="ajaxLink" href="http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">19 Dec 2014</div>                                             <h1 class="postTitle">Become a BST Ninja - Genin Level</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2014/12/04/recursion-reloaded/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">04 Dec 2014</div>                                             <h1 class="postTitle">Recursion Reloaded</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2014/11/26/height-depth-and-level-of-a-tree/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">26 Nov 2014</div>                                             <h1 class="postTitle">Height, Depth and Level of a Tree</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2014/11/13/magic-of-thunk-async/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">13 Nov 2014</div>                                             <h1 class="postTitle">The Magic of Thunk - Async</h1>                                     </div>                                </a>                            </div>   <div class="previewContainer noImage">                                <a class="ajaxLink" href="http://typeocaml.com/2014/11/13/magic-of-thunk-lazy/">                                                                        <div class="content">                                        <div class="dot"></div>                                        <div class="dateStamp">13 Nov 2014</div>                                             <h1 class="postTitle">The Magic of Thunk - Lazy</h1>                                     </div>                                </a>                            </div></div>
+            </div>
+        </div>
+
+        <div id="mainContainer">
+            <div id="container" class="post-template tag-binary-search-tree tag-data-structure tag-ninja tag-recursion">
+                <article id="postMain" class="post tag-binary-search-tree tag-data-structure tag-ninja tag-recursion">
+    <div class="heroImage showHeroImage" style="background-image: url(&quot;/content/images/2014/12/bst_ninja.jpg#hero&quot;);">
+        <div class="tagShare">
+            <div class="tags"><a href="http://typeocaml.com/tag/binary-search-tree/">binary search tree</a>, <a href="http://typeocaml.com/tag/data-structure/">data structure</a>, <a href="http://typeocaml.com/tag/ninja/">ninja</a>, <a href="http://typeocaml.com/tag/recursion/">recursion</a></div>
+            <div class="shareIcon icon-share"><!-- --></div>
+            <div class="share">
+                <a class="icon-twitter" href="https://twitter.com/share?text=Become%20a%20BST%20Ninja%20-%20Genin%20Level&amp;url=http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"></a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"></a>
+                <a class="icon-googleplus" href="https://plus.google.com/share?url=http://typeocaml.com/2014/12/19/how-to-become-a-bst-ninja-genin/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"></a>
+            </div>
+        </div>
+    </div>
+    <section class="postContent twoColumn">
+        <h1 class="postTitle">Become a BST Ninja - Genin Level</h1>
+        <time class="dateStamp" datetime="2014-12-19">
+            <span>— </span>
+            <i>Published 19 December 2014</i>
+            <span> —</span>
+        </time>
+        <p><img src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/bst_ninja.jpg" alt="bst_ninja" class="hidden"></p>
+
+<p>Binary Search Tree (<em>BST</em>) is one of the most classic data structures. The definition for its structure is shown as below:</p>
+
+<ul>
+<li>It consists of <em>Nodes</em> and <em>Leaves</em>.</li>
+<li>A <em>Node</em> has a child bst on the <em>left</em> side, a <em>key</em> (, a <em>data</em>), and a child bst on the <em>right</em> side. Note here <strong>a node's left or right child is not a node, instead, is indeed another binary search tree</strong>. </li>
+<li>A <em>Leaf</em> has nothing but act only as a STOP sign. </li>
+</ul>
+
+<pre><code class="ocaml hljs"><span class="hljs-keyword">type</span> <span class="hljs-symbol">'a</span> bst_t =  
+  | <span class="hljs-type">Leaf</span>
+  | <span class="hljs-type">Node</span> <span class="hljs-keyword">of</span> <span class="hljs-symbol">'a</span> bst_t * <span class="hljs-symbol">'a</span> * <span class="hljs-symbol">'a</span> bst_t <span class="hljs-comment">(* Node (left, key, right) *)</span>
+<span class="hljs-comment">(* a node may also carry a data associated with the key. 
+   It is omitted here for neater demonstration *)</span>
+</code></pre>
+
+<p>The important feature that makes BST unique is </p>
+
+<ul>
+<li>for any node
+<ul><li>all keys from its <strong>left child are smaller</strong> than its own key</li>
+<li>all keys from its <strong>right child are bigger</strong> (assumming keys are distinct)</li></ul></li>
+</ul>
+
+<p>And here is an example of BST:</p>
+
+<p><img src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/example_bst.jpg" alt="example_bst"></p>
+
+<p>Instead of continuing to present the basics of BST, this post will 
+now focus on how to attack BST related problems with the most powerful 
+weapon: <strong>Recursion</strong>. </p>
+
+<h1 id="recursiononbst">Recursion on BST</h1>
+
+<p>From <a href="http://typeocaml.com/2014/12/04/recursion-reloaded/">Recursion Reloaded</a>, we know that one way to model recursion is:</p>
+
+<ol>
+<li>Assume we already got a problem solver: <code>solve</code>.  </li>
+<li>Don't think about what would happen in each iteration.  </li>
+<li><strong>Split</strong> the problem to smallers sizes (<em>N = N1 + N2 + ...</em>).  </li>
+<li>Solve those smaller problems like <code>solve N1</code>, <code>solve N2</code>, ... Here is the tricky part: still, we do not know or care what are inside <code>solve</code> and how <code>f</code> would do the job, we just believe that it will return the correct results.  </li>
+<li>Now we have those results for smaller problems, how to <strong>wire</strong> them up to return the result for <em>N</em>? This is the ultimate question we need to answer.  </li>
+<li>Of course, we do not forget the <strong>STOP sign</strong> for some edge cases.  </li>
+<li>Together with point 5 and 6, we get our <code>solve</code>.</li>
+</ol>
+
+<p>A good thing coming from BST is that the <em>split</em> step has been done already, i.e., a BST problem can be always divided into <em>left child</em>, <em>root</em>, and <em>right child</em>.</p>
+
+<p>Thus if we assume we already got <code>solve</code>, we just need to solve <em>left</em> and / or solve <em>right</em>, then do something with <em>root</em>,
+ and finally wire all outcomes to obtain the final result. Again, we 
+should of course never forget the STOP sign and in BST, usually it is 
+the <em>Leaf</em>, i.e., we need to ask ourselves what if the BST is a <em>Leaf</em>. </p>
+
+<p>The thinking flow is illustrated as the diagram below.</p>
+
+<p><img src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/left_root_right-4.jpg" alt="solve"></p>
+
+<p>Before we start to look at some problems, note that in the diagram above or <a href="http://typeocaml.com/2014/12/04/recursion-reloaded/">Recursion Reloaded</a>, we seem to always solve <em>both left and right</em>, or say, <em>all sub-problmes</em>. It is actually not necessary. For BST, sometimes <em>either left or right</em> is enough. Let's have a look at this case first. </p>
+
+<h1 id="eitherleftorright">Either Left or Right</h1>
+
+<p>Our starter for this section is the simplest yet very essential operation: <strong>insert</strong> a key to a BST.</p>
+
+<h2 id="insert">Insert</h2>
+
+<p>From the definition of BST, we know the basic rule is that if the new
+ key is smaller than a root, then it belongs to the root's left child; 
+otherwise, to the root's right child. Let's follow the modelling in the 
+previous diagram to achieve this.</p>
+
+<ol>
+<li>We assume we already got <code>insert key bst</code>  </li>
+<li>We know the problem can be split into <em>left</em>, <em>root</em>, and <em>right</em>.  </li>
+<li>Because a new key can go either left or right, so we need to <em>deal_with root</em> first, i.e., compare the new key and the key of the root.  </li>
+<li>Directly taken from the rule of BST, if the new key is smaller, then we need to <em>solve left</em> thus <code>insert key left</code>; otherwise <code>insert key right</code>.  </li>
+<li>What if we get to a <em>Leaf</em>? It means we can finally place our new key there as a new <em>Node</em> and of course, at this moment both children of the new <em>Node</em> are <em>Leaves</em>.</li>
+</ol>
+
+<p><img src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/insert-2.jpg" alt="insert"></p>
+
+<p>Note that the BST type in OCaml we defined early on is pure 
+functional, which means every time we need to update something, we have 
+to create new. That's why in the diagram, even if we just insert x to 
+left or right, we need to construct a new <em>Node</em> because we are updating the left child or the right one. The code is shown as below.</p>
+
+<pre><code class="ocaml hljs"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> insert x = <span class="hljs-keyword">function</span>  
+  | <span class="hljs-type">Leaf</span> -&gt; <span class="hljs-type">Node</span> (<span class="hljs-type">Leaf</span>, x, <span class="hljs-type">Leaf</span>) <span class="hljs-comment">(* Leaf is a STOP *)</span>
+  | <span class="hljs-type">Node</span> (left, k, right) -&gt;
+    <span class="hljs-keyword">if</span> x &lt; k <span class="hljs-keyword">then</span> <span class="hljs-type">Node</span> (insert x left, k, right) <span class="hljs-comment">(* if x is smaller, go left *)</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-type">Node</span> (left, k, insert x right) <span class="hljs-comment">(* otherwise, go right *)</span>
+</code></pre>
+
+<h2 id="member">Member</h2>
+
+<p><code>member</code> is to check whether a given key exists in the BST or not. It is very similar to <code>insert</code>. There are three differences:</p>
+
+<ol>
+<li>When <em>dealing with root</em>, we need to see whether the given key equals to the root's key or not. If yes, then we hit it.  </li>
+<li><code>member</code> is a readonly function, so we directly solve <em>left</em> or <em>right</em> without constructing new <em>Node</em>.  </li>
+<li>If arriving at a <em>Leaf</em>, then we have nowhere to go any more and it means the given key is not in the BST.</li>
+</ol>
+
+<pre><code class="ocaml hljs"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> mem x = <span class="hljs-keyword">function</span>  
+  | <span class="hljs-type">Leaf</span> -&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-type">Node</span> (left, k, right) -&gt;
+    <span class="hljs-keyword">if</span> x &lt; k <span class="hljs-keyword">then</span> mem x left
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> x = k <span class="hljs-keyword">then</span> <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">else</span> mem x right
+</code></pre>
+
+<h1 id="bothleftandright">Both Left and Right</h1>
+
+<p>Usually when we need to retrieve some properties of a BST or possibly
+ go through all nodes to get an answer, we have to solve both children. 
+However, the modelling technique does not change. </p>
+
+<h2 id="height">Height</h2>
+
+<p>Recall from <a href="http://typeocaml.com/2014/11/26/height-depth-and-level-of-a-tree/">Some properties of a tree</a>,
+ the height of a tree is the number of edges that the longest path (from
+ the root to a leaf) has. From this definition, it seems easy to get the
+ height. We simply try to find all possible paths from root and for each
+ path we record its number of edges. The answer will be the max of them.
+ It sounds straightforward, but if you really try to write the code in 
+this way, I bet the code would be a bit messy. Honestly, I never wrote 
+in this way and I will never do that.</p>
+
+<p>Another way is to think recursively. First let analyse a little bit about the longest path matter.</p>
+
+<p><img src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/height.jpg" alt="height"></p>
+
+<p>As we can see from the above diagram, <em>Root</em> has two edges: one to <em>Left</em> and the other to <em>Right</em>. So whatever the longest path from <em>Root</em> might be, it must pass either <em>Left</em> or <em>Right</em>. If we somehow could obtain the longest path from the root of <em>Left</em> and the longest path from the root of <em>Right</em>, the longest path from <em>Root</em> should be the bigger one of the two paths, right?</p>
+
+<p>Let's now assume we already got <code>height</code> and it will return the height of a BST. Then we can obtain <code>h_left</code> and <code>h_right</code>. The answer is what is the <code>h</code> (height of <em>Root</em>)?
+ Note that the height implies the longest path already (that's the 
+definition). So from the paragraph above, What we need to do is getting <code>max h_left h_right</code>. Since <em>Root</em> has an edge to either child, <code>h = 1 + max h_left h_right</code>.</p>
+
+<p>Don't forget the <em>STOP</em> sign: the height of a Leaf is 0.</p>
+
+<pre><code class="ocaml hljs"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> height = <span class="hljs-keyword">function</span>  
+  | <span class="hljs-type">Leaf</span> -&gt; <span class="hljs-number">0</span>
+  | <span class="hljs-type">Node</span> (left, _, right) -&gt; <span class="hljs-number">1</span> + max (height left) (height right)
+</code></pre>
+
+<p>Simple, isn't it?</p>
+
+<h2 id="keysatacertaindepth">Keys at a certain depth</h2>
+
+<p>So far, it seems our hypothetic <code>solve</code> function takes only the sub-probem as parameter. In many cases this is not enough. Sometimes we need to supply <strong>more arguments</strong> to help <code>solve</code>. For example, in the problem of retriving all keys at a certain depth definitely needs <em>current depth</em> information.</p>
+
+<p><img src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/depth-1.jpg" alt="depth"></p>
+
+<p>Only with the help of <code>current_depth</code>, the <em>Root</em> can know whether it belongs to the final results. </p>
+
+<ol>
+<li>If <code>current_depth = target_depth</code>, then <em>Root</em> should be collected. Also we do not continue to solve <em>Left</em> or <em>Right</em> as we know their depths will never equal to <em>target_deapth</em>.  </li>
+<li>Otherwise, we need to solve both <em>Left</em> and <em>Right</em> with argument of <code>1 + current_depth</code>.  </li>
+<li>Assume our <code>solve</code> is working. Then <code>solve left (1+current_depth)</code> would return a list of target nodes and so does <code>solve right (1+current_depth)</code>. We simply then concatenate two target lists.  </li>
+<li>STOP sign: <em>Leaf</em> is not even a <em>Node</em>, so the result will be empty list. </li>
+</ol>
+
+<p>The code is like this:</p>
+
+<pre><code class="ocaml hljs"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> from_depth d cur_d = <span class="hljs-keyword">function</span>  
+  | <span class="hljs-type">Leaf</span> -&gt; <span class="hljs-literal">[]</span>
+  | <span class="hljs-type">Node</span> (left, k, right) -&gt;
+    <span class="hljs-keyword">if</span> cur_d = d <span class="hljs-keyword">then</span> [k]
+    <span class="hljs-keyword">else</span> from_depth d (cur_d + <span class="hljs-number">1</span>) left @ from_depth d (cur_d + <span class="hljs-number">1</span>) right
+
+<span class="hljs-keyword">let</span> all_keys_at depth bst = from_depth depth <span class="hljs-number">0</span> bst  
+</code></pre>
+
+<h1 id="genin">Genin</h1>
+
+<p>From <a href="http://en.wikipedia.org/wiki/Ninja">Ninja Wiki</a></p>
+
+<blockquote>
+  <p>A system of rank existed. A jōnin ("upper man") was the highest 
+rank, representing the group and hiring out mercenaries. This is 
+followed by the chūnin ("middle man"), assistants to the jōnin. At the 
+bottom was the genin ("lower man"), field agents drawn from the lower 
+class and assigned to carry out actual missions.</p>
+</blockquote>
+
+<hr>
+
+<p><strong>Ps.</strong> </p>
+
+<p>Some readers contacted me. They hope that maybe I can use more 
+advanced knowledge or harder examples in my posts and the current ones 
+might seem a little boring. I think I need to explain a bit here. </p>
+
+<p>The general idea behind <em>Many things about OCaml</em> is not to 
+write a cookbook for certain problems related to OCaml or be a place 
+where quick solution is there and copy / paste sample code would do the 
+trick. Instead, <em>Many things</em> means some important aspects in 
+OCaml that might be overlooked, or some particular problems that can 
+show the greatness of OCaml, or the elegant OCaml solutions for some 
+typical data structures and algorithms, etc. As long as something are 
+valuable and that value shows only in OCaml or Functional Programming, I
+ would like to add them all in here one by one. </p>
+
+<p>Fortunately or unfortunately, even though I have only limited experiences in OCaml, I found that the <em>many</em> is actually quite big. And due to this <em>many</em>,
+ I had to make a plan to present them all in a progressive way. Topics 
+can interleave with each other in terms of time order as we do not want 
+to have the same food for a month. More importantly, however, all should
+ go from simple / easy to advanced / hard. In order to present some 
+advanced topic, we need to make sure we have a solid foundation. This is
+ why, for example, I even produced a post for <a href="http://typeocaml.com/2014/11/26/height-depth-and-level-of-a-tree/">the properties of a tree</a> although they are so basic. This is also why I <a href="http://typeocaml.com/2014/12/04/recursion-reloaded/">reloaded recursion</a> since recursion is everywhere in OCaml. They are a kind of preparations. </p>
+
+<p>Moreover, I believe in fundamentals. Fundamentals are normally 
+concise and contain the true essence. But sometimes they can be easily 
+overlooked or ignored and we may need to experience a certain number of 
+difficult problems afterwards, then start to look back and appreciate 
+the fundamentals.</p>
+
+<p>The reason of using simple examples is that it makes my life easier 
+for demonstrations. I love visualisations and one graph can be better 
+than thousands of words. For complicated problems and solutions, it is a
+ bit more difficult to draw a nice and clean diagram to show the true 
+idea behind. I will try to do so later on, but even if I could achieve 
+it in this early stage, some readers might easily get lost or confused 
+because of the unavoidable complication of the graph. As a result, the 
+point of grasping fundamentals might be missed. </p>
+
+<p>Anyway, please don't worry too much. Attractive problems in OCaml are
+ always there. For example, in my plan, I will later start to present a 
+number (maybe 15 ~ 17) of my beloved <a href="http://www.cambridge.org/gb/academic/subjects/computer-science/programming-languages-and-applied-logic/pearls-functional-algorithm-design">Functional Pearls</a> in OCaml and if you are really chasing for some awesomeness, I hope they would satisfy you.</p>
+	<script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/highlight.js"></script>
+	<script type="text/javascript">hljs.initHighlighting.called = false;hljs.initHighlighting();</script>
+	<script type="text/x-mathjax-config;executed=true">  
+      	  MathJax.Hub.Config({
+      	  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      	  });
+    	</script>
+    	<!--<script type="text/javascript" src="/assets/MathJax-2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML?v=ab50f2fa2f"></script>-->
+	<script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/MathJax.js"></script>
+    	
+    </section>
+    <section class="postContent" id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 937px ! important;" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/a.html" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></section> 
+    <script type="text/javascript"> 
+      var disqus_shortname = 'typeocaml'; // REQUIRED: replace *YOUR_DISQUS_SHORTNAME* with your own shortname 
+      var disqus_identifier = ''; 
+     
+    
+      /* * * DON'T EDIT BELOW THIS LINE * * */ 
+      (function() { 
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; 
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; 
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); 
+      window.globalVar = true;
+      })(); 
+    </script> 
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+
+            </div>
+        </div>
+    </div>  
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/jquery_002.js"></script>    
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/jquery_003.js"></script>
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/jquery.js"></script>
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/nprogress.js"></script>
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/jquery_004.js"></script>
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/jquery_005.js"></script>
+    <script src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/js"></script>
+    
+    
+    <script type="text/javascript" src="Become%20a%20Binary%20Search%20Tree%20Ninja%20in%20OCaml%20-%20Genin%20Level_fichiers/script.js"></script>
+    <!--[if lte IE 7]> <script type="text/javascript" src="/assets/js/IE7.js?v=ab50f2fa2f"></script> <![endif]-->
+    <!--[if lte IE 9]> <script type="text/javascript" src="/assets/js/legacySupportIE.js?v=ab50f2fa2f"></script> <![endif]-->
+    <!--<script type="text/javascript" src="/assets/js/highlight.pack.js?v=ab50f2fa2f"></script>
+    <script type="text/javascript" >hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+    <script type="text/x-mathjax-config">  
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>-->
+
+
+<div id="supportCheck"><input name="test" checked="checked" id="id-test" style="" type="radio"></div><iframe style="display: none;"></iframe></body></html>

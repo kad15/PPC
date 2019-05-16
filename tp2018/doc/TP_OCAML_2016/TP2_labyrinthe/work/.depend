@@ -1,0 +1,3 @@
+maze.cmi :
+tp2.cmo : maze.cmi
+tp2.cmx : maze.cmi

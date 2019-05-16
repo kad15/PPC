@@ -1,0 +1,5 @@
+fifo.cmi :
+fifo.cmo : fifo.cmi
+fifo.cmx : fifo.cmi
+tree.cmo : fifo.cmi
+tree.cmx : fifo.cmx

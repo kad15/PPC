@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="svg" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    
+    <link rel="alternate" hreflang="en" href="https://ocaml.org/learn/tutorials/get_up_and_running.html">
+
+    
+    <title>So you're learning OCaml, a one stop shop tutorial – OCaml</title>
+    <link href="https://ocaml.org/img/favicon32x32.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Web Fonts -->
+    <link href="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/css_002.css" rel="stylesheet">
+    <link href="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/css.css" rel="stylesheet">
+    <link href="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/css_003.css" rel="stylesheet" type="text/css">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/bootstrap_mod.css" rel="stylesheet" media="screen">
+    <link href="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/ocamlorg.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" async="" src="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/ga.js"></script><script src="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/collapsed-menu.js" type="text/javascript"></script>
+    
+    
+    <script>
+      if (document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1')) {
+      document.documentElement.className = 'svg';
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" onclick="toggleVisibilityMenu('menu-items')">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="https://ocaml.org/"><img src="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/colour-logo-white.svg" class="svg" alt="OCaml"><img src="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/colour-logo-white.png" class="png" alt="OCaml"></a>
+          <div id="menu-items" class="nav-collapse collapse">
+                        <ul class="nav">
+              <li class="active"><a href="https://ocaml.org/learn/">Learn</a></li>
+              <li><a href="https://ocaml.org/docs/">Documentation</a></li>
+              <li><a href="https://opam.ocaml.org/">Packages</a></li>
+              <li><a href="https://ocaml.org/community/">Community</a></li>
+            </ul>
+
+            
+            <a href="https://github.com/ocaml/ocaml.org/tree/master/site/learn/tutorials/get_up_and_running.md" title="Edit this page" class="edit-this-page pull-right"><!-- Image in CSS
+	      --><span>Edit this page</span></a>
+	    <script language="JavaScript">
+	      // Preload the hover image
+	      Image1= new Image(33,33);
+	      Image1.src = '/img/edit-hover.svg';
+	      Image2= new Image(33,33);
+	      Image2.src = '/img/edit-hover.png';
+	    </script>
+            
+            <form id="searchform" class="navbar-search pull-right" method="get" action="//www.google.com/search">
+              <input name="as_sitesearch" value="ocaml.org" type="hidden">
+              <input placeholder="Search" class="search-query" name="q" type="text">
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </nav>
+    
+    <!--								-*-html-*- -->
+<div class="container">
+  <div class="row">
+    
+    
+    <div class="span1"></div>
+    <div id="content-primary" class="span10">
+            <div id="tryocaml" class="content" style="display:none;">
+        <div class="container">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style="display:none;"></div>
+            <div id="menu-lessons" style="display:none">
+              <table class="zebra-striped">
+                <tbody><tr><td id="text-x"><code></code></td> <td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--								-*-html-*- -->
+<div class="running-header">
+  
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a href="https://ocaml.org/">Home</a><span class="divider"></span></li>
+<li><a href="https://ocaml.org/learn/">Learn</a><span class="divider"></span></li>
+<li><a href="https://ocaml.org/learn/tutorials/">OCaml Tutorials</a><span class="divider"></span></li>
+<li class="active">So you're learning OCaml, a one stop shop tutorial</li>
+
+
+    </ol>
+    <ul class="translations">
+      <li class="active">en</li>
+
+    </ul>
+  </div>
+  
+</div>
+
+      <div id="main-contents" class="content">
+        <!--  
+  -->
+
+<p>This tutorial originally appeared
+<a href="http://hyegar.com/2015/10/20/so-youre-learning-ocaml/">here</a> and is
+slightly modified in this form. It is intended to get you up and
+running quickly with OCaml.</p>
+<h1 id="CrashcourseontheOCamlecosystem">Crash course on the OCaml ecosystem</h1>
+
+<p>These are some key notes that you should know.</p>
+<ol><li><code>opam</code> is the package manager for OCaml. It is very advanced and
+supports many features. The most basic of which is</li></ol>
+
+<pre class="shell"><code class="shell">$ opam install &lt;some_package&gt;</code></pre>
+
+<p>For people on <code>OS X</code>, you can get it on <code>brew</code> and all the <code>Linux</code>
+distros should have <code>opam</code>. Attention Ubuntu people: if you are using 
+an outdated version of Ubuntu (e.g. Wily, Vivid or Trusty), you should
+do this instead because apt-get's version of opam on those is madly
+outdated.</p>
+<pre class="shell"><code class="shell">$ add-apt-repository ppa:avsm/ppa
+$ apt-get update
+$ apt-get install ocaml opam</code></pre>
+
+<p>For Windows people, <a href="https://www.typerex.org/ocpwin.html">this</a> seems
+to be a decent option or you could get a VM. Do <em>note</em> that opam
+doesn't work on this platform and for a beginner you might ending up
+wasting a lot of time with environment issues or libraries that assume
+Unix.</p>
+<ol><li>Once you have <code>opam</code> installed, you probably want to do:</li></ol>
+
+<pre class="shell"><code class="shell">$ opam switch 4.02.3</code></pre>
+
+<p>This will install the latest version of the compiler. When you did
+<code>opam switch</code> you can see all the other available compilers as
+well. You can even switch to a beta compiler like so:</p>
+<pre class="shell"><code class="shell">opam switch 4.03.0+beta1</code></pre>
+
+<ol><li><p><code>ocamlfind</code> is a program that predates <code>opam</code> and wraps the
+standard <code>OCaml</code> compilers: <code>ocamlc</code> and <code>ocamlopt</code>. The former is a
+byte code compiler and the latter creates native code.</p>
+</li><li><p><code>ocamlbuild</code> is a tool that helps build <code>OCaml</code> programs, many
+people have strong opinions on it. You can find the manual for it
+<a href="https://github.com/gasche/manual-ocamlbuild">here</a>. It seems that
+people are starting to invest effort into it again.</p>
+</li><li><p><code>oasis</code> is a tool that helps abstract usage of 3, 4. I resisted it
+for a while and wrote Makefiles instead, don't do that, just use
+oasis. The oasis flow basically goes like this: (Be aware that oasis
+is really finicky and its error messages are useless), see the oasis
+minitutorial at the end of this post.</p>
+</li><li><p><code>merlin</code> is a OCaml program that is simply amazing it drives code
+completion for plugins available in <code>emacs</code> and <code>vim</code>. Once you have
+merlin installed with</p>
+</li></ol>
+
+<pre class="shell"><code class="shell">$ opam install merlin</code></pre><p>then you can add a <code>.merlin</code> file to your project so that <code>merlin</code>
+knows what packages to code complete for, a sample <code>.merlin</code> file
+looks like this:</p>
+<pre class="text"><code class="text">B _build/src
+S src
+PKG cmdliner lwt
+FLG -w +a-4-40..42-44-45-48</code></pre><p>Notice how I put the <code>B _build/src</code> That sort of assumes you're using
+<code>_oasis</code> and you made the a <code>src</code> directory. I also provided you with
+some nice compiler flags for extra warnings.</p>
+<p>You'll need to add some code to vim or emacs to truly get the most out
+of <code>merlin</code>, you can even get <code>jedi</code> style docstring popups like so:</p>
+<p><img src="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/caml_docstring.png" alt="popup"></p>
+<p>The elisp that I use for my <code>init.el</code> is listed after the <code>oasis</code>
+tutorial at the end of this post.</p>
+<ol><li><p>There are no full blown IDEs for OCaml, learn <code>emacs</code>, <code>vim</code>.
+Also <code>Sublime Text</code> has a merlin plugin, if you're already familiar
+with Sublime Text then just stick with it, merlin is really what
+matters here.</p>
+</li><li><p><code>utop</code> is an enhanced repl, its better than the plain <code>ocaml</code>
+repl. Install it with <code>opam install utop</code></p>
+</li></ol>
+
+<h1 id="Librarysituation">Library situation</h1>
+
+<p><code>OCaml</code> does have a standard library but it is deliberately minimal. It was only created
+to serve the needs of the compiler programmers, ie its not like
+<code>Python</code>'s standard library which has everything under the sun + the
+moon. There are a few standard library replacements, one is called
+<code>Core</code> and its provided by Jane Street. Its the library used in the
+<strong>Real World OCaml</strong> book/website. Another standard library
+replacement is called <code>Batteries</code>, this is more "community"
+supported. There is a more recent contender called <code>Containers</code>. For a
+categorized list of contemporary and well liked/must have libraries,
+checkout the <a href="https://github.com/rizo/awesome-ocaml">awesome-ocaml</a>
+repository.</p>
+<h1 id="SpeakingofLibraries">Speaking of Libraries...</h1>
+
+<p>This is "functional programming," so many of the real world libraries
+you'll encounter will have Monadic interfaces, like <code>lwt</code> or Core's
+<code>async</code>, both are asynchronous threading libraries, use Monads and
+that wacky <code>&gt;&gt;=</code> function. But you really shouldn't fret about what a
+Monad is or represents, just follow the type signature and you'll be
+fine. For a more detailed treatment of Monads in OCaml and a code
+example to talk to the <code>Stripe</code> API, see
+<a href="http://hyegar.com/2015/10/12/monads-you-can-understand/">this</a>.</p>
+<h2 id="Doingsimpletasksshamelessplug">Doing simple tasks (shameless plug)</h2>
+
+<p>I try using <code>OCaml</code> for literally everything and that includes going
+to hackathons, to make this less painful I wrote a library called
+<code>Podge</code> which helps with simple stuff. I don't claim its a standard
+library replacement, just a library for getting stuff done. These two
+code samples assume the file is named <code>code.ml</code> and can be run with
+<code>utop code.ml</code></p>
+<p>First install with opam:</p>
+<pre class="shell"><code class="shell">$ opam install podge</code></pre>
+
+<ol><li>Reading output of a process</li></ol>
+
+<pre><code class="ocaml">#require <span class="string">"podge"</span>
+<span class="governing">let</span> () = 
+  <span class="ocaml-module">Podge</span>.<span class="ocaml-module">Unix</span>.read_process_output <span class="string">"ls -halt"</span> |&gt; <span class="ocaml-module">List</span>.iter print_endline</code></pre>
+
+<p>The <code>|&gt;</code> just means piping, its piping the output of
+<code>read_process_output</code> into the input of the partially applied function
+<code>iter</code></p>
+<ol><li>Reading a file</li></ol>
+
+<pre><code class="ocaml">#require <span class="string">"podge"</span>
+<span class="governing">let</span> () = 
+  <span class="ocaml-module">Podge</span>.<span class="ocaml-module">Unix</span>.read_lines <span class="string">"code.ml"</span> |&gt; <span class="ocaml-module">List</span>.iter print_endline</code></pre>
+
+<p>Similar to 1, this reads all lines of file and gives it to the input
+of the partially applied function <code>iter</code>.</p>
+<p>These are two simple code samples from <code>Podge</code>, check out the
+<a href="https://github.com/fxfactorial/podge">repo</a> for other useful modules
+like: (The README has code examples)</p>
+<ul><li><code>Web</code> simple HTTP requests and getting data back as JSON</li><li><code>Xml</code> querying simple XML documents</li><li><code>ANSITerminal</code> for creating colored shell output</li><li><code>StringExt</code> which is all due to <a href="http://rgrinberg.com/">Rudi Grinberg</a></li></ul>
+
+<h2 id="Whatcanyoudowithit">What can you do with it?</h2>
+
+<p>Loads, warning shameless plugs ahead.</p>
+<ol><li>I wrote a opam package that makes it easy to get an <code>iOS</code> OCaml
+ cross-compiler, see
+ <a href="https://github.com/fxfactorial/opam-ios">here</a>.</li><li>Compilers!, lots of compilers/compiler tools are written in OCaml:
+ Facebook uses OCaml for <a href="https://github.com/facebook/pfff">pfff</a>
+ and <a href="https://github.com/facebook/flow">flow</a> and the first cut of
+ Rust was written in OCaml.</li><li>Financial world, <a href="https://www.janestreet.com/">Jane Street</a> uses
+ OCaml for basically everything (AFAIK)</li><li>Systems Programming: <a href="https://ahrefs.com/">ahrefs</a>, my former
+ employer Ahrefs uses OCaml for heavy systems programming.</li><li>Kernels: Unikernels are hot right now, the most prominent one is
+ the <a href="https://mirage.io/">Mirage-OS</a> project and its all OCaml.</li><li>Shameless plug: I use OCaml as well for <code>js_of_ocaml</code>, in fact I'm
+ using it to write an Electron app with a node backend (All code is
+ OCaml compiled into JS, then run on node/Electron), see
+ <a href="https://github.com/fxfactorial/ocaml-electron">here.</a></li><li>Genomics/Bioinformatics:
+ <a href="https://github.com/hammerlab">Hammer Lab</a> in NYC uses OCaml for
+ their genomics/sequencing work.</li><li>My employer MixRank let me write <code>OCaml</code> for a <code>ssh</code> tunnel
+ multiplexer for jailbroken iDevices called
+ <a href="https://github.com/onlinemediagroup/ocaml-usbmux">gandalf</a></li><li>You can even replace your shell scripts or Python with it, aka run
+ it using the interpreter, see the self contained example listed
+ after the elisp code at the end.</li></ol>
+
+<h1 id="Stickwithit">Stick with it!</h1>
+
+<p>This style of coding might be new to you or maybe its your first
+programming language, stick with it and continue. <code>OCaml</code> offers many
+awesome features and has many strengths including a very professional
+and pragmatic community. Also, if you're in the Bay Area then please
+come to <a href="http://www.meetup.com/sv-ocaml/">weekly office hours</a> hours
+hosted at MixRank in San Francisco. Its open to all levels of
+experience and I still have some Enter the Monad tshirts to give away
+courtesy of Jane Street.</p>
+<h2 id="Oasisminitutorial">Oasis mini-tutorial</h2>
+
+<ol><li><p>Create a directory.</p>
+</li><li><p>Go to the directory and create a file named <strong>_oasis</strong> and
+directory named <code>src</code></p>
+</li><li><p>Here is a template of the contents of the <strong>_oasis</strong> file</p>
+</li></ol>
+
+<pre class="conf"><code class="conf">OASISFormat:  0.4
+OCamlVersion: &gt;= 4.02.3
+Name:         opam_package_name
+Version:      0.1
+Maintainers:  New OCaml programmer
+Homepage:     http://my_coolsite.com
+Synopsis:     Some short description
+Authors:      Cool@me.com
+License:      BSD-3-clause
+Plugins:      META (0.4), DevFiles (0.4)
+AlphaFeatures: ocamlbuild_more_args
+
+Description:
+Some cool description
+
+# This is a comment and this below creates an binary program
+Executable &lt;some_program_name&gt;
+Path: src
+BuildTools:ocamlbuild
+install: true
+MainIs: main.ml
+CompiledObject: native
+BuildDepends: package_one, package_two
+
+# Another comment, this builds a library called pg
+Library pg
+Path:         src
+# oasis will figure out the dependencies, 
+# Just list the modules you want public, 
+# Note that there's no .ml, just give the name
+Modules:      Pg
+CompiledObject: byte
+BuildDepends: some_package</code></pre>
+
+<ol><li>Generate the Makefile, setup.ml, configure and other build crap.</li></ol>
+
+<pre class="shell"><code class="shell">$ oasis setup -setup-update dynamic</code></pre>
+
+<ol><li>Actually build your code, yes its just a call to make.</li></ol>
+
+<pre class="shell"><code class="shell">$ make</code></pre><p>Assuming that you were building an executable, then you should see
+either a <code>foo.native</code> or a <code>foo.byte</code> in the root directory of the
+project.</p>
+<ol><li>You can stop here, but you can go even further with
+<code>oasis2opam</code>. Install it with: </li></ol>
+
+<pre class="shell"><code class="shell">opam install oasis2opam</code></pre>
+
+<p>then in your project's root directory, aka the directory with the
+_oasis file, do:</p>
+<pre class="shell"><code class="shell">oasis2opam --local</code></pre>
+
+<p>This creates the <code>opam</code> directory and some meta data for the opam
+packaging system. Your local package can now be a first class citizen
+with opam just by doing this in the same project root directory:</p>
+<pre class="shell"><code class="shell">$ opam pin add &lt;your_package_name&gt; . -y</code></pre>
+
+<h2 id="ElispforOCamlcoding">Elisp for OCaml coding</h2>
+
+<pre class="elisp"><code class="elisp">;; OCaml code
+(add-hook
+ 'tuareg-mode-hook
+ (lambda ()
+   ;; Add opam emacs directory to the load-path
+   (setq opam-share
+     (substring
+      (shell-command-to-string "opam config var share 2&gt; /dev/null")
+      0 -1))
+   (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+   ;; Load merlin-mode
+   (require 'merlin)
+   ;; Start merlin on ocaml files
+   (add-hook 'tuareg-mode-hook 'merlin-mode t)
+   (add-hook 'caml-mode-hook 'merlin-mode t)
+   ;; Enable auto-complete
+   (setq merlin-use-auto-complete-mode 'easy)
+   ;; Use opam switch to lookup ocamlmerlin binary
+   (setq merlin-command 'opam)
+   (company-mode)
+   (require 'ocp-indent)
+   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
+   (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
+   (autoload 'merlin-mode "merlin" "Merlin mode" t)
+   (utop-minor-mode)
+   (company-quickhelp-mode)
+   ;; Important to note that setq-local is a macro and it needs to be
+   ;; separate calls, not like setq
+   (setq-local merlin-completion-with-doc t)
+   (setq-local indent-tabs-mode nil)
+   (setq-local show-trailing-whitespace t)
+   (setq-local indent-line-function 'ocp-indent-line)
+   (setq-local indent-region-function 'ocp-indent-region)
+   (if (equal system-type 'darwin)
+       (load-file "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
+     (load-file "/home/gar/.opam/working/share/emacs/site-lisp/ocp-indent.el"))
+   (merlin-mode)))
+
+(add-hook 'utop-mode-hook (lambda ()
+                (set-process-query-on-exit-flag
+                 (get-process "utop") nil)))</code></pre>
+
+<h2 id="OCamlasshellscriptingexampleassumegandalf">OCaml as shell scripting, example assume gandalf</h2>
+
+<p>This is the deploy script I use for a
+<a href="https://github.com/fxfactorial/ent">project</a> that I'm working on, a
+way to get a node like thing on iOS using JavaScriptCore,
+Objective-C++ and Grand Central Dispatch.</p>
+<p>You can do <code>chmod +x</code> on the script, then can just invoke it as a
+regular program, no compiling necessary.</p>
+<pre><code class="ocaml">#!/usr/bin/env ocaml
+<span class="comment">(* Need topfind <span class="keyword">to</span> make require work, need require <span class="keyword">to</span> use podge package *)</span>
+#use <span class="string">"topfind"</span>
+#require <span class="string">"podge"</span>
+
+<span class="governing">module</span> <span class="ocaml-module">U</span> <span class="ocaml-variable"></span>= <span class="ocaml-module">Yojson</span>.<span class="ocaml-module">Basic</span>.Util
+<span class="governing">module</span> <span class="ocaml-module">A</span> <span class="ocaml-variable"></span>= <span class="ocaml-module">Podge</span>.ANSITerminal
+
+<span class="governing">type</span> <span class="type">cmd</span> = Scp <span class="keyword">of</span> int * string
+         | Ssh <span class="keyword">of</span> int * string
+
+<span class="governing">type</span> <span class="type">error_condition</span> = Copy_error | Exec_error
+
+<span class="governing">let</span> <span class="ocaml-function">connected_devices</span> <span class="ocaml-variable">() </span>=
+  <span class="ocaml-module">Podge</span>.<span class="ocaml-module">Unix</span>.read_process_output <span class="string">"gandalf -s"</span>
+  |&gt; <span class="ocaml-module">Podge</span>.<span class="ocaml-module">List</span>.drop ~n:5
+  |&gt; <span class="ocaml-module">String</span>.concat <span class="string">""</span>
+  |&gt; <span class="ocaml-module">Yojson</span>.<span class="ocaml-module">Basic</span>.from_string
+  |&gt; <span class="ocaml-module">U</span>.to_list
+  |&gt; <span class="ocaml-module">List</span>.fold_left
+    (<span class="keyword">fun</span> accum item -&gt; <span class="ocaml-module">U</span>.(member <span class="string">"Local Port"</span> item |&gt; to_int) :: accum) []
+
+<span class="governing">let</span> <span class="ocaml-function">command</span> = <span class="keyword">function</span>
+  | Scp (port, target) -&gt;
+    <span class="ocaml-module">Printf</span>.sprintf <span class="string">"scp -P %d %s root@localhost:~/"</span> port target
+  | Ssh (port, cmd) -&gt;
+    <span class="ocaml-module">Printf</span>.sprintf <span class="string">"ssh root@localhost -p %d \"%s\""</span> port cmd
+
+<span class="governing">let</span> <span class="ocaml-function">usage</span> <span class="ocaml-variable">() </span>=
+  <span class="string">"This deploy script assumes that it was started\n\
+   from the makefile <span class="keyword">with</span> `make deploy` <span class="governing">and</span> that gandalf is running"</span>
+  |&gt; print_endline;
+  exit 1
+
+<span class="governing">let</span> <span class="ocaml-function">with_gandalf</span> <span class="ocaml-variable">udid ~f </span>=
+  <span class="governing">let </span><span class="ocaml-variable">f_name</span> = <span class="ocaml-module">Filename</span>.temp_file <span class="string">"gandalf"</span> <span class="string">"deployment"</span> <span class="governing">in</span>
+  <span class="governing">let </span><span class="ocaml-variable">f_chan</span> = open_out f_name <span class="governing">in</span>
+  <span class="ocaml-module">Printf</span>.sprintf <span class="string">"%s:2000:22"</span> udid |&gt; output_string f_chan;
+  close_out f_chan;
+  <span class="governing">let </span><span class="ocaml-variable">gandalf_pid</span> =
+    <span class="ocaml-module">Unix</span>.(create_process <span class="string">"gandalf"</span> [|<span class="string">"gandalf"</span>; <span class="string">"-m"</span>; f_name|] stdin stdout stderr)
+  <span class="governing">in</span>
+  <span class="ocaml-module">Unix</span>.sleep 1;
+  f ();
+  <span class="ocaml-module">Unix</span>.kill gandalf_pid 5
+
+<span class="governing">let</span> <span class="ocaml-function">cmd_result</span> <span class="ocaml-variable">~error_msg </span>= <span class="keyword">function</span>
+  | outcome when outcome &lt;&gt; 0 -&gt;
+    <span class="ocaml-module">A</span>.colored_message ~m_color:<span class="ocaml-module">Podge</span>.<span class="ocaml-module">T</span>.Red error_msg |&gt; prerr_endline;
+    exit 1
+  | _ -&gt; ()
+
+<span class="governing">let</span> () =
+  <span class="keyword">if</span> <span class="ocaml-module">Array</span>.length <span class="ocaml-module">Sys</span>.argv &lt;&gt; 3 <span class="keyword">then</span> usage ()
+  <span class="keyword">else</span>
+    with_gandalf <span class="ocaml-module">Sys</span>.argv.(2) <span class="governing">begin</span> <span class="keyword">fun</span> () -&gt;
+      <span class="governing">let </span><span class="ocaml-variable">devices</span> = connected_devices () <span class="governing">in</span>
+      devices |&gt; <span class="ocaml-module">List</span>.iter <span class="governing">begin</span> <span class="keyword">fun</span> i_device -&gt;
+        <span class="governing">let </span><span class="ocaml-variable">scp_cmd</span> = <span class="ocaml-module">Sys</span>.(Scp (i_device, argv.(1))) |&gt; command <span class="governing">in</span>
+        <span class="ocaml-module">Printf</span>.sprintf <span class="string">"Deploying binary <span class="keyword">to</span> remote device: %s"</span> scp_cmd
+        |&gt; <span class="ocaml-module">A</span>.colored_message |&gt; print_endline;
+        <span class="ocaml-module">Sys</span>.command scp_cmd
+        |&gt; cmd_result ~error_msg:<span class="string">"Was unable <span class="keyword">to</span> copy over the binary"</span>;
+        <span class="governing">let </span><span class="ocaml-variable">ssh_cmd_sign</span> =
+          <span class="ocaml-module">Sys</span>.(Ssh (i_device, <span class="string">"ldid -S /var/root/"</span> ^ argv.(1))) |&gt; command
+        <span class="governing">in</span>
+        <span class="ocaml-module">Printf</span>.sprintf <span class="string">"Signing binary on remote device: %s"</span> ssh_cmd_sign
+        |&gt; <span class="ocaml-module">A</span>.colored_message |&gt; print_endline;
+        <span class="ocaml-module">Sys</span>.command ssh_cmd_sign
+        |&gt; cmd_result
+          ~error_msg:(<span class="ocaml-module">Printf</span>.sprintf <span class="string">"Signing binary on remote device: %s"</span> ssh_cmd_sign);
+        <span class="governing">let </span><span class="ocaml-variable">ssh_cmd</span> = <span class="ocaml-module">Sys</span>.(Ssh (i_device, <span class="string">"/var/root/"</span> ^ argv.(1))) |&gt; command <span class="governing">in</span>
+        <span class="ocaml-module">Printf</span>.sprintf <span class="string">"Executing binary on remote device: %s"</span> ssh_cmd
+        |&gt; print_endline;
+        <span class="ocaml-module">Sys</span>.command ssh_cmd
+        |&gt; cmd_result ~error_msg:<span class="string">"Was unable <span class="keyword">to</span> execute the binary"</span>;
+        <span class="ocaml-module">A</span>.colored_message <span class="string">"Deployed <span class="governing">and</span> tested successfully"</span>
+        |&gt; print_endline
+      <span class="governing">end</span>
+    <span class="governing">end</span></code></pre>
+
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+    
+    <footer id="footer" class="navbar navbar-inverse">
+      <div class="navbar-inner">
+	<!-- footer							-*-html-*- -->
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/learn/">Learn</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/learn/taste.html">Code Examples</a></li>
+      <li><a href="https://ocaml.org/learn/tutorials/">Tutorials</a></li>
+      <li><a href="https://ocaml.org/learn/books.html">Books</a></li>
+      <li><a href="https://ocaml.org/learn/success.html">Success Stories</a></li>
+      <li><a href="https://ocaml.org/learn/tutorials/"></a></li>
+    </ul>
+  </div>
+</div>
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/docs/">Documentation</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/docs/install.html">Install</a></li>
+      <li><a href="http://caml.inria.fr/pub/docs/manual-ocaml/">Manual</a></li>
+      <li><a href="https://opam.ocaml.org/packages/">Packages</a></li>
+      <li><a href="https://ocaml.org/releases/index.html">Compiler Releases</a></li>
+      <li><a href="https://ocaml.org/docs/logos.html">Logos</a></li>
+    </ul>
+  </div>
+</div>
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/community/">Community</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/community/mailing_lists.html">Mailing Lists</a></li>
+      <li><a href="https://ocaml.org/meetings/">Meetings</a></li>
+      <li><a href="https://ocaml.org/community/planet/">News</a></li>
+      <li><a href="https://ocaml.org/community/support.html">Support</a></li>
+      <li><a href="http://caml.inria.fr/mantis/my_view_page.php" target="_blank">Bug Tracker</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="column">
+  <div class="entry">
+    <h1>Contact</h1>
+    <ul>
+      <li><a href="https://github.com/ocaml/ocaml.org/issues" target="_blank">Website Issues</a></li>
+      <li><a href="https://ocaml.org/about.html">About This Site</a></li>
+    <li><a href="https://github.com/ocaml/ocaml.org/" target="_blank">Find Us on GitHub</a></li>
+      <li><a href="https://ocaml.org/contributors.html">Credits</a></li>
+    </ul>
+  </div>
+</div>
+
+      </div>
+    </footer>
+    
+    <!-- Load javascript from CDN -->
+    <script type="text/javascript" src="So%20you%27re%20learning%20OCaml,%20a%20one%20stop%20shop%20tutorial%20%E2%80%93%20OCaml_fichiers/bootstrap.js"></script>
+
+    
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37808023-1']);
+    _gaq.push(['_setDomainName', 'ocaml.org']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    </script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['setCookieDomain', '*.ocaml.org']);
+      _paq.push(['setDocumentTitle', 'So you're learning OCaml, a one stop shop tutorial']);
+      _paq.push(['setDoNotTrack', true]);
+      _paq.push(['setCustomVariable', 1, 'Page language',
+         'English',
+         'page']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+
+      (function() {
+        var u=(('https:' == document.location.protocol) ? 'https' : 'http') + '://ocaml.org/piwik/';
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+        g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//ocaml.org/piwik/piwik.php?idsite=1"
+		      style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code --> <!-- ifndef staging -->
+
+  
+
+</body></html>

@@ -1,0 +1,15 @@
+# $Id: TODO,v 1.7 2005-03-11 14:59:15 barnier Exp $
+
+ - Connection avec lpsolve
+
+ - Ne verifier les over/underflows qu'a la pose de la
+   contrainte, pas après (car les bornes varient de
+   maniere monotone), et systematiquement
+
+ - Problème de typage avec les IR: on ne peut pas calculer
+   directement le max d'un tableau d'IR si certaines sont setable
+   et d'autres notsetable
+
+ - Opti par dichotomie dans Goals (cf. Constraint-Based Scheduling p.18)
+
+ - Scheduling : slack avec le meilleur de tous les [start_i, end_j)

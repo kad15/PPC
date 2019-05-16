@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_reify.html">
+<link rel="next" href="Fcl_linear.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_boolean</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_reify.html" title="Fcl_reify">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_linear.html" title="Fcl_linear">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_boolean.html">Fcl_boolean</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_boolean: <code class="code">sig</code> <a href="Fcl_boolean.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<code class="code">cstr bools sum</code> returns a constraint ensuring that <code class="code">sum</code> is equal
+    to the sum of the boolean variables of the array <code class="code">bools</code>. This constraint
+    posts a demon for each variable.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="VALcstr"><span class="keyword">val</span> cstr</span> : <code class="type">Fcl_var.Fd.t array -> Fcl_var.Fd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">cstr bools sum</code> returns a constraint ensuring that <code class="code">sum</code> is equal
+    to the sum of the boolean variables of the array <code class="code">bools</code>. This constraint
+    posts a demon for each variable.<br>
+</div>
+
+<pre><span id="VALsum"><span class="keyword">val</span> sum</span> : <code class="type">Fcl_var.Fd.t array -> Fcl_var.Fd.t</code></pre><div class="info ">
+<code class="code">sum bools</code> returns the sum (a new variable) and posts the preceding
+    constraint.<br>
+</div>
+</body></html>

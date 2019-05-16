@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_setDomain.html">
+<link rel="next" href="Fcl_data.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><link title="Access" rel="Section" href="#2_Access">
+<link title="Control" rel="Section" href="#2_Control">
+<link title="Backtrackable References" rel="Section" href="#2_BacktrackableReferences">
+<title>Fcl_stak</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_setDomain.html" title="Fcl_setDomain">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_data.html" title="Fcl_data">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_stak.html">Fcl_stak</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_stak: <code class="code">sig</code> <a href="Fcl_stak.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<h1 id="1_GlobalStackofGoalsBacktrackableOperations">Global Stack of Goals, Backtrackable Operations</h1><br>
+</div>
+<hr width="100%">
+<br>
+This module provides functions to control the execution of the goal
+   stack, as well as <em>backtrackable references</em>, i.e. mutable data
+   structures restored on backtracking. Nota: the module name
+   <code class="code">Stak</code> lacks a '<code class="code">c</code>' because of a possible clash with the OCaml
+   standard library module <code class="code">Stack</code>.<br>
+<br>
+<h2 id="2_Access">Access</h2><br>
+
+<pre><span id="TYPElevel"><span class="keyword">type</span> <code class="type"></code>level</span> </pre>
+<div class="info ">
+Type of a level in the stack.<br>
+</div>
+
+
+<pre><span id="VALolder"><span class="keyword">val</span> older</span> : <code class="type"><a href="Fcl_stak.html#TYPElevel">level</a> -> <a href="Fcl_stak.html#TYPElevel">level</a> -> bool</code></pre><div class="info ">
+<code class="code">older l1 l2</code> true if level <code class="code">l1</code> precedes <code class="code">l2</code>.<br>
+</div>
+
+<pre><span id="VALsize"><span class="keyword">val</span> size</span> : <code class="type">unit -> int</code></pre><div class="info ">
+Size of the stack, i.e. number of trailings.<br>
+</div>
+
+<pre><span id="VALdepth"><span class="keyword">val</span> depth</span> : <code class="type">unit -> int</code></pre><div class="info ">
+Depth of the stack, i.e. number of active levels.<br>
+</div>
+
+<pre><span id="VALlevel"><span class="keyword">val</span> level</span> : <code class="type">unit -> <a href="Fcl_stak.html#TYPElevel">level</a></code></pre><div class="info ">
+Returns the current level.<br>
+</div>
+
+<pre><span id="VALlevels"><span class="keyword">val</span> levels</span> : <code class="type">unit -> <a href="Fcl_stak.html#TYPElevel">level</a> list</code></pre><div class="info ">
+Returns the current active levels.<br>
+</div>
+
+<pre><span id="VALnb_choice_points"><span class="keyword">val</span> nb_choice_points</span> : <code class="type">unit -> int</code></pre><div class="info ">
+Access to a global counter incremented at each choice point.
+   Useful to implement search strategies such as Limited Discrepancy
+   Search<br>
+</div>
+<br>
+<h2 id="2_Control">Control</h2><br>
+
+<pre><span id="EXCEPTIONLevel_not_found"><span class="keyword">exception</span> Level_not_found</span> <span class="keyword">of</span> <code class="type"><a href="Fcl_stak.html#TYPElevel">level</a></code></pre>
+<div class="info ">
+Raised by <code class="code">cut</code>.<br>
+</div>
+
+<pre><span id="VALcut"><span class="keyword">val</span> cut</span> : <code class="type"><a href="Fcl_stak.html#TYPElevel">level</a> -> unit</code></pre><div class="info ">
+<code class="code">cut l</code> cuts the choice points left on the stack until level <code class="code">l</code>.
+     Raise <code class="code">Level_not_found</code> if level is not reached and stack is empty.<br>
+</div>
+
+<pre><span id="EXCEPTIONFail"><span class="keyword">exception</span> Fail</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info ">
+Raised during solving whenever a failure occurs. The string argument
+   is informative.<br>
+</div>
+
+<pre><span id="VALfail"><span class="keyword">val</span> fail</span> : <code class="type">string -> 'a</code></pre><div class="info ">
+<code class="code">fail x</code> equivalent to <code class="code">raise (Fail x)</code>.<br>
+</div>
+<br>
+<h2 id="2_BacktrackableReferences">Backtrackable References</h2><br>
+
+<pre><span id="TYPEref"><span class="keyword">type</span> <code class="type">'a</code> ref</span> </pre>
+<div class="info ">
+Backtrackable reference of type <code class="code">'a</code>. I.e. type of mutable
+   data structures restored on backtracking.<br>
+</div>
+
+
+<pre><span id="VALref"><span class="keyword">val</span> ref</span> : <code class="type">'a -> 'a <a href="Fcl_stak.html#TYPEref">ref</a></code></pre><div class="info ">
+Returns a reference whose modifications will be trailed during the
+   solving of a goal.<br>
+</div>
+
+<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type">'a <a href="Fcl_stak.html#TYPEref">ref</a> -> 'a -> unit</code></pre><div class="info ">
+Sets a backtrackable reference.<br>
+</div>
+
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">'a <a href="Fcl_stak.html#TYPEref">ref</a> -> 'a</code></pre><div class="info ">
+Dereference.<br>
+</div>
+
+<pre><span id="VALincr"><span class="keyword">val</span> incr</span> : <code class="type">int <a href="Fcl_stak.html#TYPEref">ref</a> -> unit</code></pre><div class="info ">
+<code class="code">incr r</code> increments reference r.<br>
+</div>
+
+<pre><span id="VALdecr"><span class="keyword">val</span> decr</span> : <code class="type">int <a href="Fcl_stak.html#TYPEref">ref</a> -> unit</code></pre><div class="info ">
+<code class="code">decr r</code> decrements reference r.<br>
+</div>
+</body></html>

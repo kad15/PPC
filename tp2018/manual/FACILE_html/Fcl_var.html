@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_cstr.html">
+<link rel="next" href="Fcl_invariant.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_var</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_cstr.html" title="Fcl_cstr">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_invariant.html" title="Fcl_invariant">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_var.html">Fcl_var</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_var: <code class="code">sig</code> <a href="Fcl_var.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<h1 id="1_ConstrainedAttributedFiniteDomainVariables">Constrained, Attributed, Finite Domain Variables</h1><br>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEconcrete"><span class="keyword">type</span> <code class="type">('a, 'b)</code> concrete</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTconcrete.Unk"><span class="constructor">Unk</span></span> <span class="keyword">of</span> <code class="type">'a</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTconcrete.Val"><span class="constructor">Val</span></span> <span class="keyword">of</span> <code class="type">'b</code></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" >Concrete type of the value of finite domain variables.</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr></table>
+
+
+
+<pre><span class="keyword">module type</span> <a href="Fcl_var.BASICVAR.html">BASICVAR</a> = <code class="code">sig</code> <a href="Fcl_var.BASICVAR.html">..</a> <code class="code">end</code></pre><div class="info">
+Common variables module signature.
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Fcl_var.FD.html">FD</a> = <code class="code">sig</code> <a href="Fcl_var.FD.html">..</a> <code class="code">end</code></pre><div class="info">
+Extended signature for finite domain variable (with added functions
+   irrelevant to set or float variables).
+</div>
+
+<pre><span class="keyword">module</span> <a href="Fcl_var.Fd.html">Fd</a>: <code class="type"><a href="Fcl_var.FD.html">FD</a></code><code class="type"> 
+ with
+     type domain = Fcl_domain.t
+     and type elt = Fcl_domain.elt
+     and type size = int</code></pre><div class="info">
+Concrete finite domain variable module.
+</div>
+
+<pre><span class="keyword">module</span> <a href="Fcl_var.SetFd.html">SetFd</a>: <code class="type"><a href="Fcl_var.BASICVAR.html">BASICVAR</a></code><code class="type"> 
+ with
+     type domain = Fcl_setDomain.t
+     and type elt = <a href="Fcl_setDomain.S.html">Fcl_setDomain.S</a>.t
+     and type size = int</code></pre><div class="info">
+Concrete integer set variable module.
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Fcl_var.DOMAIN.html">DOMAIN</a> = <code class="code">sig</code> <a href="Fcl_var.DOMAIN.html">..</a> <code class="code">end</code></pre>
+<pre><span class="keyword">module</span> <a href="Fcl_var.MakeVar.html">MakeVar</a>: <div class="sig_block"><code class="code">functor (</code><code class="code">Domain</code><code class="code"> : </code><code class="type"><a href="Fcl_var.DOMAIN.html">DOMAIN</a></code><code class="code">) -&gt; </code><code class="type"><a href="Fcl_var.BASICVAR.html">BASICVAR</a></code><code class="type">  with type domain = Domain.t and type elt = Domain.elt and type size = Domain.size</code></div></pre></body></html>

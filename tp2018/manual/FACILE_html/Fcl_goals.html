@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_conjunto.html">
+<link rel="next" href="Fcl_fdArray.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><link title="Access" rel="Section" href="#2_Access">
+<link title="Creation" rel="Section" href="#2_Creation">
+<link title="Operators and Built-in Goals" rel="Section" href="#2_OperatorsandBuiltinGoals">
+<link title="Operations on Array of Variables" rel="Section" href="#2_OperationsonArrayofVariables">
+<link title="Operations on List of Variables" rel="Section" href="#2_OperationsonListofVariables">
+<link title="Optimization" rel="Section" href="#2_Optimization">
+<link title="Search Strategy" rel="Section" href="#2_SearchStrategy">
+<link title="Solving" rel="Section" href="#2_Solving">
+<link title="Instantiation of Finite Domain Variables" rel="Subsection" href="#3_InstantiationofFiniteDomainVariables">
+<link title="Instantiation of Set Variables" rel="Subsection" href="#3_InstantiationofSetVariables">
+<title>Fcl_goals</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_conjunto.html" title="Fcl_conjunto">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_fdArray.html" title="Fcl_fdArray">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_goals.html">Fcl_goals</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_goals: <code class="code">sig</code> <a href="Fcl_goals.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<h1 id="1_BuildingandSolvingGoals">Building and Solving Goals</h1><br>
+</div>
+<hr width="100%">
+<br>
+This module provides functions and operators to build goals that will
+   control the search, i.e. mainly choose and instantiate variables.<br>
+<br>
+<h2 id="2_Access">Access</h2><br>
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info ">
+The type of goals.<br>
+</div>
+
+
+<pre><span id="VALname"><span class="keyword">val</span> name</span> : <code class="type"><a href="Fcl_goals.html#TYPEt">t</a> -> string</code></pre><div class="info ">
+<code class="code">name g</code> returns the name of the goal <code class="code">g</code>.<br>
+</div>
+
+<pre><span id="VALfprint"><span class="keyword">val</span> fprint</span> : <code class="type">Pervasives.out_channel -> <a href="Fcl_goals.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">fprint chan g</code> prints the name of goal <code class="code">g</code> on channel <code class="code">chan</code>.<br>
+</div>
+<br>
+<h2 id="2_Creation">Creation</h2><br>
+
+<pre><span id="VALfail"><span class="keyword">val</span> fail</span> : <code class="type"><a href="Fcl_goals.html#TYPEt">t</a></code></pre>
+<pre><span id="VALsuccess"><span class="keyword">val</span> success</span> : <code class="type"><a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+Failure (resp. success). Neutral element for the disjunction
+     (resp. conjunction) over goals. Could be implemented as
+     <code class="code">create (fun () -&gt; Stak.fail "fail")</code> (resp. <code class="code">create (fun () -&gt; ())</code>).<br>
+</div>
+
+<pre><span id="VALatomic"><span class="keyword">val</span> atomic</span> : <code class="type">?name:string -> (unit -> unit) -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">atomic ~name:"atomic" f</code> returns a goal calling function <code class="code">f</code>.
+     <code class="code">f</code> must take <code class="code">()</code> as argument and return <code class="code">()</code>. <code class="code">name</code> default
+     value is <code class="code">"atomic"</code>.<br>
+</div>
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">?name:string -> ('a -> <a href="Fcl_goals.html#TYPEt">t</a>) -> 'a -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">create ~name:"create" f a</code> returns a goal calling <code class="code">f a</code>.
+     <code class="code">f</code> should return a goal (success to stop). <code class="code">name</code>
+     default value is <code class="code">"create"</code>.<br>
+</div>
+
+<pre><span id="VALcreate_rec"><span class="keyword">val</span> create_rec</span> : <code class="type">?name:string -> (<a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a>) -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">create_rec ~name:"create_rec" f</code> returns a goal calling <code class="code">f</code>. <code class="code">f</code>
+     takes the goal itself as argument and should return a goal
+     (success to stop). Useful to write recursive goals. <code class="code">name</code> default
+     value is <code class="code">"create_rec"</code>.<br>
+</div>
+<br>
+<h2 id="2_OperatorsandBuiltinGoals">Operators and Built-in Goals</h2><br>
+
+<pre><span id="VAL(&&~)"><span class="keyword">val</span> (&amp;&amp;~)</span> : <code class="type"><a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(||~)"><span class="keyword">val</span> (||~)</span> : <code class="type"><a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+Conjunction and disjunction over goals. Note that these two operators
+     do have the <b>same priority</b>. Goals expressions must therefore be
+     carefully parenthesized to produce the expected result.<br>
+</div>
+
+<pre><span id="VALforto"><span class="keyword">val</span> forto</span> : <code class="type">int -> int -> (int -> <a href="Fcl_goals.html#TYPEt">t</a>) -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre>
+<pre><span id="VALfordownto"><span class="keyword">val</span> fordownto</span> : <code class="type">int -> int -> (int -> <a href="Fcl_goals.html#TYPEt">t</a>) -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">forto min max g</code> (resp. <code class="code">fordownto min max g</code>) returns the
+     conjunctive iteration of goal <code class="code">g</code> on increasing (resp. decreasing)
+     integers from <code class="code">min</code> (resp. <code class="code">max</code>) to <code class="code">max</code> (resp. <code class="code">min</code>).<br>
+</div>
+
+<pre><span id="VALonce"><span class="keyword">val</span> once</span> : <code class="type"><a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">once g</code> cuts choice points left on goal <code class="code">g</code>.<br>
+</div>
+
+<pre><span id="VALsigma"><span class="keyword">val</span> sigma</span> : <code class="type">?domain:<a href="Fcl_domain.html#TYPEt">Fcl_domain.t</a> -> (Fcl_var.Fd.t -> <a href="Fcl_goals.html#TYPEt">t</a>) -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">sigma ~domain:Domain.int fgoal</code> creates the goal <code class="code">(fgoal v)</code>
+   where <code class="code">v</code> is a new
+   variable of domain <code class="code">domain</code>. Default domain is the largest one. It can
+   be considered as an existential quantification, hence the concrete
+   notation <code class="code">sigma</code> of this function (because existential quantification can be
+   seen as a generalized  disjunction).<br>
+</div>
+<br>
+<h3 id="3_InstantiationofFiniteDomainVariables">Instantiation of Finite Domain Variables</h3><br>
+
+<pre><span id="VALunify"><span class="keyword">val</span> unify</span> : <code class="type">Fcl_var.Fd.t -> Fcl_var.Fd.elt -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">unify var x</code> instantiates variable <code class="code">var</code> to <code class="code">x</code>.<br>
+</div>
+
+<pre><span id="VALindomain"><span class="keyword">val</span> indomain</span> : <code class="type">Fcl_var.Fd.t -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+Non-deterministic instantiation of a variable, by labeling its domain
+   (in increasing order).<br>
+</div>
+
+<pre><span id="VALassign"><span class="keyword">val</span> assign</span> : <code class="type">?choose:(<a href="Fcl_domain.html#TYPEt">Fcl_domain.t</a> -> <a href="Fcl_domain.html#TYPEelt">Fcl_domain.elt</a>) -> Fcl_var.Fd.t -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+Binary choice-point on a single assignment.<br>
+</div>
+
+<pre><span id="VALrandom"><span class="keyword">val</span> random</span> : <code class="type">Fcl_var.Fd.t -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+Non-deterministic instantiation of a variable, by labeling its domain
+   in random order.<br>
+</div>
+
+<pre><span id="VALinstantiate"><span class="keyword">val</span> instantiate</span> : <code class="type">(<a href="Fcl_domain.html#TYPEt">Fcl_domain.t</a> -> <a href="Fcl_domain.html#TYPEelt">Fcl_domain.elt</a>) -> Fcl_var.Fd.t -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">instantiate choose var</code> Non-deterministic instantiation of a variable,
+   by labeling its domain using the value returned by the <code class="code">choose</code> function.<br>
+</div>
+
+<pre><code><span id="TYPEorder"><span class="keyword">type</span> <code class="type"></code>order</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTorder.Decr"><span class="constructor">Decr</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTorder.Incr"><span class="constructor">Incr</span></span></code></td>
+
+</tr></table>
+
+
+
+<pre><span id="VALdichotomic"><span class="keyword">val</span> dichotomic</span> : <code class="type">?order:<a href="Fcl_goals.html#TYPEorder">order</a> -> Fcl_var.Fd.t -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">dichotomic (?order:Incr) var</code> Non-deterministic instantiation of
+   variable <code class="code">var</code>, by dichotomic recursive exploration of its domain,
+   according to order <code class="code">order</code>. <code class="code">order</code> default value is <code class="code">Incr</code>.<br>
+</div>
+<br>
+<h3 id="3_InstantiationofSetVariables">Instantiation of Set Variables</h3><br>
+
+<pre><span class="keyword">module</span> <a href="Fcl_goals.Conjunto.html">Conjunto</a>: <code class="code">sig</code> <a href="Fcl_goals.Conjunto.html">..</a> <code class="code">end</code></pre><br>
+<h2 id="2_OperationsonArrayofVariables">Operations on Array of Variables</h2><br>
+
+<pre><span class="keyword">module</span> <a href="Fcl_goals.Array.html">Array</a>: <code class="code">sig</code> <a href="Fcl_goals.Array.html">..</a> <code class="code">end</code></pre><br>
+<h2 id="2_OperationsonListofVariables">Operations on List of Variables</h2><br>
+
+<pre><span class="keyword">module</span> <a href="Fcl_goals.List.html">List</a>: <code class="code">sig</code> <a href="Fcl_goals.List.html">..</a> <code class="code">end</code></pre><br>
+<h2 id="2_Optimization">Optimization</h2><br>
+
+<pre><code><span id="TYPEbb_mode"><span class="keyword">type</span> <code class="type"></code>bb_mode</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbb_mode.Restart"><span class="constructor">Restart</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbb_mode.Continue"><span class="constructor">Continue</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbb_mode.Dicho"><span class="constructor">Dicho</span></span></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" >Branch and bound mode.</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr></table>
+
+
+
+<pre><span id="VALminimize"><span class="keyword">val</span> minimize</span> : <code class="type">?step:int -><br>       ?mode:<a href="Fcl_goals.html#TYPEbb_mode">bb_mode</a> -><br>       <a href="Fcl_goals.html#TYPEt">t</a> -> Fcl_var.Fd.t -> (int -> unit) -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">minimize ~step:1 ~mode:Continue goal cost solution</code> runs a
+   Branch and Bound algorithm on <code class="code">goal</code> for bound <code class="code">cost</code>, with an improvement
+   of at least <code class="code">step</code> between each solution found. Three modes are available :
+   <code class="code">Restart</code> and <code class="code">Continue</code> (default) explore the cost domain monotonically,
+   the former restarting from the root node of the search each time an
+   improvement is found, while the latter simply carries on, only backtracking
+   until a better cost may be found; the third mode, <code class="code">Dicho</code>, performs a
+   dichotomic search, with restarts at each improvement. Each time a solution
+   is found, the <code class="code">solution</code> function is called with the instantiation value
+   of <code class="code">cost</code> (which <b>must be instantiated</b> by <code class="code">goal</code>) as argument; this
+   function can therefore be used to store (e.g. in a reference) the current
+   solution. Default <code class="code">step</code> is 1. <code class="code">minimize</code> <b>always fails</b>.<br>
+</div>
+<br>
+<h2 id="2_SearchStrategy">Search Strategy</h2><br>
+
+<pre><span id="VALlds"><span class="keyword">val</span> lds</span> : <code class="type">?step:int -> <a href="Fcl_goals.html#TYPEt">t</a> -> <a href="Fcl_goals.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">lds ~step:1 g</code> returns a goal which will iteratively search <code class="code">g</code> with
+     increasing limited discrepancy (see ) by
+     increment <code class="code">step</code>. <code class="code">step</code> default value is 1.<br>
+</div>
+<br>
+<h2 id="2_Solving">Solving</h2><br>
+
+<pre><span id="VALon_choice_point"><span class="keyword">val</span> on_choice_point</span> : <code class="type">Fcl_cstr.event</code></pre><div class="info ">
+Event occurring whenever a choice point is reach.<br>
+</div>
+
+<pre><span id="VALsolve"><span class="keyword">val</span> solve</span> : <code class="type">?control:(int -> unit) -> <a href="Fcl_goals.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+<code class="code">solve ~control:(fun _ -&gt; ()) g</code> solves the goal <code class="code">g</code> and returns
+     a success (<code class="code">true</code>) or a
+     failure (<code class="code">false</code>). The execution can be precisely controlled
+     with the <code class="code">control</code> argument whose single argument is the number
+     of bactracks since the beginning of the search. This function is called
+     after every local failure:
+<p>
+<ul>
+<li>it can raise <code class="code">Stak.Fail</code> to force a failure of the search in the
+     current branch (i.e. backtrack);</li>
+</ul>
+<ul>
+<li>it can raise any other user exception to stop the search process;</li>
+</ul>
+<ul>
+<li>it must return <code class="code">unit</code> to continue the search; this is the default
+     behavior.</li>
+</ul>
+<br>
+</div>
+</body></html>

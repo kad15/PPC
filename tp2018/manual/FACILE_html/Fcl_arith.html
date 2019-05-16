@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_expr.html">
+<link rel="next" href="Fcl_conjunto.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><link title="Basics" rel="Section" href="#2_Basics">
+<link title="Construction of Arithmetic Expressions" rel="Section" href="#2_ConstructionofArithmeticExpressions">
+<link title="Access" rel="Section" href="#2_Access">
+<link title="Arithmetic Constraints on Expressions" rel="Section" href="#2_ArithmeticConstraintsonExpressions">
+<link title="Reification" rel="Section" href="#2_Reification">
+<link title="Boolean sums setting" rel="Section" href="#2_Booleansumssetting">
+<title>Fcl_arith</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_expr.html" title="Fcl_expr">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_conjunto.html" title="Fcl_conjunto">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_arith.html">Fcl_arith</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_arith: <code class="code">sig</code> <a href="Fcl_arith.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<h1 id="1_ArithmeticExpressionsandConstraints">Arithmetic Expressions and Constraints</h1><br>
+</div>
+<hr width="100%">
+<br>
+<br>
+<br>
+This module provides functions and operators to build arithmetic
+   expressions and state (in/dis)equation constraints on them.<br>
+<br>
+<h2 id="2_Basics">Basics</h2><br>
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info ">
+Type of arithmetic expressions over variables of type <code class="code">Var.Fd.t</code> and
+   integers.<br>
+</div>
+
+
+<pre><span id="VALi2e"><span class="keyword">val</span> i2e</span> : <code class="type">int -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">i2e n</code> returns an expression which evaluates to <code class="code">n</code>.<br>
+</div>
+
+<pre><span id="VALfd2e"><span class="keyword">val</span> fd2e</span> : <code class="type">Fcl_var.Fd.t -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">fd2e v</code> returns an expression which evaluates to <code class="code">n</code> if the
+    variable <code class="code">v</code> is instantiated to <code class="code">n</code>.<br>
+</div>
+
+<pre><span id="VALe2fd"><span class="keyword">val</span> e2fd</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> Fcl_var.Fd.t</code></pre><div class="info ">
+<code class="code">e2fd e</code> creates and returns a new variable <code class="code">v</code> and posts the constraint
+    <code class="code">fd2e v =~ e</code>.<br>
+</div>
+<br>
+<h2 id="2_ConstructionofArithmeticExpressions">Construction of Arithmetic Expressions</h2><br>
+<br>
+<b>Only</b> if compiled in bytecode (using <code class="code">facile.cma</code>),
+   the arithmetic operators check whether any integer overflow
+   (i.e. the result of an arithmetic operation on integers is
+   less than <code class="code">min_int</code> or greater than <code class="code">max_int</code>) occurs during
+   constraints internal computations and raise an assert failure.
+   Arithmetic operations are taken modulo  otherwise
+   (or  on 64-bit processors, see the OCaml reference
+   manual), thus incomplete failures may happen
+   with native code compiled programs.<br>
+
+<pre><span id="VAL(+~)"><span class="keyword">val</span> (+~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(-~)"><span class="keyword">val</span> (-~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL( *~ )"><span class="keyword">val</span> ( *~ )</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+Addition, substraction, multiplication on expressions.<br>
+</div>
+
+<pre><span id="VAL( **~ )"><span class="keyword">val</span> ( **~ )</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> int -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+Exponentiation of an expression to an integer value.<br>
+</div>
+
+<pre><span id="VAL(/~)"><span class="keyword">val</span> (/~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(%~)"><span class="keyword">val</span> (%~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+Division and modulo on expressions. The exception <code class="code">Division_by_zero</code>
+   is raised whenever the second argument evaluates to 0.<br>
+</div>
+
+<pre><span id="VALabs"><span class="keyword">val</span> abs</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+Absolute value on expressions.<br>
+</div>
+
+<pre><span id="VALsum"><span class="keyword">val</span> sum</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> array -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VALsum_fd"><span class="keyword">val</span> sum_fd</span> : <code class="type">Fcl_var.Fd.t array -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">sum exps</code> (resp. <code class="code">sum_fd vars</code>) returns the sum of all the elements of an
+   array of expressions (resp. variables). Returns an expression that evaluates
+   to 0 if the array is empty.<br>
+</div>
+
+<pre><span id="VALscalprod"><span class="keyword">val</span> scalprod</span> : <code class="type">int array -> <a href="Fcl_arith.html#TYPEt">t</a> array -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VALscalprod_fd"><span class="keyword">val</span> scalprod_fd</span> : <code class="type">int array -> Fcl_var.Fd.t array -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">scalprod coeffs exps</code> (resp. <code class="code">scalprod_fd coeffs vars</code>) returns the
+   scalar product of an array of integers and an array of expressions
+   (resp. variables).
+   Returns an expression that evaluates to 0 if both arrays are empty.
+   Raises <code class="code">Invalid_argument</code> if the arrays don't have the same length.<br>
+</div>
+
+<pre><span id="VALprod"><span class="keyword">val</span> prod</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> array -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VALprod_fd"><span class="keyword">val</span> prod_fd</span> : <code class="type">Fcl_var.Fd.t array -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">prod exps</code> (resp. <code class="code">prod_fd vars</code>) returns the product of all the
+   elements of an array of expressions (resp. variables).
+   Returns an expression that evaluates to 1 if the array is empty.<br>
+</div>
+<br>
+<h2 id="2_Access">Access</h2><br>
+
+<pre><span id="VALfprint"><span class="keyword">val</span> fprint</span> : <code class="type">Pervasives.out_channel -> <a href="Fcl_arith.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">fprint chan e</code> prints expression <code class="code">e</code> on channel <code class="code">chan</code>.<br>
+</div>
+
+<pre><span id="VALeval"><span class="keyword">val</span> eval</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">eval e</code> returns the integer numerical value of a fully instantiated
+   expression <code class="code">e</code>. Raises <code class="code">Invalid_argument</code> if <code class="code">e</code> is not instantiated.<br>
+</div>
+
+<pre><span id="VALmin_of_expr"><span class="keyword">val</span> min_of_expr</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> int</code></pre>
+<pre><span id="VALmax_of_expr"><span class="keyword">val</span> max_of_expr</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">min_of_expr e</code> (resp. <code class="code">max_of_expr e</code>) returns the minimal (resp. maximal)
+   possible value of expression <code class="code">e</code>.<br>
+</div>
+
+<pre><span id="VALmin_max_of_expr"><span class="keyword">val</span> min_max_of_expr</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> int * int</code></pre><div class="info ">
+<code class="code">min_max_of_expr e</code> is equivalent to <code class="code">(min_of_expr e, max_of_expr e)</code>.<br>
+</div>
+<br>
+<h2 id="2_ArithmeticConstraintsonExpressions">Arithmetic Constraints on Expressions</h2><br>
+<br>
+FaCiLe processes arithmetic constraints to try to simplify and factorize
+   common subexpressions. Furthermore, auxilliary variables are created to
+   handle non-linear expressions and substituted to the original terms.
+   So printing an arithmetic constraint may produce something quite
+   different from the user's input.<br>
+
+<pre><span id="VAL(<~)"><span class="keyword">val</span> (&lt;~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre>
+<pre><span id="VAL(<=~)"><span class="keyword">val</span> (&lt;=~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre>
+<pre><span id="VAL(=~)"><span class="keyword">val</span> (=~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre>
+<pre><span id="VAL(>=~)"><span class="keyword">val</span> (&gt;=~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre>
+<pre><span id="VAL(>~)"><span class="keyword">val</span> (&gt;~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre>
+<pre><span id="VAL(<>~)"><span class="keyword">val</span> (&lt;&gt;~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+Strictly less, less or equal, equal, greater or equal,
+   strictly greater and different constraints on expressions.<br>
+</div>
+
+<pre><span id="VALshift"><span class="keyword">val</span> shift</span> : <code class="type">Fcl_var.Fd.t -> int -> Fcl_var.Fd.t</code></pre><div class="info ">
+<code class="code">shift x d</code> returns a finite domain variable constrained to be
+   equal to <code class="code">x+d</code>.<br>
+</div>
+<br>
+<h2 id="2_Reification">Reification</h2><br>
+<br>
+The following operators are  shortcuts to lighten the writing of reified
+   expressions. They replace the corresponding constraint by an expression
+   equal to a boolean variable that is instantiated to <code class="code">1</code> when the constraint is
+   satisfied and to <code class="code">0</code> if it is violated.
+   See module <code class="code">Reify</code> .<br>
+
+<pre><span id="VAL(<~~)"><span class="keyword">val</span> (&lt;~~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">e1 op~~ e2</code> is equivalent to <code class="code">fd2e (Reify.boolean (e1 op~ e2))</code>.<br>
+</div>
+
+<pre><span id="VAL(<=~~)"><span class="keyword">val</span> (&lt;=~~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(=~~)"><span class="keyword">val</span> (=~~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(>=~~)"><span class="keyword">val</span> (&gt;=~~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(>~~)"><span class="keyword">val</span> (&gt;~~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre>
+<pre><span id="VAL(<>~~)"><span class="keyword">val</span> (&lt;&gt;~~)</span> : <code class="type"><a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a> -> <a href="Fcl_arith.html#TYPEt">t</a></code></pre><div class="info ">
+Reified strictly less, less or equal, equal, greater or equal,
+   strictly greater and different.<br>
+</div>
+<br>
+<h2 id="2_Booleansumssetting">Boolean sums setting</h2>
+<p>
+
+   FaCiLe tries to automatically optimize the processing of
+   boolean (0-1 variables) sums whenever their sizes are large enough.<br>
+
+<pre><span id="VALget_boolsum_threshold"><span class="keyword">val</span> get_boolsum_threshold</span> : <code class="type">unit -> int</code></pre><div class="info ">
+Returns the minimum size for boolean sums optimization. (Default: 5)<br>
+</div>
+
+<pre><span id="VALset_boolsum_threshold"><span class="keyword">val</span> set_boolsum_threshold</span> : <code class="type">int -> unit</code></pre><div class="info ">
+Set the minimum size for boolean sums optimization.
+   <code class="code">boolsum_threshold max_int</code> disables it.<br>
+</div>
+</body></html>

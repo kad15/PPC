@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Astar.html">
+<link rel="next" href="Memory.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Astar" rel="Chapter" href="Astar.html">
+<link title="Draw" rel="Chapter" href="Draw.html">
+<link title="Memory" rel="Chapter" href="Memory.html">
+<link title="Pqueue" rel="Chapter" href="Pqueue.html">
+<link title="Problem" rel="Chapter" href="Problem.html"><title>TD ASTAR : Draw</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Astar.html" title="Astar">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Memory.html" title="Memory">Next</a>
+</div>
+<h1>Module <a href="type_Draw.html">Draw</a></h1>
+
+<pre><span class="keyword">module</span> Draw: <code class="code">sig</code> <a href="Draw.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Display on a graphic window all elements relative to the current state of a path-finding problem resolution.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="EXCEPTIONExit"><span class="keyword">exception</span> Exit</span></pre>
+
+<pre><code><span id="TYPEgraph"><span class="keyword">type</span> <code class="type"></code>graph</span> = {</code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTgraph.width">width</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTgraph.height">height</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr></table>
+}
+
+
+
+<pre><span id="VALopen_graph"><span class="keyword">val</span> open_graph</span> : <code class="type"><a href="Problem.html#TYPEproblem">Problem.problem</a> -> <a href="Draw.html#TYPEgraph">graph</a></code></pre><div class="info ">
+<code class="code">open_graph pb</code> opens the graphic windows, and returns the graphic windows characteristics (width, height).<br>
+</div>
+
+<pre><span id="VALscale"><span class="keyword">val</span> scale</span> : <code class="type"><a href="Draw.html#TYPEgraph">graph</a> -> <a href="Problem.html#TYPEproblem">Problem.problem</a> -> <a href="Problem.html#TYPEpoint">Problem.point</a> -> int * int</code></pre><div class="info ">
+<code class="code">scale graph problem (x,y)</code> returns the graphic window coordinates corresponding to coordinates <code class="code">(x,y)</code> in the problem space.<br>
+</div>
+
+<pre><span id="VALdisplay"><span class="keyword">val</span> display</span> : <code class="type">(<a href="Problem.html#TYPEpoint">Problem.point</a> -> int * int) -><br>       <a href="Problem.html#TYPEpoint">Problem.point</a> -><br>       <a href="Problem.html#TYPEpoint">Problem.point</a> list -><br>       <a href="Problem.html#TYPEpoint">Problem.point</a> list -> <a href="Problem.html#TYPEpoint">Problem.point</a> list -> <a href="Problem.html#TYPEproblem">Problem.problem</a> -> unit</code></pre><div class="info ">
+<code class="code">display scale (x,y) path frontier closed pb</code> draws all elements relative to the current state <code class="code">u</code> of the path-finding problem <code class="code">pb</code> on the graphic window.<br>
+</div>
+
+<pre><span id="VALwait"><span class="keyword">val</span> wait</span> : <code class="type">Graphics.event list -> unit</code></pre><div class="info ">
+<code class="code">wait events</code> waits for the until one of the events specified in <code class="code">events</code> occurs, and performs the corresponding actions (e.g. : raise exception <code class="code">Exit</code> when 'q' is key-pressed.<br>
+</div>
+
+<pre><span id="VALsleep"><span class="keyword">val</span> sleep</span> : <code class="type">float -> unit</code></pre><div class="info ">
+<code class="code">sleep t</code> waits <code class="code">t</code> seconds.<br>
+</div>
+</body></html>

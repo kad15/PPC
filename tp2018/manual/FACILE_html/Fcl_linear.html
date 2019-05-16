@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_boolean.html">
+<link rel="next" href="Fcl_nonlinear.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_linear</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_boolean.html" title="Fcl_boolean">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_nonlinear.html" title="Fcl_nonlinear">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_linear.html">Fcl_linear</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_linear: <code class="code">sig</code> <a href="Fcl_linear.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<code class="code">shift_cstr y x d</code> returns the constraint <code class="code">y = x+d</code><br>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEoperator"><span class="keyword">type</span> <code class="type"></code>operator</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELToperator.LessThan"><span class="constructor">LessThan</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELToperator.Equal"><span class="constructor">Equal</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELToperator.Diff"><span class="constructor">Diff</span></span></code></td>
+
+</tr></table>
+
+
+
+<pre><span id="VALmin_max_plus_inter"><span class="keyword">val</span> min_max_plus_inter</span> : <code class="type">int -> int -> int -> int -> int * int</code></pre>
+<pre><span id="VALmin_max_minus_inter"><span class="keyword">val</span> min_max_minus_inter</span> : <code class="type">int -> int -> int -> int -> int * int</code></pre>
+<pre><span id="VALcstr"><span class="keyword">val</span> cstr</span> : <code class="type">?boolsum:int -><br>       (int * Fcl_var.Fd.t) list -> <a href="Fcl_linear.html#TYPEoperator">operator</a> -> int -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre>
+<pre><span id="VALlinear_aux"><span class="keyword">val</span> linear_aux</span> : <code class="type">(int * Fcl_var.Fd.t) list -> int -> Fcl_var.Fd.t</code></pre>
+<pre><span id="VALshift_cstr"><span class="keyword">val</span> shift_cstr</span> : <code class="type">Fcl_var.Fd.t -> Fcl_var.Fd.t -> int -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">shift_cstr y x d</code> returns the constraint <code class="code">y = x+d</code><br>
+</div>
+
+<pre><span id="VALget_boolsum_threshold"><span class="keyword">val</span> get_boolsum_threshold</span> : <code class="type">unit -> int</code></pre><div class="info ">
+Returns the minimum size for boolean sums optimization.<br>
+</div>
+
+<pre><span id="VALset_boolsum_threshold"><span class="keyword">val</span> set_boolsum_threshold</span> : <code class="type">int -> unit</code></pre><div class="info ">
+Set the minimum size for boolean sums optimization.
+   <code class="code">boolsum_threshold max_int</code> disables it.<br>
+</div>
+</body></html>

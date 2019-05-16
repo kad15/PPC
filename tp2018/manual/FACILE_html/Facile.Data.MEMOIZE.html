@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Facile.Data.CONTAINER.html">
+<link rel="Up" href="Facile.Data.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Facile.Data.MEMOIZE</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Facile.Data.CONTAINER.html" title="Facile.Data.CONTAINER">Previous</a>
+&nbsp;<a class="up" href="Facile.Data.html" title="Facile.Data">Up</a>
+&nbsp;</div>
+<h1>Module type <a href="type_Facile.Data.MEMOIZE.html">Facile.Data.MEMOIZE</a></h1>
+
+<pre><span class="keyword">module type</span> MEMOIZE = <code class="code">sig</code> <a href="Facile.Data.MEMOIZE.html">..</a> <code class="code">end</code></pre><hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type">'a</code> t</span> </pre>
+
+
+<pre><span id="TYPEset"><span class="keyword">type</span> <code class="type"></code>set</span> </pre>
+
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">int -> 'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a></code></pre>
+<pre><span id="VALadd"><span class="keyword">val</span> add</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> int -> unit</code></pre>
+<pre><span id="VALbt_add"><span class="keyword">val</span> bt_add</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> int -> unit</code></pre>
+<pre><span id="VALmem"><span class="keyword">val</span> mem</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> bool</code></pre>
+<pre><span id="VALfind"><span class="keyword">val</span> find</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> <a href="Facile.Data.MEMOIZE.html#TYPEset">set</a></code></pre>
+<pre><span id="VALfind_opt"><span class="keyword">val</span> find_opt</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> <a href="Facile.Data.MEMOIZE.html#TYPEset">set</a> option</code></pre>
+<pre><span id="VALremove"><span class="keyword">val</span> remove</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> int -> unit</code></pre>
+<pre><span id="VALremove_isempty"><span class="keyword">val</span> remove_isempty</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> int -> bool</code></pre>
+<pre><span id="VALbt_remove"><span class="keyword">val</span> bt_remove</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> int -> unit</code></pre>
+<pre><span id="VALbt_remove_isempty"><span class="keyword">val</span> bt_remove_isempty</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> int -> bool</code></pre>
+<pre><span id="VALremove_all"><span class="keyword">val</span> remove_all</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> unit</code></pre>
+<pre><span id="VALbt_remove_all"><span class="keyword">val</span> bt_remove_all</span> : <code class="type">'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'a -> unit</code></pre>
+<pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">('a -> <a href="Facile.Data.MEMOIZE.html#TYPEset">set</a> -> unit) -> 'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> unit</code></pre>
+<pre><span id="VALfold"><span class="keyword">val</span> fold</span> : <code class="type">('a -> <a href="Facile.Data.MEMOIZE.html#TYPEset">set</a> -> 'c -> 'c) -><br>       'a <a href="Facile.Data.MEMOIZE.html#TYPEt">t</a> -> 'c -> 'c</code></pre></body></html>

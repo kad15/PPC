@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" class="svg" lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    
+    <link rel="alternate" hreflang="en" href="https://ocaml.org/learn/tutorials/format.html">
+<link rel="alternate" hreflang="fr" href="https://ocaml.org/learn/tutorials/format.fr.html">
+
+    
+    <title>Format – OCaml</title>
+    <link href="https://ocaml.org/img/favicon32x32.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Web Fonts -->
+    <link href="Format%20%E2%80%93%20OCaml_fichiers/css_002.css" rel="stylesheet">
+    <link href="Format%20%E2%80%93%20OCaml_fichiers/css.css" rel="stylesheet">
+    <link href="Format%20%E2%80%93%20OCaml_fichiers/css_003.css" rel="stylesheet" type="text/css">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="Format%20%E2%80%93%20OCaml_fichiers/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="Format%20%E2%80%93%20OCaml_fichiers/bootstrap_mod.css" rel="stylesheet" media="screen">
+    <link href="Format%20%E2%80%93%20OCaml_fichiers/ocamlorg.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" defer="defer" async="" src="Format%20%E2%80%93%20OCaml_fichiers/piwik.html"></script><script type="text/javascript" async="" src="Format%20%E2%80%93%20OCaml_fichiers/ga.js"></script><script src="Format%20%E2%80%93%20OCaml_fichiers/collapsed-menu.js" type="text/javascript"></script>
+    
+    
+    <script>
+      if (document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1')) {
+      document.documentElement.className = 'svg';
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" onclick="toggleVisibilityMenu('menu-items')">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="https://ocaml.org/index.fr.html"><img src="Format%20%E2%80%93%20OCaml_fichiers/colour-logo-white.svg" class="svg" alt="OCaml"><img src="Format%20%E2%80%93%20OCaml_fichiers/colour-logo-white.png" class="png" alt="OCaml"></a>
+          <div id="menu-items" class="nav-collapse collapse">
+                        <ul class="nav">
+              <li class="active"><a href="https://ocaml.org/learn/index.fr.html">Apprendre</a></li>
+              <li><a href="https://ocaml.org/docs/index.fr.html">Documentation</a></li>
+              <li><a href="https://opam.ocaml.org/">Contributions</a></li>
+              <li><a href="https://ocaml.org/community/index.fr.html">Communauté</a></li>
+            </ul>
+
+            
+            <a href="https://github.com/ocaml/ocaml.org/tree/master/site/learn/tutorials/format.fr.md" title="Éditer cette page" class="edit-this-page pull-right"><!-- Image in CSS
+	      --><span>Éditer cette page</span></a>
+	    <script language="JavaScript">
+	      // Preload the hover image
+	      Image1= new Image(33,33);
+	      Image1.src = '/img/edit-hover.svg';
+	      Image2= new Image(33,33);
+	      Image2.src = '/img/edit-hover.png';
+	    </script>
+            
+            <form id="searchform" class="navbar-search pull-right" method="get" action="//www.google.com/search">
+              <input name="as_sitesearch" value="ocaml.org" type="hidden">
+              <input placeholder="Rechercher" class="search-query" name="q" type="text">
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </nav>
+    
+    <!--								-*-html-*- -->
+<div class="container">
+  <div class="row">
+    
+    <div class="span4"></div>
+    <div class="span8">
+      <!--								-*-html-*- -->
+<div class="running-header">
+  
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a href="https://ocaml.org/">Home</a><span class="divider"></span></li>
+<li><a href="https://ocaml.org/learn/index.fr.html">Apprendre</a><span class="divider"></span></li>
+<li><a href="https://ocaml.org/learn/tutorials/index.fr.html">Tutoriel OCaml</a><span class="divider"></span></li>
+<li class="active">Format</li>
+
+
+    </ol>
+    <ul class="translations">
+      <li><a href="https://ocaml.org/learn/tutorials/format.html">en</a></li>
+<li class="active">fr</li>
+
+    </ul>
+  </div>
+  
+</div>
+
+    </div>
+    <div class="span4">
+      <nav id="nav-secondary">
+        <ul class="nav nav-list">
+          <li class="nav-header"><a href="#">Contenu</a></li>
+          <ul><li><a href="#Principes">Principes</a>
+</li><li><a href="#Lesbotes">Les boîtes</a>
+</li><li><a href="#Impressiondesespaces">Impression des espaces</a>
+</li><li><a href="#Indentationdeslignesnouvelles">Indentation des lignes nouvelles</a>
+</li><li><a href="#Raffinementsurlesboteshov">Raffinement sur les boîtes «&nbsp;hov&nbsp;»</a>
+<ul><li><a href="#Botehovtassanteetbotehovstructurelle">Boîte «&nbsp;hov&nbsp;» tassante et boîte «&nbsp;hov&nbsp;» structurelle</a>
+</li><li><a href="#Diffrencesentrebotehovtassanteetbotehovstructurelle">Différences entre boîte «&nbsp;hov&nbsp;» tassante et boîte «&nbsp;hov&nbsp;» structurelle</a>
+</li></ul>
+</li><li><a href="#Conseilspratiques">Conseils pratiques</a>
+</li><li><a href="#Impressionsurlasortiestandardutilisationdeprintf">Impression sur la sortie standard: utilisation de <code>printf</code></a>
+</li><li><a href="#Unexempleconcret">Un exemple concret</a>
+<ul><li><a href="#Impressionlaplusgnraleutilisationdefprintf">Impression la plus générale: utilisation de <code>fprintf</code></a>
+</li></ul>
+</li></ul>
+
+        </ul>
+      </nav>
+    </div>
+    <div id="content-primary" class="span8">
+            <div id="tryocaml" class="content" style="display:none;">
+        <div class="container">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style="display:none;"></div>
+            <div id="menu-lessons" style="display:none">
+              <table class="zebra-striped">
+                <tbody><tr><td id="text-x"><code></code></td> <td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="main-contents" class="content">
+        <!--   -->
+
+<h1 id="UtiliserlemoduleFormat">Utiliser le module Format</h1><p>Le module Format des librairies standard de Caml Light et OCaml propose
+une méthode d'impression enjolivée. Ce module implémente un moteur
+d'impression qui coupe «&nbsp;bien&nbsp;» les lignes («&nbsp;bien&nbsp;» signifie à-peu-près
+ici «&nbsp;automatiquement et quand nécessaire&nbsp;»).</p>
+<h2 id="Principes">Principes</h2><p>La coupure des lignes repose sur trois concepts:</p>
+<ul><li><strong>Les boîtes</strong>&nbsp;: une boîte est une unité logique d'impression, qui
+ définit un comportement du moteur d'impression pour présenter
+ l'intérieur de la boîte.</li><li><strong>Les indications de coupures</strong>&nbsp;: une indication de coupure est une
+ directive au moteur d'impression, qui lui propose de couper la ligne
+ à cet endroit si cela s'avère nécessaire. Sinon, le moteur
+ d'impression ne coupe jamais les lignes (sauf en «&nbsp;cas d'urgence&nbsp;»
+ pour éviter les trop mauvaises sorties).</li><li><strong>Les règles d'indentation</strong>&nbsp;: Quand le moteur d'impression démarre
+ une nouvelle ligne, il fixe l'indentation de la nouvelle ligne
+ (c'est-à-dire le nombre de blancs insérés en début de ligne) en
+ suivant des règles qui dépendent à la fois de l'indication de
+ coupure et de la définition de la boîte où la ligne est coupée&nbsp;:<ul><li>Une boîte peut définir le montant de l'indentation ajoutée à
+ chaque nouvelle ligne de son corps. Cette valeur est appelée
+ <strong>indentation additionnelle de boîte</strong>.</li><li>Une indication de coupure peut aussi définir une indentation
+ additionelle pour la nouvelle ligne qu'elle peut occasionner.
+ Cette valeur est appelée <strong>indentation additionnelle de
+ coupure</strong>.</li><li>Si l'indication de coupure <code>bh</code> engendre une nouvelle ligne à
+ l'intérieur de la boîte <code>b</code>, alors l'indentation de la nouvelle
+ ligne est la somme de: l'indentation courante de la boîte <code>b</code>
+ <code>+</code> l'indentation additionnelle de boîte définie par la boîte
+ <code>b</code> <code>+</code> l'indication additionnelle de coupure définie par
+ l'indication de coupure <code>bh</code>.</li></ul></li></ul>
+
+<h2 id="Lesbotes">Les boîtes</h2><p>Il y a 4 types de boîtes. (La plus communément utilisée est la boîte
+«&nbsp;hov&nbsp;», laissez tomber les autres types en première lecture.)</p>
+<ul><li><strong>Boîte horizontale</strong> (boîte <em>h</em>, ouverte par la procédure
+ <code>open_hbox</code>)&nbsp;: dans cette boîte les indications de coupures ne
+ donnent pas lieu à retour à la ligne.</li><li><strong>Boîte verticale</strong> (boîte <em>v</em>, ouverte par la procédure
+ <code>open_vbox</code>): toute indication de coupure provoque un retour à la
+ ligne.</li><li><strong>Boîte verticale/horizontale</strong> (boîte <em>hv</em>, ouverte par la
+ procédure <code>open_hvbox</code>)&nbsp;: si c'est possible, toute la boîte est
+ imprimée sur une seule ligne; sinon toute indication de coupure
+ provoque un retour à la ligne.</li><li><strong>Boîte verticale ou horizontale</strong> (boîte <em>hov</em>, ouverte par l'une
+ des procédures <code>open_box</code> ou <code>open_hovbox</code>) ou boîte «&nbsp;tassante&nbsp;»:
+ les indications de coupure sont utilisées pour aller à la ligne
+ quand il n'y a plus de place sur la ligne courante. Il existe deux
+ espèces légèrement différentes de boîtes «&nbsp;hov&nbsp;» qui sont décrites
+ <a href="#hov-boxes">plus bas</a>. En première approximation nous confondrons
+ ces deux types de boîtes «&nbsp;hov&nbsp;» et ne considérerons que celles
+ obtenues avec la procédure <code>open_box</code>.</li></ul>
+
+<p>Donnons un exemple. Supposons que nous voulions écrire 10 caractères
+avant la marge droite (qui indique qu'il n'y a plus de place sur la
+ligne courante). Je représente chaque caractère par une marque <code>-</code>, les
+ouvertures et fermetures de boîtes sont indiquées respectivement par <code>[</code>
+et <code>]</code>, et <code>b</code> signifie une indication de coupure (blanc ou «&nbsp;break&nbsp;»).</p>
+<p>La sortie "--b--b--" est imprimée comme suit (le symbole b vaut la
+valeur de la coupure comme expliqué ci-après)&nbsp;:</p>
+<ul><li><p>dans une boîte «&nbsp;h&nbsp;»&nbsp;:</p>
+<pre class="text"><code class="text">--b--b--</code></pre></li><li><p>dans une boîte «&nbsp;v&nbsp;»&nbsp;:</p>
+<pre class="text"><code class="text">--b
+--b
+--</code></pre></li><li><p>dans une boîte «&nbsp;hv&nbsp;»&nbsp;:</p>
+<p>S'il y a assez de place pour imprimer toute la boîte sur la ligne&nbsp;:</p>
+<pre class="text"><code class="text">--b--b--</code></pre><p>Mais si <code>---b---b---</code> ne peut tenir sur la ligne, la sortie est</p>
+<pre class="text"><code class="text">---b
+---b
+---</code></pre></li><li><p>dans une boîte «&nbsp;hov&nbsp;»&nbsp;:</p>
+<p>S'il y a assez de place pour imprimer toute la boîte sur la ligne&nbsp;:</p>
+<pre class="text"><code class="text">--b--b--</code></pre><p>Mais si <code>---b---b---</code> ne peut tenir sur la ligne, la sortie est</p>
+<pre class="text"><code class="text">---b---b
+---</code></pre><p>La première indication de coupure ne donne pas lieu à un retour à la
+ligne, puisque la ligne n'est pas pleine. La seconde indication de
+coupure entraîne un retour à la ligne, puisqu'il n'y a plus la place
+d'imprimer ce qui suit l'indication de coupure. Si la place restante
+sur la ligne était encore plus courte, la première indication de
+coupure aurait aussi donné lieu à un retour à la ligne et
+<code>---b---b---</code> aurait été imprimé ainsi:</p>
+<pre class="text"><code class="text">---b
+---b
+---</code></pre></li></ul>
+
+<h2 id="Impressiondesespaces">Impression des espaces</h2><p>Les indications de coupure sont aussi utilisées pour imprimer des
+espaces (si la ligne n'est pas coupée quand l'indication de coupure est
+traitée, sinon le retour à la ligne sépare correctement les éléments à
+imprimer). Vous donnez une indication de coupure en appelant
+<code>print_break sp indent</code>, où <code>sp</code> est l'entier qui indique le nombre
+d'espaces à imprimer.<br>
+ Donc <code>print_break sp ...</code> signifie imprimer <code>sp</code> espaces ou aller à la
+ligne.</p>
+<p>Par exemple, si l'on imprime "--b--b--" (où <code>b</code> est <code>print_break 1 0</code>,
+ce qui correspond à l'impression d'un espace), on obtient la sortie
+suivante&nbsp;:</p>
+<ul><li><p>dans une boîte «&nbsp;h&nbsp;»&nbsp;:</p>
+<pre class="text"><code class="text">-- -- --</code></pre></li><li><p>dans une boîte «&nbsp;v&nbsp;»&nbsp;:</p>
+<pre class="text"><code class="text">--
+--
+--</code></pre></li><li><p>dans une boîte «&nbsp;hv&nbsp;»&nbsp;:</p>
+<pre class="text"><code class="text">-- -- --</code></pre><p>ou, suivant la place restante sur la ligne&nbsp;:</p>
+<pre class="text"><code class="text">--
+--
+--</code></pre></li><li><p>et de même pour les boîtes «&nbsp;hov&nbsp;».</p>
+</li></ul>
+
+<p>De façon générale, un programme qui utilise <code>format</code>, n'écrit pas
+d'espaces lui-même mais émet des indications de coupure. (Par exemple à
+l'aide de <code>print_space ()</code> qui est synonyme de <code>print_break     1 0</code> et
+écrit un espace ou déclenche une coupure de ligne.)</p>
+<h2 id="Indentationdeslignesnouvelles">Indentation des lignes nouvelles</h2><p>On dispose de deux moyens de fixer l'indentation des lignes&nbsp;:</p>
+<ul><li><p><strong>En définissant la boîte où la ligne apparaît</strong>: à l'ouverture de
+ la boîte, on peut fixer l'indentation ajoutée à chaque ligne ouverte
+ dans la boîte.<br>
+ Par exemple: <code>open_hovbox 1</code> ouvre une boîte hovbox dont les lignes
+ seront indentées de 1 par rapport à l'indentation initiale de la
+ boîte. Ainsi avec <code>---[--b--b--b--</code>, on obtient&nbsp;:</p>
+<pre class="text"><code class="text">---[--b--b
+     --b--</code></pre><p>tandis qu'avec <code>open_hovbox 2</code>, on obtient&nbsp;:</p>
+<pre class="text"><code class="text">---[--b--b
+      --b--</code></pre><p>Note: le symbole <code>[</code> n'est évidemment pas visible sur la sortie
+écran, je l'écris pour matérialiser l'ouverture de la boîte
+d'impression. Ainsi le dernier «&nbsp;écran&nbsp;» est en fait&nbsp;:</p>
+<pre class="text"><code class="text">-----b--b
+     --b--</code></pre></li><li><p>En définissant l'indication de coupure qui a provoqué le retour à la
+ ligne. On émet une indication de coupure avec
+ <code>print_break sp indent</code>. L'entier <code>indent</code> fixe l'indentation
+ additionnelle de la nouvelle ligne qui peut être émise par
+ l'indication de coupure. C'est-à-dire que <code>indent</code> est ajouté à
+ l'indentation par défaut de la boîte où la coupure a lieu.<br>
+ Par exemple, en indiquant par <code>[</code> l'ouverture d'une boîte <code>hov 1</code>
+ (obtenue par <code>open_hovbox       1</code>), et par <code>b</code>
+ <code>print_break       1       2</code>, alors la sortie de "---[--b--b--b--",
+ sera imprimée&nbsp;:</p>
+<pre class="text"><code class="text">---[-- --
+      --
+      --</code></pre></li></ul>
+
+<h2 id="Raffinementsurlesboteshov">Raffinement sur les boîtes «&nbsp;hov&nbsp;»</h2><h3 id="Botehovtassanteetbotehovstructurelle">Boîte «&nbsp;hov&nbsp;» tassante et boîte «&nbsp;hov&nbsp;» structurelle</h3><p>Les boîtes «&nbsp;hov&nbsp;» se subdivisent en deux catégories au comportement
+légèrement différent en ce qui concerne les coupures qui interviennent
+après la fermeture d'une boîte dont l'indentation est différente de la
+boîte qui l'englobe. On distingue&nbsp;:</p>
+<ul><li>**la boîte «&nbsp;hov&nbsp;» *tassante*** (ouverte par la procédure
+ <code>open_hovbox</code>): les indications de coupure sont utilisées pour aller
+ à la ligne quand il n'y a plus de place sur la ligne courante; il
+ n'y a pas de passage à la ligne s'il y a assez de place sur la ligne
+ courante.</li><li>**la boîte «&nbsp;hov&nbsp;» *structurelle*** (ouverte par la procédure
+ <code>open_box</code>): très similaire à la boîte «&nbsp;hov&nbsp;» tassante, les
+ indications de coupure sont également utilisées pour aller à la
+ ligne quand il n'y a plus de place sur la ligne courante, mais de
+ surcroît les indications de coupures qui permettent de mettre en
+ évidence la structure de boîtes sont effectuées même s'il reste
+ assez de place sur la ligne courante.</li></ul>
+
+<h3 id="Diffrencesentrebotehovtassanteetbotehovstructurelle">Différences entre boîte «&nbsp;hov&nbsp;» tassante et boîte «&nbsp;hov&nbsp;» structurelle</h3><p>La différence de comportement entre la boîte «&nbsp;hov&nbsp;» tassante et la
+boîte «&nbsp;hov&nbsp;» structurelle (ou «&nbsp;box&nbsp;») est mise en évidence par la
+fermeture des boîtes et la fermeture des parenthèses en fin
+d'impression: avec la boîte «&nbsp;hov&nbsp;» tassante les boîtes et les
+parenthèses sont fermées sur la même ligne (si la place disponible le
+permet), tandis qu'avec la boîte «&nbsp;hov&nbsp;» structurelle chaque indication
+de coupure produira un saut de ligne. Prenons l'exemple de la sortie de
+<code>[(---[(----[(---b)]b)]b)]</code> où <code>b</code> représente une indication de coupure
+sans indentation supplémentaire (<code>print_cut     ()</code>). Ainsi, si "["
+représente l'ouverture de boîtes «&nbsp;hov&nbsp;» tassantes (<code>open_hovbox</code>),
+<code>[(---[(----[(---b)]b)]b)]</code> est imprimé ainsi:</p>
+<pre class="text"><code class="text">(---
+ (----
+  (---)))</code></pre><p>Si maintenant on remplace les boîtes «&nbsp;hov&nbsp;» tassantes par des boîtes «
+hov&nbsp;» structurelles (<code>open_box</code>), chaque indication de coupure placée
+avant chaque parenthèse fermante est susceptible de montrer la structure
+de boîte et produit donc une coupure; on obtient alors&nbsp;:</p>
+<pre class="text"><code class="text">(---
+ (----
+  (---
+  )
+ )
+)</code></pre>
+
+<h2 id="Conseilspratiques">Conseils pratiques</h2><p>En écrivant vos fonctions d'impression, suivez les règles simples
+suivantes&nbsp;:</p>
+<ol><li>Les boîtes doivent être ouvertes et fermées de façon cohérente (les
+ appels à <code>open_*</code> et à <code>close_box</code> doivent être parenthésés).</li><li>N'hésitez pas à ouvrir des boîtes.</li><li>Donnez beaucoup d'indications de coupures, sinon l'imprimeur se
+ retrouve dans une situation anormale (coincé sur la marge droite),
+ où il essaie de faire de son mieux, ce qui n'est pas toujours très
+ bon.</li><li>N'essayez pas de forcer l'espacement à l'aide de blancs explicites
+ dans les chaînes de caractères à imprimer. Pour chaque espace
+ nécessaire, utilisez une indication de coupure (<code>print_space ()</code>), à
+ moins que vous ne vouliez pas que la ligne soit coupée à cet
+ endroit. Par exemple, imaginez que vous vouliez imprimer une
+ définition OCaml, disons <code>let rec ident = expression</code>. Vous allez
+ probablement considérer les 3 premiers blancs comme des «&nbsp;blancs
+ insécables&nbsp;» et les inclure directement dans une chaîne de
+ caractères, et écrire la chaîne <code>"let rec "</code> avant l'identificateur
+ et la chaîne <code>=</code> après lui; en revanche, l'espace qui suit le
+ caractère <code>=</code> doit être une indication de coupure, puisqu'il est
+ d'usage (et élégant) de couper la ligne à cet endroit pour indenter
+ la partie expression d'une définition. En conclusion, il est bien
+ sûr souvent nécessaire d'imprimer des caractères «&nbsp;espace&nbsp;», ou
+ blancs insécables, mais la plupart du temps un espace correspond
+ plutôt à une indication de coupure.)</li><li>Ne forcez jamais de coupures de ligne, laissez le moteur
+ d'impression le faire pour vous: c'est son travail! En particulier,
+ n'utilisez pas la procédure <code>force_newline</code>: son usage provoque bien
+ une coupure de ligne, mais il provoque aussi une réinitialisation
+ partielle du moteur d'impression qui déséquilibre tout le reste de
+ l'impression.</li><li>N'imprimez jamais de retour à la ligne dans les chaînes de
+ caractères&nbsp;: le moteur d'impression considèrera à juste titre ce
+ retour chariot comme un caractère quelconque émis sur la ligne
+ courante, ce qui dérangera complètement la sortie. Utilisez à la
+ place des coupures de ligne: si celles-ci doivent se produire à tout
+ coup, c'est que la boîte englobante doit être une boîte verticale!</li><li>Terminez votre programme principal d'impression par un appel à
+ <code>print_newline ()</code>, qui vide les tables de l'imprimeur (et donc
+ termine l'impression). (Notez que le système interactif le fait
+ également à la fin de chaque phrase entrée.)</li></ol>
+
+<h2 id="Impressionsurlasortiestandardutilisationdeprintf">Impression sur la sortie standard: utilisation de <code>printf</code></h2><p>Le module <code>format</code> vous propose une fonction générale de formattage à la
+<code>printf</code>. En plus des indications de format habituelles à la primitive
+<code>printf</code>, on dispose dans le format de caractères qui commandent
+ouvertures et fermetures de boîtes ainsi que l'émission d'indications de
+coupure de ligne.</p>
+<p>Les indications spécifiques au moteur d'impression sont toutes
+introduites par le caractère <code>@</code>. À peu près toutes les fonctions du
+module <code>format</code> peuvent être appelées depuis un format de <code>printf</code>.
+Ainsi&nbsp;:</p>
+<ul><li>«&nbsp;<code>@[</code>&nbsp;» ouvre une boîte (<code>open_box             0</code>). On peut
+ préciser le type de la boîte en argument supplémentaire. Par exemple
+ <code>@[&lt;hov n&gt;</code> est équivalent à <code>open_hovbox n</code>.</li><li>«&nbsp;<code>@]</code>&nbsp;» ferme la dernière boîte ouverte (<code>close_box ()</code>).</li><li>«&nbsp;<code>@</code>&nbsp;» émet un espace sécable (<code>print_space ()</code>).</li><li>«&nbsp;<code>@,</code>&nbsp;» émet une indication de coupure sans espace ni indentation
+ supplémentaire en cas de coupure (<code>print_cut ()</code>).</li><li>«&nbsp;<code>@;&lt;n m&gt;</code>&nbsp;» émet une indication de coupure la plus générale, avec
+ ses deux arguments entiers (<code>print_break n m</code>).</li><li>«&nbsp;<code>@.</code>&nbsp;» termine l'impression en fermant toutes les boîtes encore
+ ouvertes (<code>print_newline ()</code>).</li></ul>
+
+<p>Par exemple</p>
+<pre><code class="ocamltop"><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="ocaml-module">Format</span>.printf <span class="string">"@[&lt;1&gt;%s@ =@ %d@ %s@]@."</span> <span class="string">"Prix TTC"</span> 100 <span class="string">"Euros"</span></span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout">Prix TTC = 100 Euros
+</span><span class="ocaml-stderr"></span>- : unit = ()
+</span></code></pre>
+
+<h2 id="Unexempleconcret">Un exemple concret</h2><p>Voici un exemple complet&nbsp;: le plus petit exemple non trivial qu'on
+puisse imaginer, c'est-à-dire le \$\lambda-\$calculus&nbsp;:)</p>
+<p>Le problème est donc d'imprimer les valeurs d'un type concret qui
+modélise un langage d'expressions qui définissent les fonctions et leur
+application à des arguments.</p>
+<p>D'abord, je donne la syntaxe abstraite des lambda-termes (nous utilisons
+le <a href="https://ocaml.org/learn/description.html#interactive">système interactif</a> pour évaluer ce
+code)&nbsp;:</p>
+<pre><code class="ocamltop"><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing">type</span> <span class="type">lambda</span> =
+      | Lambda <span class="keyword">of</span> string * lambda
+      | Var <span class="keyword">of</span> string
+      | Apply <span class="keyword">of</span> lambda * lambda</span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span>type lambda =
+    Lambda of string * lambda
+  | Var of string
+  | Apply of lambda * lambda
+</span></code></pre>
+
+<p>J'utilise le module format pour imprimer les lambda-termes:</p>
+<pre><code class="ocamltop"><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing">open</span> <span class="ocaml-module">Format</span></span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span></span><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing">let </span><span class="ocaml-variable">ident</span> = print_string
+    <span class="governing">let </span><span class="ocaml-variable">kwd</span> = print_string</span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span>val ident : string -&gt; unit = &lt;fun&gt;
+val kwd : string -&gt; unit = &lt;fun&gt;
+</span><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing"><span class="governing">let rec</span></span> <span class="ocaml-function">print_exp0</span> = <span class="keyword">function</span>
+      | Var s -&gt;  ident s
+      | lam -&gt; open_hovbox 1; kwd <span class="string">"("</span>; print_lambda lam; kwd <span class="string">")"</span>; close_box ()
+    <span class="governing"><span class="governing">and</span></span> <span class="ocaml-function">print_app</span> = <span class="keyword">function</span>
+      | e -&gt; open_hovbox 2; print_other_applications e; close_box ()
+    <span class="governing"><span class="governing">and</span></span> <span class="ocaml-function">print_other_applications</span> <span class="ocaml-variable">f </span>=
+      <span class="keyword">match</span> f <span class="keyword">with</span>
+      | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
+      | f -&gt; print_exp0 f
+    <span class="governing"><span class="governing">and</span></span> <span class="ocaml-function">print_lambda</span> = <span class="keyword">function</span>
+      | Lambda (s, lam) -&gt;
+          open_hovbox 1;
+          kwd <span class="string">"\\"</span>; ident s; kwd <span class="string">"."</span>; print_space(); print_lambda lam;
+          close_box()
+      | e -&gt; print_app e</span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span>val print_exp0 : lambda -&gt; unit = &lt;fun&gt;
+val print_app : lambda -&gt; unit = &lt;fun&gt;
+val print_other_applications : lambda -&gt; unit = &lt;fun&gt;
+val print_lambda : lambda -&gt; unit = &lt;fun&gt;
+</span></code></pre>
+
+<p>En Caml Light, remplacez la première ligne par&nbsp;:</p>
+<pre><code class="ocaml">#open <span class="string">"format"</span>;;</code></pre>
+
+<h3 id="Impressionlaplusgnraleutilisationdefprintf">Impression la plus générale: utilisation de <code>fprintf</code></h3><p>On utilise maintenant la fonction <code>fprintf</code> et toutes les fonctions
+d'impression prennent en argument supplémentaire le formatteur (c'est
+l'argument <code>ppf</code>) où l'impression se produira. Cela généralise les
+fonctions d'impression qui peuvent maintenant imprimer sur n'importe
+quel formateur défini dans le programme, et cela permet en outre
+d'utiliser la conversion <code>%a</code>, celle qu'on utilise pour imprimer un
+argument de <code>fprintf</code> avec une fonction d'impression spécialisée qu'on a
+préalablement définie dans le programme (ces fonctions d'impression de
+l'utilisateur prennent aussi un formatteur en premier argument).</p>
+<p>Voici la fonction d'impression des lambda-termes à l'aide des formats
+d'impression à la <code>fprintf</code>.</p>
+<pre><code class="ocamltop"><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing">open</span> <span class="ocaml-module">Format</span></span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span></span><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing">let</span> <span class="ocaml-function">ident</span> <span class="ocaml-variable">ppf s </span>= fprintf ppf <span class="string">"%s"</span> s
+    <span class="governing">let</span> <span class="ocaml-function">kwd</span> <span class="ocaml-variable">ppf s </span>= fprintf ppf <span class="string">"%s"</span> s</span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span>val ident : Format.formatter -&gt; string -&gt; unit = &lt;fun&gt;
+val kwd : Format.formatter -&gt; string -&gt; unit = &lt;fun&gt;
+</span><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing"><span class="governing">let rec</span></span> <span class="ocaml-function">pr_exp0</span> <span class="ocaml-variable">ppf </span>= <span class="keyword">function</span>
+      | Var s -&gt; fprintf ppf <span class="string">"%a"</span> ident s
+      | lam -&gt; fprintf ppf <span class="string">"@[&lt;1&gt;(%a)@]"</span> pr_lambda lam
+    <span class="governing"><span class="governing">and</span></span> <span class="ocaml-function">pr_app</span> <span class="ocaml-variable">ppf e </span>=
+      fprintf ppf <span class="string">"@[&lt;2&gt;%a@]"</span> pr_other_applications e
+    <span class="governing"><span class="governing">and</span></span> <span class="ocaml-function">pr_other_applications</span> <span class="ocaml-variable">ppf f </span>=
+      <span class="keyword">match</span> f <span class="keyword">with</span>
+      | Apply (f, arg) -&gt; fprintf ppf <span class="string">"%a@ %a"</span> pr_app f pr_exp0 arg
+      | f -&gt; pr_exp0 ppf f
+    <span class="governing"><span class="governing">and</span></span> <span class="ocaml-function">pr_lambda</span> <span class="ocaml-variable">ppf </span>= <span class="keyword">function</span>
+      | Lambda (s, lam) -&gt;
+         fprintf ppf <span class="string">"@[&lt;1&gt;%a%a%a@ %a@]"</span>
+                 kwd <span class="string">"\\"</span> ident s kwd <span class="string">"."</span> pr_lambda lam
+      | e -&gt; pr_app ppf e</span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span>val pr_exp0 : Format.formatter -&gt; lambda -&gt; unit = &lt;fun&gt;
+val pr_app : Format.formatter -&gt; lambda -&gt; unit = &lt;fun&gt;
+val pr_other_applications : Format.formatter -&gt; lambda -&gt; unit = &lt;fun&gt;
+val pr_lambda : Format.formatter -&gt; lambda -&gt; unit = &lt;fun&gt;
+</span></code></pre>
+
+<p>Armés de ces fonctions d'impression générales, les procédures
+d'impression sur la sortie standard ou la sortie d'erreur s'obtiennent
+facilement par application partielle:.</p>
+<pre><code class="ocamltop"><span class="ocaml-prompt"># </span><span class="ocaml-input"><span class="governing">let </span><span class="ocaml-variable">print_lambda</span> = pr_lambda std_formatter
+    <span class="governing">let </span><span class="ocaml-variable">eprint_lambda</span> = pr_lambda err_formatter</span><span class="ocaml-prompt">;;</span><br><span class="ocaml-output"><span class="ocaml-stdout"></span><span class="ocaml-stderr"></span>val print_lambda : lambda -&gt; unit = &lt;fun&gt;
+val eprint_lambda : lambda -&gt; unit = &lt;fun&gt;
+</span></code></pre>
+
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+    
+    <footer id="footer" class="navbar navbar-inverse">
+      <div class="navbar-inner">
+	<!-- footer							-*-html-*- -->
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/learn/index.fr.html">Apprendre</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/learn/taste.fr.html">Exemples de code</a></li>
+      <li><a href="https://ocaml.org/learn/tutorials/index.fr.html">Tutoriels</a></li>
+      <li><a href="https://ocaml.org/learn/books.html">Livres</a></li>
+      <li><a href="https://ocaml.org/learn/success.fr.html">Cas d'usage</a></li>
+      <li><a href="https://ocaml.org/learn/tutorials/"></a></li>
+    </ul>
+  </div>
+</div>
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/docs/index.fr.html">Documentation</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/docs/install.fr.html">Installer OCaml</a></li>
+      <li><a href="http://caml.inria.fr/pub/docs/manual-ocaml/">Manuel</a></li>
+      <li><a href="https://opam.ocaml.org/packages/">Contributions</a></li>
+      <li><a href="https://ocaml.org/releases/index.fr.html">Compiler Releases</a></li>
+      <li><a href="https://ocaml.org/docs/logos.html">Logos</a></li>
+    </ul>
+  </div>
+</div>
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/community/index.fr.html">Communauté</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/community/mailing_lists.fr.html">Lieux de discussion</a></li>
+      <li><a href="https://ocaml.org/meetings/index.fr.html">Rencontres</a></li>
+      <li><a href="https://ocaml.org/community/planet/">Nouvelles</a></li>
+      <li><a href="https://ocaml.org/community/support.fr.html">Support</a></li>
+      <li><a href="http://caml.inria.fr/mantis/my_view_page.php" target="_blank">Signaler un bug d'OCaml</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="column">
+  <div class="entry">
+    <h1>Contact</h1>
+    <ul>
+      <li><a href="https://github.com/ocaml/ocaml.org/issues" target="_blank">Website Issues</a></li>
+      <li><a href="https://ocaml.org/about.html">À propos de ce site</a></li>
+    <li><a href="https://github.com/ocaml/ocaml.org/" target="_blank">Dépôt GitHub</a></li>
+      <li><a href="https://ocaml.org/contributors.fr.html">Crédits</a></li>
+    </ul>
+  </div>
+</div>
+
+      </div>
+    </footer>
+    
+    <!-- Load javascript from CDN -->
+    <script type="text/javascript" src="Format%20%E2%80%93%20OCaml_fichiers/bootstrap.js"></script>
+
+    
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37808023-1']);
+    _gaq.push(['_setDomainName', 'ocaml.org']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    </script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['setCookieDomain', '*.ocaml.org']);
+      _paq.push(['setDocumentTitle', 'Format']);
+      _paq.push(['setDoNotTrack', true]);
+      _paq.push(['setCustomVariable', 1, 'Page language',
+         'French',
+         'page']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+
+      (function() {
+        var u=(('https:' == document.location.protocol) ? 'https' : 'http') + '://ocaml.org/piwik/';
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+        g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//ocaml.org/piwik/piwik.php?idsite=1"
+		      style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code --> <!-- ifndef staging -->
+
+  
+
+</body></html>

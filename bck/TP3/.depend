@@ -1,0 +1,10 @@
+data_file_tp3_tiling_data.cmo :
+data_file_tp3_tiling_data.cmx :
+print_tiles.cmo :
+print_tiles.cmx :
+sol_tp3_tiling.cmo : /home/risky/ppc/facile/facile.cmi
+sol_tp3_tiling.cmx : /home/risky/ppc/facile/facile.cmx
+tp3k.cmo : /home/risky/ppc/facile/facile.cmi
+tp3k.cmx : /home/risky/ppc/facile/facile.cmx
+tp3.cmo :
+tp3.cmx :

@@ -1,0 +1,3 @@
+lifo.cmi :
+lifo.cmo : lifo.cmi
+lifo.cmx : lifo.cmi

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_arith.html">
+<link rel="next" href="Fcl_goals.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_conjunto</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_arith.html" title="Fcl_arith">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_goals.html" title="Fcl_goals">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_conjunto.html">Fcl_conjunto</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_conjunto: <code class="code">sig</code> <a href="Fcl_conjunto.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Constraints on Finite Sets<br>
+</div>
+<hr width="100%">
+
+<pre><span id="VALsubset"><span class="keyword">val</span> subset</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.SetFd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">subset v1 v2</code> ensures that <code class="code">v1</code> is a subset of <code class="code">v2</code>. Not reifiable.<br>
+</div>
+
+<pre><span id="VALcardinal"><span class="keyword">val</span> cardinal</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.Fd.t</code></pre><div class="info ">
+<code class="code">cardinal v</code> returns the cardinal (an integer variable) of the set <code class="code">v</code>. Not reifiable.<br>
+</div>
+
+<pre><span id="VALsmallest"><span class="keyword">val</span> smallest</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.Fd.t</code></pre><div class="info ">
+<code class="code">smallest v</code> returns the smallest element (an integer variable) of <code class="code">v</code>.<br>
+</div>
+
+<pre><span id="VALunion"><span class="keyword">val</span> union</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.SetFd.t -> Fcl_var.SetFd.t</code></pre>
+<pre><span id="VALinter"><span class="keyword">val</span> inter</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.SetFd.t -> Fcl_var.SetFd.t</code></pre><div class="info ">
+Operations on sets.<br>
+</div>
+
+<pre><span id="VALall_disjoint"><span class="keyword">val</span> all_disjoint</span> : <code class="type">Fcl_var.SetFd.t array -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">all_disjoint vars</code> ensures that all the set variables of array <code class="code">vars</code>
+   are pairwise disjoint. Not reifiable.<br>
+</div>
+
+<pre><span id="VALdisjoint"><span class="keyword">val</span> disjoint</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.SetFd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">disjoint v1 v2</code> defined by <code class="code">all_disjoint [|v1; v2|]</code>. Not reifiable.<br>
+</div>
+
+<pre><span id="VALinside"><span class="keyword">val</span> inside</span> : <code class="type">int -> Fcl_var.SetFd.t -> unit</code></pre>
+<pre><span id="VALoutside"><span class="keyword">val</span> outside</span> : <code class="type">int -> Fcl_var.SetFd.t -> unit</code></pre><div class="info ">
+Basic refinements for labeling.<br>
+</div>
+
+<pre><span id="VALmem"><span class="keyword">val</span> mem</span> : <code class="type">Fcl_var.Fd.t -> Fcl_var.SetFd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">mem x v</code> states that <code class="code">x</code> belongs to <code class="code">v</code>.<br>
+</div>
+
+<pre><span id="VALinf_min"><span class="keyword">val</span> inf_min</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.SetFd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">inf_min v1 v2</code> ensures that the minimal element
+   of <code class="code">v1</code> is less than or equal to the minimal element of <code class="code">v2</code>. The empty set
+   is smaller than any other set. Useful to break permutation symmetries for
+   a set of set variables. Not reifiable.<br>
+</div>
+
+<pre><span id="VALorder"><span class="keyword">val</span> order</span> : <code class="type">Fcl_var.SetFd.t -> Fcl_var.SetFd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">order v1 v2</code> ensures that <code class="code">v1</code> is less than or equal to <code class="code">v2</code>
+   according to <code class="code">Domain.compare</code> .
+   Caution: <code class="code">order</code> builds the cardinal
+   variables of <code class="code">v1</code> and <code class="code">v2</code>; if they are already available, please use
+   <code class="code">order_with_card</code>. Not reifiable.<br>
+</div>
+
+<pre><span id="VALorder_with_card"><span class="keyword">val</span> order_with_card</span> : <code class="type">Fcl_var.SetFd.t -><br>       Fcl_var.Fd.t -> Fcl_var.SetFd.t -> Fcl_var.Fd.t -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">order_with_card v1 card1 v2 card2</code> is equivalent to <code class="code">order</code> but the cardinals
+   of the variables must be provided too. Useful to sort a set of variables.<br>
+</div>
+
+<pre><span id="VALmember"><span class="keyword">val</span> member</span> : <code class="type">Fcl_var.SetFd.t -> <a href="Fcl_setDomain.html#TYPEelt">Fcl_setDomain.elt</a> list -> <a href="Fcl_cstr.html#TYPEt">Fcl_cstr.t</a></code></pre><div class="info ">
+<code class="code">member v l</code> ensures that <code class="code">v</code> will have a value in <code class="code">l</code>. Not reifiable.<br>
+</div>
+
+<pre><span id="VALsum_weight"><span class="keyword">val</span> sum_weight</span> : <code class="type">Fcl_var.SetFd.t -> (int * int) list -> Fcl_var.Fd.t</code></pre><div class="info ">
+<code class="code">sum_weight v weights</code> returns an integer variable equal to the sum
+   of the weights associated with the value in <code class="code">v</code>. <code class="code">weights</code> must be a
+   list of pairs <code class="code">value, weight)</code> that associates a unique weight to each
+   value possibly in <code class="code">v</code>. All the weights must be positive integers.<br>
+</div>
+</body></html>

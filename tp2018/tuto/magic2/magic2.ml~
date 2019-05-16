@@ -1,0 +1,10 @@
+open Facile open Easy
+
+let xs = Fd.array n 0 (n-1)
+let is_equal_to i x = fd2e x =~~ i2e i
+Array.iteri
+(fun i xi ->
+let ardi = Arith.sum Array.map (is_equal_to i) xs) in
+Cstr.post (fd2e xi =~ ardi))
+xs;
+Goals.solve (Goals.Array.forall Goals.indomain xs)

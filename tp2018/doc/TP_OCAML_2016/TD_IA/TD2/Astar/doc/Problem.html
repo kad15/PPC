@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Pqueue.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Astar" rel="Chapter" href="Astar.html">
+<link title="Draw" rel="Chapter" href="Draw.html">
+<link title="Memory" rel="Chapter" href="Memory.html">
+<link title="Pqueue" rel="Chapter" href="Pqueue.html">
+<link title="Problem" rel="Chapter" href="Problem.html"><title>TD ASTAR : Problem</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Pqueue.html" title="Pqueue">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Problem.html">Problem</a></h1>
+
+<pre><span class="keyword">module</span> Problem: <code class="code">sig</code> <a href="Problem.html">..</a> <code class="code">end</code></pre><div class="info module top">
+A path-finding problem, with an obstacle between origin and destination.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEpoint"><span class="keyword">type</span> <code class="type"></code>point</span> = <code class="type">int * int</code> </pre>
+<div class="info ">
+A point is represented by its coordinates <code class="code">(x,y)</code><br>
+</div>
+
+
+<pre><code><span id="TYPEobstacle"><span class="keyword">type</span> <code class="type"></code>obstacle</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTobstacle.Rectangle"><span class="constructor">Rectangle</span></span> <span class="keyword">of</span> <code class="type"><a href="Problem.html#TYPEpoint">point</a> * <a href="Problem.html#TYPEpoint">point</a></code></code></td>
+
+</tr></table>
+
+
+
+<pre><code><span id="TYPEproblem"><span class="keyword">type</span> <code class="type"></code>problem</span> = {</code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.xmin">xmin</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.xmax">xmax</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.ymin">ymin</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.ymax">ymax</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.orig">orig</span>&nbsp;: <code class="type"><a href="Problem.html#TYPEpoint">point</a></code>;</code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" >Point of departure</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.dest">dest</span>&nbsp;: <code class="type"><a href="Problem.html#TYPEpoint">point</a></code>;</code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" >Destination</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.grid">grid</span>&nbsp;: <code class="type">bool array array</code>;</code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><code class="code">grid.(x).(y)</code> are set to <code class="code">false</code> when an obstacle overlaps
+       coordinates <code class="code">(x,y)</code></td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTproblem.obstacles">obstacles</span>&nbsp;: <code class="type"><a href="Problem.html#TYPEobstacle">obstacle</a> list</code>;</code></td>
+
+</tr></table>
+}
+
+
+
+<pre><span id="VALinit_problem"><span class="keyword">val</span> init_problem</span> : <code class="type">unit -> <a href="Problem.html#TYPEproblem">problem</a></code></pre><div class="info ">
+<code class="code">init_problem ()</code> returns a path-finding problem.<br>
+</div>
+
+<pre><span id="VALchars_of"><span class="keyword">val</span> chars_of</span> : <code class="type"><a href="Problem.html#TYPEproblem">problem</a> -> char array array</code></pre><div class="info ">
+<code class="code">chars_of problem</code> returns a matrix or characters representing the grid.<br>
+</div>
+
+<pre><span id="VALprint"><span class="keyword">val</span> print</span> : <code class="type">char array array -> unit</code></pre><div class="info ">
+<code class="code">print m</code> prints a matrix of characters on standard output.<br>
+</div>
+</body></html>

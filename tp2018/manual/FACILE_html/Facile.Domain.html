@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Facile.SetDomain.html">
+<link rel="Up" href="Facile.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Facile.Domain</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Facile.html" title="Facile">Up</a>
+&nbsp;<a class="post" href="Facile.SetDomain.html" title="Facile.SetDomain">Next</a>
+</div>
+<h1>Module <a href="type_Facile.Domain.html">Facile.Domain</a></h1>
+
+<pre><span class="keyword">module</span> Domain: <code class="code">sig</code> <a href="Facile.Domain.html">..</a> <code class="code">end</code></pre><hr width="100%">
+
+<pre><span id="TYPEelt"><span class="keyword">type</span> <code class="type"></code>elt</span> = <code class="type">int</code> </pre>
+
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+
+
+<pre><span id="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> list -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALunsafe_create"><span class="keyword">val</span> unsafe_create</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> list -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALinterval"><span class="keyword">val</span> interval</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALelt"><span class="keyword">val</span> elt</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALint"><span class="keyword">val</span> int</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALboolean"><span class="keyword">val</span> boolean</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALis_empty"><span class="keyword">val</span> is_empty</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALis_bound"><span class="keyword">val</span> is_bound</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALelt_value"><span class="keyword">val</span> elt_value</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALsize"><span class="keyword">val</span> size</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALmin"><span class="keyword">val</span> min</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALmax"><span class="keyword">val</span> max</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALmin_max"><span class="keyword">val</span> min_max</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> * <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">(<a href="Facile.Domain.html#TYPEelt">elt</a> -> unit) -> <a href="Facile.Domain.html#TYPEt">t</a> -> unit</code></pre>
+<pre><span id="VALinterval_iter"><span class="keyword">val</span> interval_iter</span> : <code class="type">(<a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> unit) -> <a href="Facile.Domain.html#TYPEt">t</a> -> unit</code></pre>
+<pre><span id="VALinterval_fold_right"><span class="keyword">val</span> interval_fold_right</span> : <code class="type">(<a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> 'a -> 'a) -><br>       <a href="Facile.Domain.html#TYPEt">t</a> -> 'a -> 'a</code></pre>
+<pre><span id="VALinterval_fold_left"><span class="keyword">val</span> interval_fold_left</span> : <code class="type">('a -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> 'a) -><br>       'a -> <a href="Facile.Domain.html#TYPEt">t</a> -> 'a</code></pre>
+<pre><span id="VALarg_exists_opt"><span class="keyword">val</span> arg_exists_opt</span> : <code class="type">(<a href="Facile.Domain.html#TYPEelt">elt</a> -> bool) -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> option</code></pre>
+<pre><span id="VALinterval_list"><span class="keyword">val</span> interval_list</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> (<a href="Facile.Domain.html#TYPEelt">elt</a> * <a href="Facile.Domain.html#TYPEelt">elt</a>) list</code></pre>
+<pre><span id="VALmember"><span class="keyword">val</span> member</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> bool</code></pre>
+<pre><span id="VALmem"><span class="keyword">val</span> mem</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> list</code></pre>
+<pre><span id="VALfprint_elt"><span class="keyword">val</span> fprint_elt</span> : <code class="type">Pervasives.out_channel -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> unit</code></pre>
+<pre><span id="VALfprint"><span class="keyword">val</span> fprint</span> : <code class="type">Pervasives.out_channel -> <a href="Facile.Domain.html#TYPEt">t</a> -> unit</code></pre>
+<pre><span id="VALto_string"><span class="keyword">val</span> to_string</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALincluded"><span class="keyword">val</span> included</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove"><span class="keyword">val</span> remove</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_up"><span class="keyword">val</span> remove_up</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_low"><span class="keyword">val</span> remove_low</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_low_up"><span class="keyword">val</span> remove_low_up</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_closed_inter"><span class="keyword">val</span> remove_closed_inter</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALintersection"><span class="keyword">val</span> intersection</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALunion"><span class="keyword">val</span> union</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALdifference"><span class="keyword">val</span> difference</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALdiff"><span class="keyword">val</span> diff</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_min"><span class="keyword">val</span> remove_min</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALminus"><span class="keyword">val</span> minus</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALplus"><span class="keyword">val</span> plus</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALtimes"><span class="keyword">val</span> times</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALsmallest_geq"><span class="keyword">val</span> smallest_geq</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALgreatest_leq"><span class="keyword">val</span> greatest_leq</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALlargest_hole_around"><span class="keyword">val</span> largest_hole_around</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> * <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALsmallest_common_elt_greater_than"><span class="keyword">val</span> smallest_common_elt_greater_than</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -><br>       <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> option</code></pre>
+<pre><span id="VALchoose"><span class="keyword">val</span> choose</span> : <code class="type">(<a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> bool) -><br>       <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALrandom"><span class="keyword">val</span> random</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALcompare"><span class="keyword">val</span> compare</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALcompare_elt"><span class="keyword">val</span> compare_elt</span> : <code class="type"><a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a> -> <a href="Facile.Domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALdisjoint"><span class="keyword">val</span> disjoint</span> : <code class="type"><a href="Facile.Domain.html#TYPEt">t</a> -> <a href="Facile.Domain.html#TYPEt">t</a> -> bool</code></pre></body></html>

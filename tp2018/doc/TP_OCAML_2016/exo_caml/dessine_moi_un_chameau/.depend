@@ -1,0 +1,3 @@
+camel.cmi :
+camel.cmo : camel.cmi
+camel.cmx : camel.cmi

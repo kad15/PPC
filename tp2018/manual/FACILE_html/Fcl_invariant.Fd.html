@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_invariant.Array.html">
+<link rel="next" href="Fcl_invariant.SetFd.html">
+<link rel="Up" href="Fcl_invariant.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_invariant.Fd</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_invariant.Array.html" title="Fcl_invariant.Array">Previous</a>
+&nbsp;<a class="up" href="Fcl_invariant.html" title="Fcl_invariant">Up</a>
+&nbsp;<a class="post" href="Fcl_invariant.SetFd.html" title="Fcl_invariant.SetFd">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_invariant.Fd.html">Fcl_invariant.Fd</a></h1>
+
+<pre><span class="keyword">module</span> Fd: <code class="type"><a href="Fcl_invariant.FD.html">FD</a></code><code class="type"> 
+with
+  type fd = <a href="Fcl_var.Fd.html">Fcl_var.Fd</a>.t
+  and type elt = <a href="Fcl_var.Fd.html">Fcl_var.Fd</a>.elt</code></pre><div class="info module top">
+Module for accessing finite integer domain variables with BIRs.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEfd"><span class="keyword">type</span> <code class="type"></code>fd</span> </pre>
+<div class="info ">
+Type of a finite domain variable.<br>
+</div>
+
+
+<pre><span id="TYPEelt"><span class="keyword">type</span> <code class="type"></code>elt</span> </pre>
+<div class="info ">
+Type of elements in the domain.<br>
+</div>
+
+
+<pre><span id="VALmin"><span class="keyword">val</span> min</span> : <code class="type"><a href="Fcl_invariant.FD.html#TYPEfd">fd</a> -> <a href="Fcl_invariant.FD.html#TYPEelt">elt</a> <a href="Fcl_invariant.html#TYPEunsetable_t">Fcl_invariant.unsetable_t</a></code></pre>
+<pre><span id="VALmax"><span class="keyword">val</span> max</span> : <code class="type"><a href="Fcl_invariant.FD.html#TYPEfd">fd</a> -> <a href="Fcl_invariant.FD.html#TYPEelt">elt</a> <a href="Fcl_invariant.html#TYPEunsetable_t">Fcl_invariant.unsetable_t</a></code></pre>
+<pre><span id="VALsize"><span class="keyword">val</span> size</span> : <code class="type"><a href="Fcl_invariant.FD.html#TYPEfd">fd</a> -> int <a href="Fcl_invariant.html#TYPEunsetable_t">Fcl_invariant.unsetable_t</a></code></pre>
+<pre><span id="VALis_var"><span class="keyword">val</span> is_var</span> : <code class="type"><a href="Fcl_invariant.FD.html#TYPEfd">fd</a> -> bool <a href="Fcl_invariant.html#TYPEunsetable_t">Fcl_invariant.unsetable_t</a></code></pre><div class="info ">
+BIR variants of <code class="code">Fd.Var</code> access functions.<br>
+</div>
+
+<pre><span id="VALunary"><span class="keyword">val</span> unary</span> : <code class="type">?name:string -><br>       (<a href="Fcl_invariant.FD.html#TYPEfd">fd</a> -> 'a) -><br>       <a href="Fcl_invariant.FD.html#TYPEfd">fd</a> -> 'a <a href="Fcl_invariant.html#TYPEunsetable_t">Fcl_invariant.unsetable_t</a></code></pre><div class="info ">
+<code class="code">unary ~name:"Invariant.XxxFd.unary" f v</code> Wrapper of any access
+     function over <code class="code">fd</code> type.<br>
+</div>
+</body></html>

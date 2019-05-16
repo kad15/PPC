@@ -1,0 +1,82 @@
+{C Artificial intelligence : A* algorithm}
+
+{C David Gianazza, Nicolas Durand}
+{C Ecole Nationale de l'Aviation Civile}
+{C Institut de Recherche en Informatique de Toulouse}
+
+{2 Presentation}
+
+This is a programming exercise. The aim is to implement an A* algorithm and to test it on a path-finding problem consisting in finding the shortest path between origin and destination while avoiding obstacles.
+
+{2 Installation}
+
+Download file [tdastar.zip] (or [.tgz] or [.gz]).
+
+
+Decompress the file using [unzip], [tar -zxf], or [gunzip], depending on the file type.
+
+Go to sub-directory [Astar] and compile using command :
+{v
+> make
+v}
+
+This command creates an executable file [findpath] and an HTML documentation that can be found in subdirectory [./doc/]
+
+{2 Usage }
+
+Run the program :
+{v
+> ./findpath
+v}
+
+Run the test program in "slow motion" :
+{v
+> ./findpath -s
+v}
+
+
+{2 Work to be done}
+
+1) Open file [astar.ml] and implement the A* search algorithm. You may need the types and functions provided in modules {!Pqueue} and {!Memory}
+
+2) Open file [main.ml], implement the functions that should be given as arguments to {!Astar.search} in order to test your A* algorithm on the path-finding problem provided in module {!Problem}
+
+3) Test your program. Try it with the following heuristic function : [fun v -> 0.]. What happens ?  What kind of tree search is performed in that case ?
+
+4) How could you modify your code to perform a depth-first search ? Would that be more efficient ?
+
+{2 Reference manual }
+
+Here are the modules that you may need for this programming exercise:
+
+{!modules: Astar Pqueue Memory Problem Draw}
+
+
+You may also refer to the following indexes:
+
+{!indexlist}
+
+This documentation was produced with [ocamldoc]:
+{v
+ocamldoc -html -t "TD ASTAR" -intro Intro -d [doc_directory] -hide Pervasives *.mli
+v}
+
+{2 Copyright and license}
+
+THIS SOFTWARE IS LICENSED UNDER LGPL v3 ({{:http://www.gnu.org/licenses/lgpl.html}http://www.gnu.org/licenses/lgpl.html})
+
+LGPL v3 is a set of additional permissions added to version 3 of the GNU General Public License.  Please read carefully the following excerpted sections of the GPL v3 License.
+
+15. Disclaimer of Warranty.
+
+THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \ufffdAS IS\ufffd WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+16. Limitation of Liability.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+17. Interpretation of Sections 15 and 16.
+
+If the disclaimer of warranty and limitation of liability provided above cannot be given local legal effect according to their terms, reviewing courts shall apply local law that most closely approximates an absolute waiver of all civil liability in connection with the Program, unless a warranty or assumption of liability accompanies a copy of the Program in return for a fee.
+
+

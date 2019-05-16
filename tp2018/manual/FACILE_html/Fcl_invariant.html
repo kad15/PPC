@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_var.html">
+<link rel="next" href="Fcl_reify.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_invariant</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_var.html" title="Fcl_var">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_reify.html" title="Fcl_reify">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_invariant.html">Fcl_invariant</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_invariant: <code class="code">sig</code> <a href="Fcl_invariant.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Backtrackable Invariant References<br>
+</div>
+<hr width="100%">
+<br>
+This module provides types and functions to create
+   and handle Backtrackable Invariant References (noted BIR in the sequel).
+   BIRs are single-valued variables whose values are restored
+   upon backtracks and which are linked by "one-way" constraints.
+   They maintain functional dependencies between "source" <em>setable</em>
+   BIRs (initialized with their creation value) and <em>unsetable</em> BIRs
+   built upon them. BIRs may be convenient to automatically handle
+   heuristic criteria or the data structures of local search
+   algorithms . Note that circular dependencies
+   are not allowed by the typing policy.<br>
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type">('a, 'b)</code> t</span> </pre>
+
+
+<pre><span id="TYPEsetable"><span class="keyword">type</span> <code class="type"></code>setable</span> </pre>
+
+
+<pre><span id="TYPEunsetable"><span class="keyword">type</span> <code class="type"></code>unsetable</span> </pre>
+
+
+<pre><span id="TYPEsetable_t"><span class="keyword">type</span> <code class="type">'a</code> setable_t</span> = <code class="type">('a, <a href="Fcl_invariant.html#TYPEsetable">setable</a>) <a href="Fcl_invariant.html#TYPEt">t</a></code> </pre>
+
+
+<pre><span id="TYPEunsetable_t"><span class="keyword">type</span> <code class="type">'a</code> unsetable_t</span> = <code class="type">('a, <a href="Fcl_invariant.html#TYPEunsetable">unsetable</a>) <a href="Fcl_invariant.html#TYPEt">t</a></code> </pre>
+<div class="info ">
+Type of BIRs. Parameter <code class="code">'a</code> stands for the
+   type of the value of the BIR. Parameter <code class="code">'b</code> is <code class="code">setable</code> if the BIR
+   can be assigned, <code class="code">unsetable</code> if not. <code class="code">setable_t</code> and <code class="code">unsetable_t</code> are
+   shortcuts.<br>
+</div>
+
+<br>
+<br>
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">?name:string -> 'a -> 'a <a href="Fcl_invariant.html#TYPEsetable_t">setable_t</a></code></pre><div class="info ">
+<code class="code">create ~name:"" v</code> returns a setable BIR with initial content <code class="code">v</code>.
+   An optional string can be given to name the BIR.<br>
+</div>
+
+<pre><span id="VALconstant"><span class="keyword">val</span> constant</span> : <code class="type">?name:string -> 'a -> 'a <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">constant ~name:"" cst</code> returns an unsetable BIR with initial
+   content <code class="code">cst</code>. An optional string can be given to name the BIR.<br>
+</div>
+
+<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type">'a <a href="Fcl_invariant.html#TYPEsetable_t">setable_t</a> -> 'a -> unit</code></pre><div class="info ">
+Assignment of a setable BIR.<br>
+</div>
+
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">('a, 'b) <a href="Fcl_invariant.html#TYPEt">t</a> -> 'a</code></pre><div class="info ">
+Access to the content of a BIR.<br>
+</div>
+
+<pre><span id="VALid"><span class="keyword">val</span> id</span> : <code class="type">('a, 'b) <a href="Fcl_invariant.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">id r</code> returns a unique integer associated to BIR <code class="code">r</code>.<br>
+</div>
+
+<pre><span id="VALname"><span class="keyword">val</span> name</span> : <code class="type">('a, 'b) <a href="Fcl_invariant.html#TYPEt">t</a> -> string</code></pre><div class="info ">
+<code class="code">name r</code> returns the name (specified or generated) of BIR <code class="code">r</code>.<br>
+</div>
+
+<pre><span id="VALfprint"><span class="keyword">val</span> fprint</span> : <code class="type">Pervasives.out_channel -><br>       ?printer:(Pervasives.out_channel -> 'a -> unit) -><br>       ('a, 'b) <a href="Fcl_invariant.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">fprint c ~printer:(fun _ _ -&gt; ()) r</code> prints BIR <code class="code">r</code> on channel <code class="code">c</code>.
+   An optional custom printer can be given to display the value of <code class="code">r</code>.<br>
+</div>
+<br>
+<br>
+
+<pre><span id="VALunary"><span class="keyword">val</span> unary</span> : <code class="type">?name:string -><br>       ('a -> 'b) -> ('a, 'c) <a href="Fcl_invariant.html#TYPEt">t</a> -> 'b <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">unary ~name:"Invariant.unary" f</code> wraps the unary function <code class="code">f</code> into
+   an operator on BIRs. An optional string can be given to name the
+   operator.<br>
+</div>
+
+<pre><span id="VALbinary"><span class="keyword">val</span> binary</span> : <code class="type">?name:string -><br>       ('a -> 'b -> 'c) -><br>       ('a, 'd) <a href="Fcl_invariant.html#TYPEt">t</a> -><br>       ('b, 'e) <a href="Fcl_invariant.html#TYPEt">t</a> -> 'c <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">binary ~name:"Invariant.binary" f</code> wraps the binary function <code class="code">f</code>
+   into an operator on BIRs.
+   An optional string can be given to name the operator.<br>
+</div>
+
+<pre><span id="VALternary"><span class="keyword">val</span> ternary</span> : <code class="type">?name:string -><br>       ('a -> 'b -> 'c -> 'd) -><br>       ('a, 'e) <a href="Fcl_invariant.html#TYPEt">t</a> -><br>       ('b, 'f) <a href="Fcl_invariant.html#TYPEt">t</a> -><br>       ('c, 'g) <a href="Fcl_invariant.html#TYPEt">t</a> -> 'd <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">ternary ~name:"Invariant.ternary" f</code> wraps the ternary function <code class="code">f</code>
+   into an operator on BIRs.
+   An optional string can be given to name the operator.<br>
+</div>
+
+<pre><span id="VALsum"><span class="keyword">val</span> sum</span> : <code class="type">(int, 'a) <a href="Fcl_invariant.html#TYPEt">t</a> array -> int <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">sum a</code> returns a BIR equal to the sum of elements of <code class="code">a</code>.<br>
+</div>
+
+<pre><span id="VALprod"><span class="keyword">val</span> prod</span> : <code class="type">(int, 'a) <a href="Fcl_invariant.html#TYPEt">t</a> array -> int <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">prod a</code> returns a BIR equal to the product of elements of <code class="code">a</code>.<br>
+</div>
+
+<pre><span id="VALsum_float"><span class="keyword">val</span> sum_float</span> : <code class="type">(float, 'a) <a href="Fcl_invariant.html#TYPEt">t</a> array -> float <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">sum_float a</code> returns a BIR equal to the sum of elements of <code class="code">a</code>.<br>
+</div>
+
+<pre><span id="VALprod_float"><span class="keyword">val</span> prod_float</span> : <code class="type">(float, 'a) <a href="Fcl_invariant.html#TYPEt">t</a> array -> float <a href="Fcl_invariant.html#TYPEunsetable_t">unsetable_t</a></code></pre><div class="info ">
+<code class="code">prod_float a</code> returns a BIR equal to the product of elements of <code class="code">a</code>.<br>
+</div>
+
+<pre><span class="keyword">module</span> <a href="Fcl_invariant.Array.html">Array</a>: <code class="code">sig</code> <a href="Fcl_invariant.Array.html">..</a> <code class="code">end</code></pre><br>
+<br>
+
+<pre><span class="keyword">module type</span> <a href="Fcl_invariant.FD.html">FD</a> = <code class="code">sig</code> <a href="Fcl_invariant.FD.html">..</a> <code class="code">end</code></pre><div class="info">
+Generic signature.
+</div>
+
+<pre><span class="keyword">module</span> <a href="Fcl_invariant.Fd.html">Fd</a>: <code class="type"><a href="Fcl_invariant.FD.html">FD</a></code><code class="type"> 
+with
+  type fd = <a href="Fcl_var.Fd.html">Fcl_var.Fd</a>.t
+  and type elt = <a href="Fcl_var.Fd.html">Fcl_var.Fd</a>.elt</code></pre><div class="info">
+Module for accessing finite integer domain variables with BIRs.
+</div>
+
+<pre><span class="keyword">module</span> <a href="Fcl_invariant.SetFd.html">SetFd</a>: <code class="type"><a href="Fcl_invariant.FD.html">FD</a></code><code class="type"> 
+with
+   type fd = <a href="Fcl_var.SetFd.html">Fcl_var.SetFd</a>.t
+   and type elt = <a href="Fcl_var.SetFd.html">Fcl_var.SetFd</a>.elt</code></pre><div class="info">
+Module for accessing set domain variables with BIRs.
+</div>
+</body></html>

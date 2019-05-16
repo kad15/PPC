@@ -1,0 +1,34 @@
+SOURCES = tp1.ml
+EXEC = tp1
+CAMLOPT = ocamlopt
+CAMLDEP = ocamldep
+LIBS=
+
+all: depend $(EXEC)
+
+OBJS = $(SOURCES:.ml=.cmx)
+
+$(EXEC): $(OBJS)
+	$(CAMLOPT) -o $(EXEC) $(LIBS) $(OBJS)
+
+#.SUFFIXES:
+.SUFFIXES: .ml .mli .cmi .cmx
+
+.mli.cmi:
+	$(CAMLOPT) -c $<
+
+.ml.cmx:
+	$(CAMLOPT) -c $<
+
+clean:
+	rm -f *.cm[iox] *~ .*~ *.o #*#
+	rm -f $(EXEC)
+
+.depend: $(SOURCES)
+	$(CAMLDEP) *.mli *.ml > .depend
+
+depend: $(SOURCES)
+	$(CAMLDEP) *.mli *.ml > .depend
+
+include .depend
+

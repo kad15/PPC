@@ -1,0 +1,40 @@
+Éditeur de code source Emacs
+
+Éditeur Emacs
+
+Le code source de vos TP devra être édité avec Emacs. Vous pouvez configurer Emacs avec le fichier «emacs» disponible ci-dessous en l'ajoutant à la racine de votre répertoire personnel et en le renommant «.emacs» : 
+
+mv emacs ~/.emacs
+
+Il définit (notamment) les raccourcis suivants, très utiles pour le développement de programmes  :
+
+    [²] : complétion automatique
+    [F1] : annuler
+    [F4] : aller au caractère spécifié
+    [F5] : aller à la ligne spécifiée
+    [F6] : commande de compilation
+    [F8] : aller à la prochaine erreur
+
+
+Rappel des commandes les plus utiles (C = Ctrl, A = Alt - désigné par M dans la reference card) :
+
+    C-x C-c : quitter
+    C-x C-f : ouvrir un fichier
+    C-x C-s : sauvegarder un fichier
+    C-k : effacer (« kill ») une ligne
+    C-y : recopier la dernière entité effacée (« yank »)
+    C-w : effacer une région sélectionnée
+    C-g : interrompre une commande partiellement tapée
+    C-s : chercher en avant
+    C-r : chercher en arrière
+    A-% : remplacement interactif
+    A-; : commenter/décommenter une région sélectionnée
+    C-t : échange ("transpose") deux caractères consécutifs
+    A-t : échange deux mots consécutifs
+    C-x i : insérer un fichier
+    C-x r k : effacer un rectangle sélectionné
+    C-x r y : recopier un rectangle
+    C-x 1 : effacer toutes les autres fenêtres
+    C-x 2 : séparer la fenêtre en deux horizontalement
+    C-x 0 : supprimer la fenêtre
+    C-x 5 f : ouvrir un fichier dans une nouvelle fenêtre

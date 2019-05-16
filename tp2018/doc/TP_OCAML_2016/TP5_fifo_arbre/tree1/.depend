@@ -1,0 +1,9 @@
+fifo.cmi :
+cours_tree.cmo :
+cours_tree.cmx :
+fifo.cmo : fifo.cmi
+fifo.cmx : fifo.cmi
+tree1.cmo :
+tree1.cmx :
+tree.cmo : fifo.cmi
+tree.cmx : fifo.cmx

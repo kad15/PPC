@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_misc.html">
+<link rel="next" href="Fcl_setDomain.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><title>Fcl_domain</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_misc.html" title="Fcl_misc">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_setDomain.html" title="Fcl_setDomain">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_domain.html">Fcl_domain</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_domain: <code class="code">sig</code> <a href="Fcl_domain.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Domain Operations<br>
+</div>
+<hr width="100%">
+<br>
+This module provides functions to create
+   and handle domains, which are useful to build variables and perform
+   propagation (i.e. domain filtering).<br>
+
+<pre><span id="TYPEelt"><span class="keyword">type</span> <code class="type"></code>elt</span> = <code class="type">int</code> </pre>
+<div class="info ">
+Type of element of domains (for generic interface,
+   ).<br>
+</div>
+
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info ">
+Type of finite domains of integers (functional: no in-place
+   modifications, domains can be shared). Standard equality and
+   comparison can be used on domains.<br>
+</div>
+
+<br>
+<br>
+
+<pre><span id="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+The empty domain.<br>
+</div>
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> list -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">create l</code> builds a new domain containing the values of <code class="code">l</code>. Removes
+   duplicates and sorts values. Returns <code class="code">empty</code> if <code class="code">l</code> is
+   empty.<br>
+</div>
+
+<pre><span id="VALunsafe_create"><span class="keyword">val</span> unsafe_create</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> list -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">unsafe_create l</code> builds a new domain containing the values of <code class="code">l</code>. <code class="code">l</code> must
+be sorted and must not contain duplicate values, otherwise the behaviour is
+unspecified. Returns <code class="code">empty</code> if <code class="code">l</code> is empty. It is a more efficient variant
+of <code class="code">create</code>.<br>
+</div>
+
+<pre><span id="VALinterval"><span class="keyword">val</span> interval</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">interval inf sup</code> returns the domain of all integers in the closed
+    interval <code class="code">[inf..sup]</code>. Raise <code class="code">Invalid_argument</code> if <code class="code">inf &gt; sup</code>.<br>
+</div>
+
+<pre><span id="VALelt"><span class="keyword">val</span> elt</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">elt x</code> returns a bound domain with element <code class="code">x</code>.<br>
+</div>
+
+<pre><span id="VALint"><span class="keyword">val</span> int</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+The largest representable domain. Handy to create variables for which
+    bounds cannot be previously known. It is actually much smaller
+    than <code class="code">interval min_int max_int</code> (which really is the biggest one) to
+    try to prevent overflows while computing bounds of expressions
+    involving such variables.<br>
+</div>
+
+<pre><span id="VALboolean"><span class="keyword">val</span> boolean</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+The domain containing <code class="code">0</code> and <code class="code">1</code>.<br>
+</div>
+<br>
+<br>
+
+<pre><span id="VALis_empty"><span class="keyword">val</span> is_empty</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+<code class="code">is_empty d</code> tests whether the domain <code class="code">d</code> is empty or not.<br>
+</div>
+
+<pre><span id="VALis_bound"><span class="keyword">val</span> is_bound</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+<code class="code">is_bound d</code> tests whether the domain <code class="code">d</code> is bound (instantiated)
+   or not.<br>
+</div>
+
+<pre><span id="VALelt_value"><span class="keyword">val</span> elt_value</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALdom_changed"><span class="keyword">val</span> dom_changed</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALmin_changed"><span class="keyword">val</span> min_changed</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALmax_changed"><span class="keyword">val</span> max_changed</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="TYPEsize"><span class="keyword">type</span> <code class="type"></code>size</span> = <code class="type">int</code> </pre>
+
+
+<pre><span id="VALsize"><span class="keyword">val</span> size</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEsize">size</a></code></pre><div class="info ">
+<code class="code">size d</code> returns the number of integers in <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALmin"><span class="keyword">val</span> min</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALmax"><span class="keyword">val</span> max</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">min d</code> (resp. <code class="code">max d</code>) returns the lower (resp. upper) bound of <code class="code">d</code>.
+   If <code class="code">d</code> is empty, the behaviour is unspecified (incorrect return value
+   or exception raised).<br>
+</div>
+
+<pre><span id="VALmin_max"><span class="keyword">val</span> min_max</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> * <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">min_max d</code> returns both the lower and upper bound of <code class="code">d</code>. If <code class="code">d</code> is empty,
+   the behaviour is unspecified (incorrect return value or exception
+   raised).<br>
+</div>
+
+<pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">(<a href="Fcl_domain.html#TYPEelt">elt</a> -> unit) -> <a href="Fcl_domain.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">iter f d</code> successively applies function <code class="code">f</code> to all element of <code class="code">d</code> in
+   increasing order.<br>
+</div>
+
+<pre><span id="VALinterval_iter"><span class="keyword">val</span> interval_iter</span> : <code class="type">(<a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> unit) -> <a href="Fcl_domain.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">interval_iter f d</code> successively applies function <code class="code">f</code> to the bounds
+   of all the disjoint intervals of <code class="code">d</code> in increasing order. E.g. a
+   suitable function <code class="code">f</code> to print a domain can be defined as
+   <code class="code">fun mini maxi -&gt; Printf.printf "%d..%d " mini maxi</code>.<br>
+</div>
+
+<pre><span id="VALinterval_fold_right"><span class="keyword">val</span> interval_fold_right</span> : <code class="type">(<a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> 'a -> 'a) -> <a href="Fcl_domain.html#TYPEt">t</a> -> 'a -> 'a</code></pre><div class="info ">
+<code class="code">interval_fold_right f d a</code> is similar to <code class="code">List.fold_right</code> applied
+   to the intervals of <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALinterval_fold_left"><span class="keyword">val</span> interval_fold_left</span> : <code class="type">('a -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> 'a) -> 'a -> <a href="Fcl_domain.html#TYPEt">t</a> -> 'a</code></pre><div class="info ">
+<code class="code">interval_fold_left f a d</code> is similar to <code class="code">List.fold_left</code> applied
+   to the intervals of <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALarg_exists_opt"><span class="keyword">val</span> arg_exists_opt</span> : <code class="type">(<a href="Fcl_domain.html#TYPEelt">elt</a> -> bool) -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> option</code></pre><div class="info ">
+<code class="code">arg_exists_opt pred d</code> returns the first element of <code class="code">d</code> satisfying <code class="code">p</code>
+    or <code class="code">None</code> otherwise.<br>
+</div>
+
+<pre><span id="VALinterval_list"><span class="keyword">val</span> interval_list</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> (<a href="Fcl_domain.html#TYPEelt">elt</a> * <a href="Fcl_domain.html#TYPEelt">elt</a>) list</code></pre><div class="info ">
+<code class="code">interval_list d</code> returns the list of intervals of domain <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALmember"><span class="keyword">val</span> member</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> bool</code></pre><div class="info ">
+<code class="code">member d n</code> tests if <code class="code">n</code> belongs to <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALmem"><span class="keyword">val</span> mem</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> list</code></pre><div class="info ">
+<code class="code">value d</code> returns the list of values of the domain <code class="code">d</code><br>
+</div>
+
+<pre><span id="VALfprint_elt"><span class="keyword">val</span> fprint_elt</span> : <code class="type">Pervasives.out_channel -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> unit</code></pre>
+<pre><span id="VALfprint"><span class="keyword">val</span> fprint</span> : <code class="type">Pervasives.out_channel -> <a href="Fcl_domain.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+Pretty printing of elements and domains.<br>
+</div>
+
+<pre><span id="VALto_string"><span class="keyword">val</span> to_string</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> string</code></pre><div class="info ">
+<code class="code">to_string d</code> returns a string representation of <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALincluded"><span class="keyword">val</span> included</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+<code class="code">included d1 d2</code> tests whether domain <code class="code">d1</code> is included in domain <code class="code">d2</code>.<br>
+</div>
+
+<pre><span id="VALsmallest_geq"><span class="keyword">val</span> smallest_geq</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre>
+<pre><span id="VALgreatest_leq"><span class="keyword">val</span> greatest_leq</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">smallest_geq dom val</code> (resp. <code class="code">greatest_leq dom val</code>) returns the
+     smallest (resp. greatest) value in <code class="code">dom</code> greater (resp. smaller) than
+     or equal to <code class="code">val</code>. Raises <code class="code">Not_found</code> if <code class="code">max dom &lt; val</code> (resp.
+     <code class="code">min dom &gt; val</code>).<br>
+</div>
+
+<pre><span id="VALlargest_hole_around"><span class="keyword">val</span> largest_hole_around</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> * <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">largest_hole_around dom val</code> returns the largest hole (interval)
+      in <code class="code">dom</code> centred around <code class="code">val</code>. Returns <code class="code">(val, val)</code> if <code class="code">val</code>
+      belongs to <code class="code">dom</code> and raises <code class="code">Not_found</code> if <code class="code">val</code> is outside
+      <code class="code">dom</code> bounds. Equivalent to
+      <code class="code">(greatest_leq dom val, smallest_geq dom val)</code> but faster.<br>
+</div>
+
+<pre><span id="VALsmallest_common_elt_greater_than"><span class="keyword">val</span> smallest_common_elt_greater_than</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> option</code></pre><div class="info ">
+<code class="code">smallest_common_elt_greater_than d1 d2 lb</code> returns the smallest
+    element in the intersection of <code class="code">d1</code> and <code class="code">d2</code> greater than <code class="code">lb</code>,
+    or <code class="code">None</code> if there is none.<br>
+</div>
+
+<pre><span id="VALnearest"><span class="keyword">val</span> nearest</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">nearest dom val</code> returns the value in <code class="code">dom</code> nearest to <code class="code">val</code>.<br>
+</div>
+
+<pre><span id="VALchoose"><span class="keyword">val</span> choose</span> : <code class="type">(<a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> bool) -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">choose ord d</code> returns the mininum value of <code class="code">d</code> for order <code class="code">ord</code>.
+     Raises <code class="code">Not_found</code> if <code class="code">d</code> is empty.<br>
+</div>
+
+<pre><span id="VALrandom"><span class="keyword">val</span> random</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">random d</code> returns one random element of <code class="code">d</code><br>
+</div>
+<br>
+<br>
+
+<pre><span id="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">add n d</code> returns <code class="code">d</code>  <code class="code">{n}</code>.<br>
+</div>
+
+<pre><span id="VALremove"><span class="keyword">val</span> remove</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">remove n d</code> returns <code class="code">d</code>  <code class="code">{n}</code>. Returns <code class="code">d</code> if <code class="code">n</code>
+    is not in <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALremove_up"><span class="keyword">val</span> remove_up</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_low"><span class="keyword">val</span> remove_low</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">remove_up n d</code> (resp. <code class="code">remove_low n d</code>) returns
+      <code class="code">d</code>  <code class="code">[n+1..max_int]</code> (resp.
+      <code class="code">d</code>  <code class="code">[min_int..n-1]</code>), i.e. removes values
+     stricly greater (resp. less) than <code class="code">n</code>.<br>
+</div>
+
+<pre><span id="VALremove_low_up"><span class="keyword">val</span> remove_low_up</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">remove_low_up low up d</code> is a shortcut for
+   <code class="code">remove_up up (remove_low low d)</code>.<br>
+</div>
+
+<pre><span id="VALremove_closed_inter"><span class="keyword">val</span> remove_closed_inter</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">remove_closed_inter inf sup d</code> returns
+      <code class="code">d</code>  <code class="code">[inf..sup]</code>, i.e. removes
+     values greater than or equal to <code class="code">inf</code> and less or equal to <code class="code">sup</code> in <code class="code">d</code>.
+     Returns <code class="code">d</code> if <code class="code">inf &gt; sup</code>.<br>
+</div>
+
+<pre><span id="VALremove_min"><span class="keyword">val</span> remove_min</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALremove_max"><span class="keyword">val</span> remove_max</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">remove_min d</code> (resp. <code class="code">remove_max d</code>) returns <code class="code">d</code> without its lower
+   (resp. upper) bound. Raises <code class="code">Invalid_argument</code> if <code class="code">d</code> is empty.<br>
+</div>
+
+<pre><span id="VALintersection"><span class="keyword">val</span> intersection</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre>
+<pre><span id="VALunion"><span class="keyword">val</span> union</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+Intersection (resp. union) on domains.<br>
+</div>
+
+<pre><span id="VALdifference"><span class="keyword">val</span> difference</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">difference big small</code> returns <code class="code">big</code>  <code class="code">small</code>.
+        <code class="code">small</code> must be included in <code class="code">big</code>, otherwise the behaviour is
+        unspecified (incorrect return value or exception raised).<br>
+</div>
+
+<pre><span id="VALdiff"><span class="keyword">val</span> diff</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">diff d1 d2</code> returns <code class="code">d1</code>  <code class="code">d2</code>, i.e. domain of
+       elements in <code class="code">d1</code> which are not in <code class="code">d2</code>.<br>
+</div>
+
+<pre><span id="VALminus"><span class="keyword">val</span> minus</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">minus d</code> returns the domain of opposite values of <code class="code">d</code>.<br>
+</div>
+
+<pre><span id="VALplus"><span class="keyword">val</span> plus</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">plus d n</code> translates a domain by <code class="code">n</code>.<br>
+</div>
+
+<pre><span id="VALtimes"><span class="keyword">val</span> times</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">times d k</code> expands a domain by factor <code class="code">k</code>.<br>
+</div>
+
+<pre><span id="VALcompare"><span class="keyword">val</span> compare</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">compare d1 d2</code> is a comparison function working first on the cardinal,
+     then (if <code class="code">d1</code> and <code class="code">d2</code> have the same size) on the lexicographic order
+     of the domains (expressed in extension).<br>
+</div>
+
+<pre><span id="VALcompare_elt"><span class="keyword">val</span> compare_elt</span> : <code class="type"><a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a> -> <a href="Fcl_domain.html#TYPEelt">elt</a></code></pre><div class="info ">
+<code class="code">compare_elt e1 e2</code> is a comparison function on elements of domains.
+     Convenient to use the <code class="code">Domain</code> module as a functor argument as in
+     module <code class="code">Var</code>.<br>
+</div>
+
+<pre><span id="VALdisjoint"><span class="keyword">val</span> disjoint</span> : <code class="type"><a href="Fcl_domain.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+<code class="code">disjoint d1 d2</code> tests whether <code class="code">d1</code> and <code class="code">d2</code> are disjoint.<br>
+</div>
+</body></html>

@@ -1,0 +1,21 @@
+
+Installation
+------------
+
+Download the source code and documentation.
+
+Go to your working directory and compile using command :
+> make
+
+This command creates an executable file [findpath] and an HTML documentation that can be found in subdirectory [./doc/]
+
+Read the html documentation.
+
+Usage
+-----
+
+Run the test program :
+> ./findpath
+
+Run the test program in "slow motion" :
+> ./findpath -s

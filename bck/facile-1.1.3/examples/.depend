@@ -1,0 +1,23 @@
+scheduling.cmi : ../src/facile.cmi
+coins.cmo : ../src/facile.cmi
+coins.cmx : ../src/facile.cmx
+golf.cmo : ../src/facile.cmi
+golf.cmx : ../src/facile.cmx
+golomb.cmo : ../src/facile.cmi
+golomb.cmx : ../src/facile.cmx
+jobshop.cmo : scheduling.cmi ../src/facile.cmi
+jobshop.cmx : scheduling.cmx ../src/facile.cmx
+magic.cmo : ../src/facile.cmi
+magic.cmx : ../src/facile.cmx
+marriage.cmo : ../src/facile.cmi
+marriage.cmx : ../src/facile.cmx
+prolog.cmo : ../src/facile.cmi
+prolog.cmx : ../src/facile.cmx
+queens.cmo : ../src/facile.cmi
+queens.cmx : ../src/facile.cmx
+scheduling.cmo : ../src/facile.cmi scheduling.cmi
+scheduling.cmx : ../src/facile.cmx scheduling.cmi
+seven_eleven.cmo : ../src/facile.cmi
+seven_eleven.cmx : ../src/facile.cmx
+tiles.cmo : ../src/facile.cmi
+tiles.cmx : ../src/facile.cmx

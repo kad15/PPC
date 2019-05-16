@@ -1,0 +1,9 @@
+astar.cmi : pqueue.cmi memory.cmi
+draw.cmi : problem.cmi
+memory.cmi :
+pqueue.cmi :
+problem.cmi :
+astar.cmo : pqueue.cmi memory.cmi astar.cmi
+astar.cmx : pqueue.cmi memory.cmi astar.cmi
+main.cmo : problem.cmi pqueue.cmi memory.cmi draw.cmi astar.cmi
+main.cmx : problem.cmi pqueue.cmi memory.cmi draw.cmi astar.cmx

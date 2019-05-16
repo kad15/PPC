@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="svg" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    
+    <link rel="alternate" hreflang="en" href="https://ocaml.org/learn/tutorials/file_manipulation.html">
+<link rel="alternate" hreflang="ja" href="https://ocaml.org/learn/tutorials/file_manipulation.ja.html">
+<link rel="alternate" hreflang="zh" href="https://ocaml.org/learn/tutorials/file_manipulation.zh.html">
+
+    
+    <title>File Manipulation – OCaml</title>
+    <link href="https://ocaml.org/img/favicon32x32.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Web Fonts -->
+    <link href="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/css_002.css" rel="stylesheet">
+    <link href="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/css.css" rel="stylesheet">
+    <link href="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/css_003.css" rel="stylesheet" type="text/css">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/bootstrap_mod.css" rel="stylesheet" media="screen">
+    <link href="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/ocamlorg.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" defer="defer" async="" src="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/piwik.html"></script><script type="text/javascript" async="" src="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/ga.js"></script><script src="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/collapsed-menu.js" type="text/javascript"></script>
+    
+    
+    <script>
+      if (document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1')) {
+      document.documentElement.className = 'svg';
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" onclick="toggleVisibilityMenu('menu-items')">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="https://ocaml.org/"><img src="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/colour-logo-white.svg" class="svg" alt="OCaml"><img src="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/colour-logo-white.png" class="png" alt="OCaml"></a>
+          <div id="menu-items" class="nav-collapse collapse">
+                        <ul class="nav">
+              <li class="active"><a href="https://ocaml.org/learn/">Learn</a></li>
+              <li><a href="https://ocaml.org/docs/">Documentation</a></li>
+              <li><a href="https://opam.ocaml.org/">Packages</a></li>
+              <li><a href="https://ocaml.org/community/">Community</a></li>
+            </ul>
+
+            
+            <a href="https://github.com/ocaml/ocaml.org/tree/master/site/learn/tutorials/file_manipulation.md" title="Edit this page" class="edit-this-page pull-right"><!-- Image in CSS
+	      --><span>Edit this page</span></a>
+	    <script language="JavaScript">
+	      // Preload the hover image
+	      Image1= new Image(33,33);
+	      Image1.src = '/img/edit-hover.svg';
+	      Image2= new Image(33,33);
+	      Image2.src = '/img/edit-hover.png';
+	    </script>
+            
+            <form id="searchform" class="navbar-search pull-right" method="get" action="//www.google.com/search">
+              <input name="as_sitesearch" value="ocaml.org" type="hidden">
+              <input placeholder="Search" class="search-query" name="q" type="text">
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </nav>
+    
+    <!--								-*-html-*- -->
+<div class="container">
+  <div class="row">
+    
+    <div class="span4"></div>
+    <div class="span8">
+      <!--								-*-html-*- -->
+<div class="running-header">
+  
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a href="https://ocaml.org/">Home</a><span class="divider"></span></li>
+<li><a href="https://ocaml.org/learn/">Learn</a><span class="divider"></span></li>
+<li><a href="https://ocaml.org/learn/tutorials/">OCaml Tutorials</a><span class="divider"></span></li>
+<li class="active">File Manipulation</li>
+
+
+    </ol>
+    <ul class="translations">
+      <li class="active">en</li>
+<li><a href="https://ocaml.org/learn/tutorials/file_manipulation.ja.html">日本語</a></li>
+<li><a href="https://ocaml.org/learn/tutorials/file_manipulation.zh.html">中文</a></li>
+
+    </ul>
+  </div>
+  
+</div>
+
+    </div>
+    <div class="span4">
+      <nav id="nav-secondary">
+        <ul class="nav nav-list">
+          <li class="nav-header"><a href="#">Contents</a></li>
+          <ul><li><a href="#Bufferedchannels">Buffered channels</a>
+<ul><li><a href="#Writing">Writing</a>
+</li><li><a href="#Reading">Reading</a>
+</li><li><a href="#Seeking">Seeking</a>
+</li><li><a href="#Gotchas">Gotchas</a>
+</li><li><a href="#Example">Example</a>
+</li></ul>
+</li></ul>
+
+        </ul>
+      </nav>
+    </div>
+    <div id="content-primary" class="span8">
+            <div id="tryocaml" class="content" style="display:none;">
+        <div class="container">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style="display:none;"></div>
+            <div id="menu-lessons" style="display:none">
+              <table class="zebra-striped">
+                <tbody><tr><td id="text-x"><code></code></td> <td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="main-contents" class="content">
+        <!--   -->
+
+<h1 id="Filemanipulation">File manipulation</h1><p>This is a guide to basic file manipulation in OCaml using only what the
+standard library provides.</p>
+<p>Official documentation for the modules of interest:
+the <a href="http://caml.inria.fr/pub/docs/manual-ocaml/core.html">core library</a>
+including the initially opened module
+<a href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html">Pervasives</a>,
+<a href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Printf.html">Printf</a>.</p>
+<p>The standard library doesn't provide functions that directly read a file
+into a string or save a string into a file. Such functions can be found
+in third-party libraries such as
+<a href="http://code.google.com/p/ocaml-extlib/">Extlib</a>.
+See <a href="http://ocaml-extlib.googlecode.com/svn/doc/apiref/Std.html">Std.input_file and
+Std.output_file</a>.</p>
+<h2 id="Bufferedchannels">Buffered channels</h2><p>The normal way of opening a file in OCaml returns a <strong>channel</strong>. There
+are two kinds of channels:</p>
+<ul><li>channels that write to a file: type <code>out_channel</code></li><li>channels that read from a file: type <code>in_channel</code></li></ul>
+
+<h3 id="Writing">Writing</h3><p>For writing into a file, you would do this:</p>
+<ol><li>Open the file to obtain an <code>out_channel</code></li><li>Write stuff to the channel</li><li>If you want to force writing to the physical device, you must flush
+ the channel, otherwise writing will not take place immediately.</li><li>When you are done, you can close the channel. This flushes the
+ channel automatically.</li></ol>
+
+<p>Commonly used functions: <code>open_out</code>, <code>open_out_bin</code>, <code>flush</code>,
+<code>close_out</code>, <code>close_out_noerr</code></p>
+<p>Standard <code>out_channel</code>s: <code>stdout</code>, <code>stderr</code></p>
+<h3 id="Reading">Reading</h3><p>For reading data from a file you would do this:</p>
+<ol><li>Open the file to obtain an <code>in_channel</code></li><li>Read characters from the channel. Reading consumes the channel, so
+ if you read a character, the channel will point to the next
+ character in the file.</li><li>When there are no more characters to read, the <code>End_of_file</code>
+ exception is raised. Often, this is where you want to close the
+ channel.</li></ol>
+
+<p>Commonly used functions: <code>open_in</code>, <code>open_in_bin</code>, <code>close_in</code>,
+<code>close_in_noerr</code></p>
+<p>Standard <code>in_channel</code>: <code>stdin</code></p>
+<h3 id="Seeking">Seeking</h3><p>Whenever you write or read something to or from a channel, the current
+position changes to the next character after what you just wrote or
+read. Occasionally, you may want to skip to a particular position in the
+file, or restart reading from the beginning. This is possible for
+channels that point to regular files, use <code>seek_in</code> or <code>seek_out</code>.</p>
+<h3 id="Gotchas">Gotchas</h3><ul><li>Don't forget to flush your <code>out_channel</code>s if you want to actually
+ write something. This is particularly important if you are writing
+ to non-files such as the standard output (<code>stdout</code>) or a socket.</li><li>Don't forget to close any unused channel, because operating systems
+ have a limit on the number of files that can be opened
+ simultaneously. You must catch any exception that would occur during
+ the file manipulation, close the corresponding channel, and re-raise
+ the exception.</li><li>The <code>Unix</code> module provides access to non-buffered file descriptors
+ among other things. It provides standard file descriptors that have
+ the same name as the corresponding standard channels: <code>stdin</code>,
+ <code>stdout</code> and <code>stderr</code>. Therefore if you do <code>open Unix</code>, you may get
+ type errors. If you want to be sure that you are using the <code>stdout</code>
+ channel and not the <code>stdout</code> file descriptor, you can prepend it
+ with the module name where it comes from: <code>Pervasives.stdout</code>. <em>Note
+ that most things that don't seem to belong to any module actually
+ belong to the <code>Pervasives</code> module, which is automatically opened.</em></li><li><code>open_out</code> and <code>open_out_bin</code> truncate the given file if it already
+ exists! Use <code>open_out_gen</code> if you want an alternate behavior.</li></ul>
+
+<h3 id="Example">Example</h3>
+<pre><code class="ocaml"><span class="governing">open</span> <span class="ocaml-module">Printf</span>
+  
+<span class="governing">let </span><span class="ocaml-variable">file</span> = <span class="string">"example.dat"</span>
+<span class="governing">let </span><span class="ocaml-variable">message</span> = <span class="string">"Hello!"</span>
+  
+<span class="governing">let</span> () =
+  <span class="comment">(* Write message <span class="keyword">to</span> file *)</span>
+  <span class="governing">let </span><span class="ocaml-variable">oc</span> = open_out file <span class="governing">in</span>    <span class="comment">(* create or truncate file, return channel *)</span>
+  fprintf oc <span class="string">"%s\n"</span> message;   <span class="comment">(* write something *)</span>   
+  close_out oc;                <span class="comment">(* flush <span class="governing">and</span> close the channel *)</span>
+  
+  <span class="comment">(* Read file <span class="governing">and</span> display the first line *)</span>
+  <span class="governing">let </span><span class="ocaml-variable">ic</span> = open_in file <span class="governing">in</span>
+  <span class="keyword">try</span> 
+    <span class="governing">let </span><span class="ocaml-variable">line</span> = input_line ic <span class="governing">in</span>  <span class="comment">(* read line from in_channel <span class="governing">and</span> discard \n *)</span>
+    print_endline line;          <span class="comment">(* write the result <span class="keyword">to</span> stdout *)</span>
+    flush stdout;                <span class="comment">(* write on the underlying device now *)</span>
+    close_in ic                  <span class="comment">(* close the input channel *)</span> 
+  
+  <span class="keyword">with</span> e -&gt;                      <span class="comment">(* some unexpected exception occurs *)</span>
+    close_in_noerr ic;           <span class="comment">(* emergency closing *)</span>
+    <span class="keyword">raise</span> e                      <span class="comment">(* exit <span class="keyword">with</span> error: files are closed but
+                                    channels are not flushed *)</span>
+  
+  <span class="comment">(* normal exit: all channels are flushed <span class="governing">and</span> closed *)</span></code></pre>
+
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+    
+    <footer id="footer" class="navbar navbar-inverse">
+      <div class="navbar-inner">
+	<!-- footer							-*-html-*- -->
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/learn/">Learn</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/learn/taste.html">Code Examples</a></li>
+      <li><a href="https://ocaml.org/learn/tutorials/">Tutorials</a></li>
+      <li><a href="https://ocaml.org/learn/books.html">Books</a></li>
+      <li><a href="https://ocaml.org/learn/success.html">Success Stories</a></li>
+      <li><a href="https://ocaml.org/learn/tutorials/"></a></li>
+    </ul>
+  </div>
+</div>
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/docs/">Documentation</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/docs/install.html">Install</a></li>
+      <li><a href="http://caml.inria.fr/pub/docs/manual-ocaml/">Manual</a></li>
+      <li><a href="https://opam.ocaml.org/packages/">Packages</a></li>
+      <li><a href="https://ocaml.org/releases/index.html">Compiler Releases</a></li>
+      <li><a href="https://ocaml.org/docs/logos.html">Logos</a></li>
+    </ul>
+  </div>
+</div>
+<div class="column">
+  <div class="entry">
+    <h1><a href="https://ocaml.org/community/">Community</a></h1>
+    <ul>
+      <li><a href="https://ocaml.org/community/mailing_lists.html">Mailing Lists</a></li>
+      <li><a href="https://ocaml.org/meetings/">Meetings</a></li>
+      <li><a href="https://ocaml.org/community/planet/">News</a></li>
+      <li><a href="https://ocaml.org/community/support.html">Support</a></li>
+      <li><a href="http://caml.inria.fr/mantis/my_view_page.php" target="_blank">Bug Tracker</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="column">
+  <div class="entry">
+    <h1>Contact</h1>
+    <ul>
+      <li><a href="https://github.com/ocaml/ocaml.org/issues" target="_blank">Website Issues</a></li>
+      <li><a href="https://ocaml.org/about.html">About This Site</a></li>
+    <li><a href="https://github.com/ocaml/ocaml.org/" target="_blank">Find Us on GitHub</a></li>
+      <li><a href="https://ocaml.org/contributors.html">Credits</a></li>
+    </ul>
+  </div>
+</div>
+
+      </div>
+    </footer>
+    
+    <!-- Load javascript from CDN -->
+    <script type="text/javascript" src="File%20Manipulation%20%E2%80%93%20OCaml_fichiers/bootstrap.js"></script>
+
+    
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37808023-1']);
+    _gaq.push(['_setDomainName', 'ocaml.org']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    </script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['setCookieDomain', '*.ocaml.org']);
+      _paq.push(['setDocumentTitle', 'File Manipulation']);
+      _paq.push(['setDoNotTrack', true]);
+      _paq.push(['setCustomVariable', 1, 'Page language',
+         'English',
+         'page']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+
+      (function() {
+        var u=(('https:' == document.location.protocol) ? 'https' : 'http') + '://ocaml.org/piwik/';
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+        g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//ocaml.org/piwik/piwik.php?idsite=1"
+		      style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code --> <!-- ifndef staging -->
+
+  
+
+</body></html>

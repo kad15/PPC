@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Fcl_weakstore.html">
+<link rel="next" href="Fcl_var.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Fcl_debug" rel="Chapter" href="Fcl_debug.html">
+<link title="Fcl_misc" rel="Chapter" href="Fcl_misc.html">
+<link title="Fcl_domain" rel="Chapter" href="Fcl_domain.html">
+<link title="Fcl_setDomain" rel="Chapter" href="Fcl_setDomain.html">
+<link title="Fcl_stak" rel="Chapter" href="Fcl_stak.html">
+<link title="Fcl_data" rel="Chapter" href="Fcl_data.html">
+<link title="Fcl_weakstore" rel="Chapter" href="Fcl_weakstore.html">
+<link title="Fcl_cstr" rel="Chapter" href="Fcl_cstr.html">
+<link title="Fcl_var" rel="Chapter" href="Fcl_var.html">
+<link title="Fcl_invariant" rel="Chapter" href="Fcl_invariant.html">
+<link title="Fcl_reify" rel="Chapter" href="Fcl_reify.html">
+<link title="Fcl_boolean" rel="Chapter" href="Fcl_boolean.html">
+<link title="Fcl_linear" rel="Chapter" href="Fcl_linear.html">
+<link title="Fcl_nonlinear" rel="Chapter" href="Fcl_nonlinear.html">
+<link title="Fcl_expr" rel="Chapter" href="Fcl_expr.html">
+<link title="Fcl_arith" rel="Chapter" href="Fcl_arith.html">
+<link title="Fcl_conjunto" rel="Chapter" href="Fcl_conjunto.html">
+<link title="Fcl_goals" rel="Chapter" href="Fcl_goals.html">
+<link title="Fcl_fdArray" rel="Chapter" href="Fcl_fdArray.html">
+<link title="Fcl_gcc" rel="Chapter" href="Fcl_gcc.html">
+<link title="Fcl_opti" rel="Chapter" href="Fcl_opti.html">
+<link title="Fcl_alldiff" rel="Chapter" href="Fcl_alldiff.html">
+<link title="Fcl_sorting" rel="Chapter" href="Fcl_sorting.html">
+<link title="Fcl_interval" rel="Chapter" href="Fcl_interval.html">
+<link title="Fcl_genesis" rel="Chapter" href="Fcl_genesis.html">
+<link title="Fcl_binary" rel="Chapter" href="Fcl_binary.html">
+<link title="Fcl_ac6" rel="Chapter" href="Fcl_ac6.html">
+<link title="Facile" rel="Chapter" href="Facile.html"><link title="Basic" rel="Section" href="#2_Basic">
+<link title="Access" rel="Section" href="#2_Access">
+<title>Fcl_cstr</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Fcl_weakstore.html" title="Fcl_weakstore">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Fcl_var.html" title="Fcl_var">Next</a>
+</div>
+<h1>Module <a href="type_Fcl_cstr.html">Fcl_cstr</a></h1>
+
+<pre><span class="keyword">module</span> Fcl_cstr: <code class="code">sig</code> <a href="Fcl_cstr.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<h1 id="1_PostingConstraintsandBuildingNewOnes">Posting Constraints and Building New Ones</h1><br>
+</div>
+<hr width="100%">
+<br>
+This module defines the type <code class="code">t</code> of constraints and functions to create
+  and post constraints: mainly a <code class="code">create</code> function which allows to build new
+  constraints from scratch (this function is not needed when using
+  standard FaCiLe predefined constraints) and the mostly useful <code class="code">post</code>
+  function which must be called to actually add a constraint to the
+  constraint store.<br>
+<br>
+<h2 id="2_Basic">Basic</h2><br>
+
+<pre><span id="EXCEPTIONDontKnow"><span class="keyword">exception</span> DontKnow</span></pre>
+<div class="info ">
+Exception raised by the <code class="code">check</code> function of a reified constraint when it
+   is not known whether the constraint is satisfied or violated.<br>
+</div>
+
+<pre><span id="TYPEpriority"><span class="keyword">type</span> <code class="type"></code>priority</span> </pre>
+<div class="info ">
+Type of waking priority.<br>
+</div>
+
+
+<pre><span id="VALimmediate"><span class="keyword">val</span> immediate</span> : <code class="type"><a href="Fcl_cstr.html#TYPEpriority">priority</a></code></pre>
+<pre><span id="VALnormal"><span class="keyword">val</span> normal</span> : <code class="type"><a href="Fcl_cstr.html#TYPEpriority">priority</a></code></pre>
+<pre><span id="VALlater"><span class="keyword">val</span> later</span> : <code class="type"><a href="Fcl_cstr.html#TYPEpriority">priority</a></code></pre>
+<pre><span id="VALeven_later"><span class="keyword">val</span> even_later</span> : <code class="type"><a href="Fcl_cstr.html#TYPEpriority">priority</a></code></pre><div class="info ">
+Available priorities:<ul>
+<li>immediate: as soon as possible, for quick updates;</li>
+<li>normal: standard priority;</li>
+<li>later: for time consuming constraints (e.g. <code class="code">Gcc.cstr</code>, <code class="code">Alldiff.cstr</code>...).</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info ">
+The type of constraints.<br>
+</div>
+
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">?name:string -><br>       ?nb_wakings:int -><br>       ?fprint:(Pervasives.out_channel -> unit) -><br>       ?priority:<a href="Fcl_cstr.html#TYPEpriority">priority</a> -><br>       ?init:(unit -> bool) -><br>       ?check:(unit -> bool) -><br>       ?not:(unit -> <a href="Fcl_cstr.html#TYPEt">t</a>) -><br>       ?freevars:(unit -> <a href="Fcl_domain.html#TYPEt">Fcl_domain.t</a>) -><br>       ?tightness:(unit -> float) -><br>       (int -> bool) -> (<a href="Fcl_cstr.html#TYPEt">t</a> -> unit) -> <a href="Fcl_cstr.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">create ?name ?nb_wakings ?fprint ?priority ?init ?check ?not update delay</code>
+   builds a new constraint:<ul>
+<li> <code class="code">name</code> is a describing string for the constraint. Default value
+   is <code class="code">"anonymous"</code>.</li>
+<li> <code class="code">nb_wakings</code> is the number of calls to <code class="code">Var.delay</code> with distinct
+   "<code class="code">waking_id</code>" arguments  within the
+   constraint own <code class="code">delay</code> function (see below). Default value is <code class="code">1</code>.
+   Beware that if <code class="code">nb_wakings</code> is greater than 1 and the optional <code class="code">init</code>
+   argument is not provided, <code class="code">init</code> default behaviour is to do nothing
+   (i.e. the <code class="code">update</code> function will not be called).</li>
+<li> <code class="code">fprint</code> should print the constraint on an output channel taken as
+   its only argument. Default value is to print the <code class="code">name</code> string.</li>
+<li> <code class="code">priority</code> is either <code class="code">immediate</code>, <code class="code">normal</code> or <code class="code">later</code>. Time costly
+   constraints should be waken after quick ones. Default value is <code class="code">normal</code>.</li>
+<li> <code class="code">init</code> is useful to perform initialization of auxiliary data
+   structures needed and maintained by the <code class="code">update</code> function.
+   <code class="code">init ()</code> is called as soon as the constraint is posted. <code class="code">init</code>
+   must return a boolean indicating whether the constraint was solved
+   or not by this initial propagation phase, like <code class="code">update</code> does. Default
+   value is to call <code class="code">(update 0)</code> if <code class="code">nb_wakings</code> is equal to 1 to
+   perform this initial propagation; if <code class="code">nb_wakings</code> is greater than 1,
+   default value is <code class="code">fun () -&gt; false</code>, i.e. it does nothing. Hence, a
+   specific <code class="code">init</code> argument must be provided if this is not the desired
+   behaviour.</li>
+<li> <code class="code">check</code> must be specified if the constraint is to be reifiable
+   (as well as the <code class="code">not</code> function). When the constraint is reified,
+   <code class="code">check ()</code> is called to verify whether the constraint is satisfied
+   or violated, i.e. the constraint itself or its negation is entailed
+   by the constraint store. It should return <code class="code">true</code> if the constraint
+   is satisfied, <code class="code">false</code> if it is violated and raise <code class="code">DontKnow</code> when
+   it is not known. <code class="code">check</code> <b>must not</b> change the domains of the
+   variables involved in the constraint.
+   Default: <code class="code">Failure</code> exception is raised.</li>
+<li> <code class="code">not</code> must be specified if the constraint is reifiable (as well
+   as <code class="code">check</code>). <code class="code">not ()</code> should return a constraint which is the
+   negation of the constraint being defined. When the constraint is
+   reified, it is called to post the negation of the constraint whenever
+   <code class="code">check ()</code> return <code class="code">false</code>, i.e. the negation is entailed by the
+   constraint store. Default: <code class="code">Failure</code> exception is raised.</li>
+<li> <code class="code">update</code> is a mandatory argument which propagates the constraint,
+   i.e. filters domains and checks consistency. This function takes an
+   integer as its unique parameter, according to the optional
+   <code class="code">waking_id</code> argument given to the <code class="code">Var.delay</code> calls featured in the
+   constraint own <code class="code">delay</code> function (see below). When a waking event
+   occurs, this function is called with the corresponding integer
+   "<code class="code">waking_id</code>", and must return <code class="code">true</code> when the constraint is
+   (partially) satisfied <em>for this event</em>, <code class="code">false</code> if further
+   propagations have to be performed, and raise <code class="code">Stak.Fail</code>
+   whenever an inconsistency is detected. The whole
+   constraint is solved when <code class="code">update 0</code>, ..., <code class="code">update (nb_wakings-1)</code>
+   have all returned <code class="code">true</code>. E.g. a global constraint on an array
+   of variables can be aware of which variable has triggered the
+   awakening by providing the integer index of the variable as its
+   "<code class="code">waking_id</code>" to the <code class="code">Var.delay</code> function. <code class="code">update</code> is called with
+   <code class="code">0</code> by default when the <code class="code">nb_wakings</code> argument has been omitted; in
+   this case, the constraint is solved as soon as <code class="code">update</code> returns <code class="code">true</code>.</li>
+<li> <code class="code">delay</code> schedules the awakening of the constraint <code class="code">ct</code> (which is
+   taken as its unique argument), i.e. the execution of its <code class="code">update</code>
+   function. If <code class="code">update id</code> should be called (because it may propagates)
+   when one of the events contained in the events
+    list <code class="code">es</code> occurred
+   on variable <code class="code">v</code>, then <code class="code">Var.delay es v ~waking_id:id ct</code> should be called
+   within the body of the <code class="code">delay</code> function. Beware that
+   <b>all the "<code class="code">waking_id</code>s" must be contiguous integers ranging from</b>
+   <code class="code">0</code> <b>to</b> <code class="code">nb_wakings-1</code>, otherwise the behaviour is unspecified.
+   <code class="code">delay</code> is a mandatory argument.</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="VALpost"><span class="keyword">val</span> post</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">post c</code> posts the constraint <code class="code">c</code> to the constraint store.<br>
+</div>
+
+<pre><span id="VALone"><span class="keyword">val</span> one</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a></code></pre>
+<pre><span id="VALzero"><span class="keyword">val</span> zero</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a></code></pre><div class="info ">
+The constraint which succeeds (resp. fails) immediately.<br>
+</div>
+<br>
+<h2 id="2_Access">Access</h2><br>
+
+<pre><span id="VALid"><span class="keyword">val</span> id</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">id c</code> returns a unique integer identifying the constraint <code class="code">c</code>.<br>
+</div>
+
+<pre><span id="VALname"><span class="keyword">val</span> name</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> string</code></pre><div class="info ">
+<code class="code">name c</code> returns the name of the constraint <code class="code">c</code>.<br>
+</div>
+
+<pre><span id="VALpriority"><span class="keyword">val</span> priority</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEpriority">priority</a></code></pre><div class="info ">
+<code class="code">priority c</code> returns the priority of the constraint <code class="code">c</code>.<br>
+</div>
+
+<pre><span id="VALfprint"><span class="keyword">val</span> fprint</span> : <code class="type">Pervasives.out_channel -> <a href="Fcl_cstr.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">fprint chan c</code> prints the constraint <code class="code">c</code> on channel <code class="code">chan</code>. Calls
+   the <code class="code">fprint</code> function passed to <code class="code">create</code>.<br>
+</div>
+
+<pre><span id="VALis_solved"><span class="keyword">val</span> is_solved</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+<code class="code">is_solved c</code> returns <code class="code">true</code> if <code class="code">c</code> is satisfied and <code class="code">false</code> otherwise.<br>
+</div>
+
+<pre><span id="VALnb_wakings"><span class="keyword">val</span> nb_wakings</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> int</code></pre>
+<pre><span id="VALweight"><span class="keyword">val</span> weight</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">weight c</code> returns the weight of constraint <code class="code">c</code>, i.e. the number of
+    time it has been violated.<br>
+</div>
+
+<pre><span id="VALfreevars"><span class="keyword">val</span> freevars</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> <a href="Fcl_domain.html#TYPEt">Fcl_domain.t</a></code></pre><div class="info ">
+<code class="code">freevars c</code> returns the set (represented as a domain) of free
+    variables indices of constraint <code class="code">c</code> (if supported by <code class="code">c</code>, otherwise
+    an internal error is raised).<br>
+</div>
+
+<pre><span id="VALtightness"><span class="keyword">val</span> tightness</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> float</code></pre><div class="info ">
+<code class="code">tightness c</code> returns the dynamic tightness (number of nogoods over
+    the size of the cardinal product of the variables) of constraint <code class="code">c</code>
+    (if supported by <code class="code">c</code> - currently binary constraints only -
+    otherwise an internal error is raised). Relevant only when both variables
+    are unbound.<br>
+</div>
+
+<pre><span id="VALactive_store"><span class="keyword">val</span> active_store</span> : <code class="type">unit -> <a href="Fcl_cstr.html#TYPEt">t</a> list</code></pre><div class="info ">
+<code class="code">active_store ()</code> returns the list of all active constraints, i.e. whose
+   <code class="code">update</code> functions have returned <code class="code">false</code>.<br>
+</div>
+
+<pre><span id="VALnot"><span class="keyword">val</span> not</span> : <code class="type"><a href="Fcl_cstr.html#TYPEt">t</a> -> <a href="Fcl_cstr.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">not c</code> returns the negation of <code class="code">c</code>.<br>
+</div>
+</body></html>

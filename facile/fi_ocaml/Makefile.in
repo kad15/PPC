@@ -1,0 +1,64 @@
+CXX = @CXX@
+OCAMLC = @OCAMLC@
+OCAMLOPT = @OCAMLOPT@
+OCAMLDEP = @OCAMLDEP@
+OCAMLMKLIB = @OCAMLMKLIB@
+
+CXX_FLAGS = -O3
+OCAMLCFLAGS = -g -cc $(CXX) -ccopt $(CXX_FLAGS)
+OCAMLOPTFLAGS = -unsafe -noassert -inline 100 -cc $(CXX) -ccopt $(CXX_FLAGS)
+OCAMLMKLIBFLAGS = -failsafe
+
+FILIB_DIR = @FILIB_DIR@
+
+CXX_FILES = filib_ocaml.cpp
+C_OBJS = $(CXX_FILES:.cpp=.o)
+
+ML_FILES = interval.ml
+NORM_OBJS = $(ML_FILES:.ml=.cmo)
+OPT_OBJS = $(ML_FILES:.ml=.cmx)
+
+# builds libinterval.a interval.cma interval.cmxa interval.a dllinterval.so
+all : $(OPT_OBJS) $(NORM_OBJS) $(C_OBJS)
+	$(OCAMLMKLIB) $(OCAMLMKLIBFLAGS) -o interval $(NORM_OBJS) $(OPT_OBJS) $(C_OBJS) -lfi -lieee -lm -L$(FILIB_DIR)/lib 
+
+# builds libinterval.a interval.cma interval.a dllinterval.so
+all_byte : $(NORM_OBJS) $(C_OBJS)
+	$(OCAMLMKLIB) $(OCAMLMKLIBFLAGS) -o interval $(NORM_OBJS) $(C_OBJS) -lfi -lieee -lm -L$(FILIB_DIR)/lib
+
+
+#INST_FILES = $(LIBINTERVAL) interval.cmi interval.cmx
+#INST_DIR = `ocamlc -where`/interval
+#install : all doc
+#	mkdir -p $(INST_DIR)
+#	cp $(INST_FILES) $(INST_DIR)
+#
+#doc:
+#	mkdir -p html
+#	ocamldoc -d html -html interval.mli
+#
+#deb:
+#	dpkg-buildpackage -rfakeroot
+
+
+.SUFFIXES: .ml .mli .cmo .cmi .cmx
+
+.ml.cmo :
+	$(OCAMLC) $(OCAMLCFLAGS) -c $<
+.mli.cmi :
+	$(OCAMLC) $(OCAMLCFLAGS) -c $<
+.ml.cmx :
+	$(OCAMLOPT) $(OCAMLOPTFLAGS) -c $<
+.cpp.o :
+	$(CXX) $(CXX_FLAGS) -c -I$(FILIB_DIR)/include $<
+
+clean:
+	\rm -f *.cmi *.cmo *.cmx *.o
+
+clean_all:
+	\rm -fr *.cm* *.annot *.o *.a *.so .depend html
+
+.depend:
+	$(OCAMLDEP) *.mli *.ml >.depend
+
+include .depend

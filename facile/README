@@ -1,0 +1,5 @@
+How to compile the FaCiLe library:
+ automake --add-missing   % May produce irrelevant warnings
+ autoconf
+ ./configure
+ make 
